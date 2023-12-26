@@ -3,36 +3,38 @@ package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 import com.google.gson.annotations.SerializedName;
 
 public class Cast {
-    private final boolean adult;
-
+    private boolean adult;
     @SerializedName("cast_id")
-    private final int castId;
-
-    private final String character;
-
+    private int castId;
+    private String character;
     @SerializedName("credit_id")
-    private final String creditId;
-
-    private final int gender;
-    private final int id;
-
+    private String creditId;
+    private int gender;
+    private int id;
     @SerializedName("known_for_department")
-    private final String knownForDepartment;
-
-    private final String name;
-    private final int order;
-
+    private String knownForDepartment;
+    private String name;
+    private int order;
     @SerializedName("original_name")
-    private final String originalName;
-
-    private final double popularity;
-
+    private String originalName;
+    private double popularity;
     @SerializedName("profile_path")
-    private final String profilePath;
+    private String profilePath;
 
-    public Cast(boolean adult, int castId, String character, String creditId, int gender, int id,
-                String knownForDepartment, String name, int order, String originalName,
-                double popularity, String profilePath) {
+    public Cast(
+            boolean adult,
+            int castId,
+            String character,
+            String creditId,
+            int gender,
+            int id,
+            String knownForDepartment,
+            String name,
+            int order,
+            String originalName,
+            double popularity,
+            String profilePath
+    ) {
         this.adult = adult;
         this.castId = castId;
         this.character = character;
@@ -94,4 +96,6 @@ public class Cast {
     public String getProfilePath() {
         return profilePath;
     }
+
+    // Other methods as needed...
 }
