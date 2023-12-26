@@ -1,5 +1,8 @@
 package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
+import lombok.Data;
+
+@Data
 public class Genre {
     private int id;
     private String name;
@@ -9,13 +12,7 @@ public class Genre {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public String getName() {
-        return name;
-    }
 
     // Other methods as needed...
 }

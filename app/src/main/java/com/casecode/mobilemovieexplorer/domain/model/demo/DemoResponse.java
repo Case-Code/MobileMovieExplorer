@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class DemoResponse {
     @SerializedName("results")
     private List<Result> results;
@@ -12,9 +15,6 @@ public class DemoResponse {
         this.results = results;
     }
 
-    public List<Result> getResults() {
-        return results;
-    }
 
     // Other methods as needed...
 }

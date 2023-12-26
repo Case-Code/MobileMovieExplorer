@@ -2,6 +2,9 @@ package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class Cast {
     private boolean adult;
     @SerializedName("cast_id")
@@ -49,53 +52,5 @@ public class Cast {
         this.profilePath = profilePath;
     }
 
-    public boolean isAdult() {
-        return adult;
-    }
 
-    public int getCastId() {
-        return castId;
-    }
-
-    public String getCharacter() {
-        return character;
-    }
-
-    public String getCreditId() {
-        return creditId;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getKnownForDepartment() {
-        return knownForDepartment;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public String getOriginalName() {
-        return originalName;
-    }
-
-    public double getPopularity() {
-        return popularity;
-    }
-
-    public String getProfilePath() {
-        return profilePath;
-    }
-
-    // Other methods as needed...
 }

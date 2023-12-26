@@ -2,6 +2,9 @@ package com.casecode.mobilemovieexplorer.domain.model.demodetails;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class ProductionCompany {
     private final int id;
 
@@ -20,19 +23,5 @@ public class ProductionCompany {
         this.originCountry = originCountry;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public String getLogoPath() {
-        return logoPath;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getOriginCountry() {
-        return originCountry;
-    }
 }

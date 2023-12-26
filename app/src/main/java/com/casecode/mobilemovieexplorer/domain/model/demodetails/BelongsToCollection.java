@@ -2,6 +2,9 @@ package com.casecode.mobilemovieexplorer.domain.model.demodetails;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class BelongsToCollection {
     @SerializedName("backdrop_path")
     private final String backdropPath;
@@ -19,19 +22,5 @@ public class BelongsToCollection {
         this.posterPath = posterPath;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPosterPath() {
-        return posterPath;
-    }
 }

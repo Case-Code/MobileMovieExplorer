@@ -1,5 +1,8 @@
 package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
+import lombok.Data;
+
+@Data
 public class SpokenLanguage {
     private String englishName;
     private String iso6391;
@@ -11,17 +14,7 @@ public class SpokenLanguage {
         this.name = name;
     }
 
-    public String getEnglishName() {
-        return englishName;
-    }
 
-    public String getIso6391() {
-        return iso6391;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     // Other methods as needed...
 }

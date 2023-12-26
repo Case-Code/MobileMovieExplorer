@@ -1,5 +1,8 @@
 package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
+import lombok.Data;
+
+@Data
 public class ProductionCountry {
     private String iso31661;
     private String name;
@@ -9,13 +12,7 @@ public class ProductionCountry {
         this.name = name;
     }
 
-    public String getIso31661() {
-        return iso31661;
-    }
 
-    public String getName() {
-        return name;
-    }
 
     // Other methods as needed...
 }

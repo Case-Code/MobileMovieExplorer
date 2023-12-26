@@ -2,6 +2,9 @@ package com.casecode.mobilemovieexplorer.domain.model.demodetails;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class SpokenLanguage {
     @SerializedName("english_name")
     private final String englishName;
@@ -17,15 +20,5 @@ public class SpokenLanguage {
         this.name = name;
     }
 
-    public String getEnglishName() {
-        return englishName;
-    }
 
-    public String getIso6391() {
-        return iso6391;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

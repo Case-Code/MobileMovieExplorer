@@ -1,5 +1,8 @@
 package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
+import lombok.Data;
+
+@Data
 public class ProductionCompany {
     private int id;
     private String logoPath;
@@ -13,21 +16,7 @@ public class ProductionCompany {
         this.originCountry = originCountry;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public String getLogoPath() {
-        return logoPath;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getOriginCountry() {
-        return originCountry;
-    }
 
     // Other methods as needed...
 }

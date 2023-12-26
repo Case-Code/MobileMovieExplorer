@@ -2,6 +2,9 @@ package com.casecode.mobilemovieexplorer.domain.model.demodetails;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class ProductionCountry {
     @SerializedName("iso_3166_1")
     private final String iso31661;
@@ -13,11 +16,5 @@ public class ProductionCountry {
         this.name = name;
     }
 
-    public String getIso31661() {
-        return iso31661;
-    }
 
-    public String getName() {
-        return name;
-    }
 }
