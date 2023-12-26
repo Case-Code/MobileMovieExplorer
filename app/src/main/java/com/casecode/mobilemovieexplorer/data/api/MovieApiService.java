@@ -16,13 +16,13 @@ public interface MovieApiService {
     @Headers("Content-Type: application/json")
     @GET("api/movies/")
     Single<MoviesResponse> getMovies();
-
+    @Headers("Content-Type: application/json")
     @GET("api/movies/demo/")
     Single<DemoResponse> getDemoMovies();
-
+    @Headers("Content-Type: application/json")
     @GET("api/movies/{movieId}")
     Single<MoviesDetailsResponse> getMovieDetails(@Path("movieId") int movieId);
-
+    @Headers("Content-Type: application/json")
     @GET("api/movies/demo/{demoId}")
     Single<DemoDetailsResponse> getDemoDetails(@Path("demoId") int demoId);
 }

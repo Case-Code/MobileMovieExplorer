@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Trigger API calls
         movieViewModel.fetchMovies();
-  /*      movieViewModel.fetchDemoMovies();
+        movieViewModel.fetchDemoMovies();
         movieViewModel.fetchMovieDetails(640146);  // Replace with a valid movieId
-        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId*/
+        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId
     }
 
     private void setupViewModel() {

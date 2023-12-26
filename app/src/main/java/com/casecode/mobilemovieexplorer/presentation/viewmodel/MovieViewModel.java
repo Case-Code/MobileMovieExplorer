@@ -45,13 +45,13 @@ public class MovieViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull MoviesResponse moviesResponse) {
                         moviesLiveData.setValue(moviesResponse);
-                        Timber.d("value = %s", moviesResponse.toString());
-                        Timber.d("value result = %s", moviesResponse.getResults());
+                        Timber.d("moviesResponse = %s", moviesResponse.toString());
+                        Timber.d("moviesResponse result = %s", moviesResponse.getResults());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        errorLiveData.setValue("Failed to fetch movies");
+                        errorLiveData.setValue("moviesResponse,Failed to fetch movies");
                         Timber.e(e);
 
                     }
@@ -59,62 +59,66 @@ public class MovieViewModel extends ViewModel {
 
     }
 
-  /*  public void fetchDemoMovies() {
-        Call<DemoResponse> call = movieRepository.getDemoMovies();
-        call.enqueue(new Callback<DemoResponse>() {
-            @Override
-            public void onResponse(Call<DemoResponse> call, Response<DemoResponse> response) {
-                if (response.isSuccessful()) {
-                    demoMoviesLiveData.setValue(response.body());
-                } else {
-                    errorLiveData.setValue("Failed to fetch demo movies");
-                }
-            }
+    public void fetchDemoMovies() {
+        mCompositeDisposable.add(movieUseCase.getDemoMovies().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<DemoResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull DemoResponse demoResponse) {
+                        demoMoviesLiveData.setValue(demoResponse);
+                        Timber.d("DemoResponse = %s", demoResponse.toString());
+                        Timber.d("DemoResponse result = %s", demoResponse.getResults());
+                    }
 
-            @Override
-            public void onFailure(Call<DemoResponse> call, Throwable t) {
-                errorLiveData.setValue("Network error");
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        errorLiveData.setValue("DemoResponse,Failed to fetch movies");
+                        Timber.e(e);
+
+                    }
+                }));
+
     }
 
     public void fetchMovieDetails(int movieId) {
-        Call<MoviesDetailsResponse> call = movieRepository.getMovieDetails(movieId);
-        call.enqueue(new Callback<MoviesDetailsResponse>() {
-            @Override
-            public void onResponse(Call<MoviesDetailsResponse> call, Response<MoviesDetailsResponse> response) {
-                if (response.isSuccessful()) {
-                    movieDetailsLiveData.setValue(response.body());
-                } else {
-                    errorLiveData.setValue("Failed to fetch movie details");
-                }
-            }
+        mCompositeDisposable.add(movieUseCase.getMovieDetails(movieId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<MoviesDetailsResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull MoviesDetailsResponse moviesDetailsResponse) {
+                        movieDetailsLiveData.setValue(moviesDetailsResponse);
+                        Timber.d("MoviesDetailsResponse = %s", moviesDetailsResponse.toString());
+                    }
 
-            @Override
-            public void onFailure(Call<MoviesDetailsResponse> call, Throwable t) {
-                errorLiveData.setValue("Network error");
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        errorLiveData.setValue("MoviesDetailsResponse, Failed to fetch movies");
+                        Timber.e(e);
+
+                    }
+                }));
+
     }
 
     public void fetchDemoDetails(int demoId) {
-        Call<DemoDetailsResponse> call = movieRepository.getDemoDetails(demoId);
-        call.enqueue(new Callback<DemoDetailsResponse>() {
-            @Override
-            public void onResponse(Call<DemoDetailsResponse> call, Response<DemoDetailsResponse> response) {
-                if (response.isSuccessful()) {
-                    demoDetailsLiveData.setValue(response.body());
-                } else {
-                    errorLiveData.setValue("Failed to fetch demo details");
-                }
-            }
+        mCompositeDisposable.add(movieUseCase.getDemoDetails(demoId).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<DemoDetailsResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull DemoDetailsResponse demoDetailsResponse) {
+                        demoDetailsLiveData.setValue(demoDetailsResponse);
+                        Timber.d("demoDetailsResponse = %s", demoDetailsResponse.toString());
+                    }
 
-            @Override
-            public void onFailure(Call<DemoDetailsResponse> call, Throwable t) {
-                errorLiveData.setValue("Network error");
-            }
-        });
-    }*/
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        errorLiveData.setValue("demoDetailsResponse, Failed to fetch movies");
+                        Timber.e(e);
+
+                    }
+                }));
+
+    }
 
     public LiveData<MoviesResponse> getMoviesLiveData() {
         return moviesLiveData;

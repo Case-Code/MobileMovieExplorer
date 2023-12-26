@@ -2,6 +2,9 @@ package com.casecode.mobilemovieexplorer.domain.model.demo;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+
+@Data
 public class Result {
     @SerializedName("backdrop_path")
     private final String backdropPath;
@@ -42,43 +45,4 @@ public class Result {
         this.voteCount = voteCount;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public double getPopularity() {
-        return popularity;
-    }
-
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public double getVoteAverage() {
-        return voteAverage;
-    }
-
-    public int getVoteCount() {
-        return voteCount;
-    }
 }
