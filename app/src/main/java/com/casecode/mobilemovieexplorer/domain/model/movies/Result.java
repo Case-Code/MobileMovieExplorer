@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import lombok.Data;
-
 public record Result(boolean adult, @SerializedName("backdrop_path") String backdropPath,
                      @SerializedName("genre_ids") List<Integer> genreIds, int id,
                      @SerializedName("original_language") String originalLanguage,
