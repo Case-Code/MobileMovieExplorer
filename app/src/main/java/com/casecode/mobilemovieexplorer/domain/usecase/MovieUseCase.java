@@ -11,8 +11,6 @@ import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
 
-import javax.inject.Inject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,14 +57,14 @@ public class MovieUseCase {
             public void onResponse(Call<T> call, Response<T> response) {
                 if (response.isSuccessful()) {
                     liveData.setValue(response.body());
+                } else {
+                    Log.e("NetworkError", "Failed to get data. Response code: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
-                Log.e("NetworkError", "Call failed: " + call.request().url(), t);
-
-                // Handle network error
+                Log.e("NetworkError", "Failed to get data. Error: " + t.getMessage());
             }
         });
     }

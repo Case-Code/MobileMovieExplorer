@@ -2,34 +2,47 @@ package com.casecode.mobilemovieexplorer.domain.model.demo;
 
 import com.google.gson.annotations.SerializedName;
 
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
 public class Result {
     @SerializedName("backdrop_path")
-    private final String backdropPath;
+    private String backdropPath;
 
-    private final int id;
+    private int id;
 
     @SerializedName("original_title")
-    private final String originalTitle;
+    private String originalTitle;
 
-    private final String overview;
-    private final double popularity;
+    private String overview;
+    private double popularity;
 
     @SerializedName("poster_path")
-    private final String posterPath;
+    private String posterPath;
 
     @SerializedName("release_date")
-    private final String releaseDate;
+    private String releaseDate;
 
-    private final String title;
+    private String title;
 
     @SerializedName("vote_average")
-    private final double voteAverage;
+    private double voteAverage;
 
     @SerializedName("vote_count")
-    private final int voteCount;
+    private int voteCount;
 
-    public Result(String backdropPath, int id, String originalTitle, String overview, double popularity,
-                  String posterPath, String releaseDate, String title, double voteAverage, int voteCount) {
+    public Result(
+            String backdropPath,
+            int id,
+            String originalTitle,
+            String overview,
+            double popularity,
+            String posterPath,
+            String releaseDate,
+            String title,
+            double voteAverage,
+            int voteCount
+    ) {
         this.backdropPath = backdropPath;
         this.id = id;
         this.originalTitle = originalTitle;
@@ -81,4 +94,6 @@ public class Result {
     public int getVoteCount() {
         return voteCount;
     }
+
+    // Other methods as needed...
 }

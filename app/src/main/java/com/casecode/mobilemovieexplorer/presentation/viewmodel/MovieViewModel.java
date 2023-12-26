@@ -3,7 +3,6 @@ package com.casecode.mobilemovieexplorer.presentation.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.casecode.mobilemovieexplorer.MyApplication;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
