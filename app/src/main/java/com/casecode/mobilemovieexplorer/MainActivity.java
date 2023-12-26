@@ -1,10 +1,10 @@
 package com.casecode.mobilemovieexplorer;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
@@ -27,43 +27,58 @@ public class MainActivity extends AppCompatActivity {
         // Dagger injection
         MobileMovieExplorerApplication.getAppComponent().inject(this);
 
+        // Now you can use movieViewModel
+        movieViewModel.fetchMovies();
 
-        // Initialize ViewModel
-        movieViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
-
-        // Example: Observe MoviesResponse
-        movieViewModel.getMovies().observe(this, new Observer<MoviesResponse>() {
+        // Observe moviesLiveData
+        movieViewModel.getMoviesLiveData().observe(this, new Observer<MoviesResponse>() {
             @Override
             public void onChanged(MoviesResponse moviesResponse) {
-                // Update UI with moviesResponse data
-                // For example, display a list of movies in a RecyclerView
+                // Handle changes in moviesLiveData
+                Log.d("MainActivity", "Movies response received: " + moviesResponse);
             }
         });
 
-        // Example: Observe DemoResponse
-        movieViewModel.getDemoMovies().observe(this, new Observer<DemoResponse>() {
+        // Observe demoMoviesLiveData
+        movieViewModel.getDemoMoviesLiveData().observe(this, new Observer<DemoResponse>() {
             @Override
             public void onChanged(DemoResponse demoResponse) {
-                // Update UI with demoResponse data
+                // Handle changes in demoMoviesLiveData
+                Log.d("MainActivity", "Demo movies response received: " + demoResponse);
             }
         });
 
-        // Example: Observe MovieDetailsResponse
-        int movieId = 123; // Replace with the actual movie ID
-        movieViewModel.getMovieDetails(movieId).observe(this, new Observer<MoviesDetailsResponse>() {
+        // Observe movieDetailsLiveData
+        movieViewModel.getMovieDetailsLiveData().observe(this, new Observer<MoviesDetailsResponse>() {
             @Override
             public void onChanged(MoviesDetailsResponse moviesDetailsResponse) {
-                // Update UI with moviesDetailsResponse data
+                // Handle changes in movieDetailsLiveData
+                Log.d("MainActivity", "Movie details response received: " + moviesDetailsResponse);
             }
         });
 
-        // Example: Observe DemoDetailsResponse
-        int demoId = 456; // Replace with the actual demo ID
-        movieViewModel.getDemoDetails(demoId).observe(this, new Observer<DemoDetailsResponse>() {
+        // Observe demoDetailsLiveData
+        movieViewModel.getDemoDetailsLiveData().observe(this, new Observer<DemoDetailsResponse>() {
             @Override
             public void onChanged(DemoDetailsResponse demoDetailsResponse) {
-                // Update UI with demoDetailsResponse data
+                // Handle changes in demoDetailsLiveData
+                Log.d("MainActivity", "Demo details response received: " + demoDetailsResponse);
             }
         });
+
+        // Observe errorLiveData
+        movieViewModel.getErrorLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                // Handle errors
+                Log.e("MainActivity", "Error: " + errorMessage);
+            }
+        });
+
+        // Trigger API calls
+        movieViewModel.fetchMovies();
+        movieViewModel.fetchDemoMovies();
+        movieViewModel.fetchMovieDetails(640146);  // Replace with a valid movieId
+        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId
     }
 }
