@@ -11,6 +11,7 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -26,6 +27,13 @@ public abstract class NetworkModule {
     @Singleton
     public static OkHttpClient provideOkHttpClient() {
         return new OkHttpClient().newBuilder()
+                .addInterceptor(chain -> {
+                    Request originalRequest = chain.request();
+                    Request.Builder requestBuilder = originalRequest.newBuilder()
+                            .header("Content-Type", "application/json");
+                    Request request = requestBuilder.build();
+                    return chain.proceed(request);
+                })
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(15, TimeUnit.SECONDS)
@@ -36,7 +44,7 @@ public abstract class NetworkModule {
     public static Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL) // Replace with your base URL
-               // .client(okHttpClient)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();

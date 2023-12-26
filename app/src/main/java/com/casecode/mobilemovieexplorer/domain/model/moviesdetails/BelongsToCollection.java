@@ -8,7 +8,6 @@ import lombok.Data;
 public class BelongsToCollection {
     @SerializedName("backdrop_path")
     private String backdropPath;
-
     private int id;
     private String name;
 

@@ -1,3 +1,11 @@
 
 I
-java:S1068"'Remove this unused "TAG" private field.(º³ôùÿÿÿÿ8·„É»Ê1
+java:S1602<",Remove useless curly braces around statement(™Û£Ç8Ş€ãÂÊ1
+\
+java:S1612<"?Replace this lambda with method reference 'this::setConnected'.(™Û£Ç8ß€ãÂÊ1
+Y
+java:S1117<"<Rename "isOnline" which hides the field declared at line 29.(™Û£Ç8Ä«ßÂÊ1
+I
+java:S1068"'Remove this unused "TAG" private field.(º³ôùÿÿÿÿ8Ö«ßÂÊ1
+Y
+java:S11446"7Remove this unused private "showSnakebarMesage" method.(É´üÕşÿÿÿÿ8Ö«ßÂÊ1

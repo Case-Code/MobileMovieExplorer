@@ -15,6 +15,4 @@ public class DemoResponse {
         this.results = results;
     }
 
-
-    // Other methods as needed...
 }
