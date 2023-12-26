@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     @Inject
     MovieViewModelFactory movieViewModelFactory;
-
+// Hi
     private MovieViewModel movieViewModel;
 
     @Override
