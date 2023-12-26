@@ -8,15 +8,24 @@ import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
-import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
+import com.casecode.mobilemovieexplorer.domain.usecase.MovieUseCase;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
 
+import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import timber.log.Timber;
+
+@HiltViewModel
 public class MovieViewModel extends ViewModel {
+    private static final String TAG = "MovieViewModel";
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
-    private final MovieRepository movieRepository;
+    private final MovieUseCase movieUseCase;
 
     private final MutableLiveData<MoviesResponse> moviesLiveData = new MutableLiveData<>();
     private final MutableLiveData<DemoResponse> demoMoviesLiveData = new MutableLiveData<>();
@@ -24,30 +33,33 @@ public class MovieViewModel extends ViewModel {
     private final MutableLiveData<DemoDetailsResponse> demoDetailsLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
 
-    public MovieViewModel(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    @Inject
+    public MovieViewModel(MovieUseCase movieUseCase) {
+        this.movieUseCase = movieUseCase;
     }
 
     public void fetchMovies() {
-        Call<MoviesResponse> call = movieRepository.getMovies();
-        call.enqueue(new Callback<MoviesResponse>() {
-            @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                if (response.isSuccessful()) {
-                    moviesLiveData.setValue(response.body());
-                } else {
-                    errorLiveData.setValue("Failed to fetch movies");
-                }
-            }
+        mCompositeDisposable.add(movieUseCase.getMovies().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<MoviesResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull MoviesResponse moviesResponse) {
+                        moviesLiveData.setValue(moviesResponse);
+                        Timber.d("value = %s", moviesResponse.toString());
+                        Timber.d("value result = %s", moviesResponse.getResults());
+                    }
 
-            @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                errorLiveData.setValue("Network error");
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        errorLiveData.setValue("Failed to fetch movies");
+                        Timber.e(e);
+
+                    }
+                }));
+
     }
 
-    public void fetchDemoMovies() {
+  /*  public void fetchDemoMovies() {
         Call<DemoResponse> call = movieRepository.getDemoMovies();
         call.enqueue(new Callback<DemoResponse>() {
             @Override
@@ -102,7 +114,7 @@ public class MovieViewModel extends ViewModel {
                 errorLiveData.setValue("Network error");
             }
         });
-    }
+    }*/
 
     public LiveData<MoviesResponse> getMoviesLiveData() {
         return moviesLiveData;
@@ -123,6 +135,14 @@ public class MovieViewModel extends ViewModel {
     public LiveData<String> getErrorLiveData() {
         return errorLiveData;
     }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mCompositeDisposable.clear();
+        mCompositeDisposable.dispose();
+    }
+
 }
 
 

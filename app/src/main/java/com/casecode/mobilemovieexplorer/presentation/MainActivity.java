@@ -1,32 +1,38 @@
-package com.casecode.mobilemovieexplorer;
+package com.casecode.mobilemovieexplorer.presentation;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
+import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
+@AndroidEntryPoint
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     @Inject
-    MovieViewModel movieViewModel;
+    MovieViewModelFactory movieViewModelFactory;
+
+    private MovieViewModel movieViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Dagger injection
-        MobileMovieExplorerApplication.getAppComponent().inject(this);
-
+        setupViewModel();
         // Now you can use movieViewModel
         movieViewModel.fetchMovies();
 
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(MoviesResponse moviesResponse) {
                 // Handle changes in moviesLiveData
-                Log.d("MainActivity", "Movies response received: " + moviesResponse);
+                Timber.tag(TAG).d("Movies response received: " + moviesResponse);
             }
         });
 
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(DemoResponse demoResponse) {
                 // Handle changes in demoMoviesLiveData
-                Log.d("MainActivity", "Demo movies response received: " + demoResponse);
+                Timber.tag(TAG).d("Demo movies response received: " + demoResponse);
             }
         });
 
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(MoviesDetailsResponse moviesDetailsResponse) {
                 // Handle changes in movieDetailsLiveData
-                Log.d("MainActivity", "Movie details response received: " + moviesDetailsResponse);
+                Timber.tag(TAG).d("Movie details response received: " + moviesDetailsResponse);
             }
         });
 
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(DemoDetailsResponse demoDetailsResponse) {
                 // Handle changes in demoDetailsLiveData
-                Log.d("MainActivity", "Demo details response received: " + demoDetailsResponse);
+                Timber.tag(TAG).d("Demo details response received: " + demoDetailsResponse);
             }
         });
 
@@ -71,14 +77,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(String errorMessage) {
                 // Handle errors
-                Log.e("MainActivity", "Error: " + errorMessage);
+                Timber.tag("MainActivity").e("Error: " + errorMessage);
             }
         });
 
         // Trigger API calls
         movieViewModel.fetchMovies();
-        movieViewModel.fetchDemoMovies();
+  /*      movieViewModel.fetchDemoMovies();
         movieViewModel.fetchMovieDetails(640146);  // Replace with a valid movieId
-        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId
+        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId*/
+    }
+
+    private void setupViewModel() {
+        movieViewModel = new ViewModelProvider(this, movieViewModelFactory).get(MovieViewModel.class);
     }
 }

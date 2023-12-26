@@ -1,19 +1,5 @@
 package com.casecode.mobilemovieexplorer.domain.usecase;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
-import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
-import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
-import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
@@ -24,6 +10,7 @@ import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,32 +24,23 @@ public class MovieUseCase {
         this.movieRepository = movieRepository;
     }
 
-    public LiveData<MoviesResponse> getMovies() {
-        MutableLiveData<MoviesResponse> moviesLiveData = new MutableLiveData<>();
-        Call<MoviesResponse> call = movieRepository.getMovies();
-        enqueueCall(call, moviesLiveData);
-        return moviesLiveData;
+    public Single<MoviesResponse> getMovies() {
+        return movieRepository.getMovies();
     }
 
-    public LiveData<DemoResponse> getDemoMovies() {
-        MutableLiveData<DemoResponse> demoMoviesLiveData = new MutableLiveData<>();
-        Call<DemoResponse> call = movieRepository.getDemoMovies();
-        enqueueCall(call, demoMoviesLiveData);
-        return demoMoviesLiveData;
+    public Single<DemoResponse> getDemoMovies() {
+
+        return movieRepository.getDemoMovies();
     }
 
-    public LiveData<MoviesDetailsResponse> getMovieDetails(int movieId) {
-        MutableLiveData<MoviesDetailsResponse> movieDetailsLiveData = new MutableLiveData<>();
-        Call<MoviesDetailsResponse> call = movieRepository.getMovieDetails(movieId);
-        enqueueCall(call, movieDetailsLiveData);
-        return movieDetailsLiveData;
+    public Single<MoviesDetailsResponse> getMovieDetails(int movieId) {
+
+        return movieRepository.getMovieDetails(movieId);
     }
 
-    public LiveData<DemoDetailsResponse> getDemoDetails(int demoId) {
-        MutableLiveData<DemoDetailsResponse> demoDetailsLiveData = new MutableLiveData<>();
-        Call<DemoDetailsResponse> call = movieRepository.getDemoDetails(demoId);
-        enqueueCall(call, demoDetailsLiveData);
-        return demoDetailsLiveData;
+    public Single<DemoDetailsResponse> getDemoDetails(int demoId) {
+
+        return movieRepository.getDemoDetails(demoId);
     }
 
     private <T> void enqueueCall(Call<T> call, MutableLiveData<T> liveData) {

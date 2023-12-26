@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class MoviesResponse {
     private final int page;
     private final List<Result> results;
@@ -21,19 +24,5 @@ public class MoviesResponse {
         this.totalResults = totalResults;
     }
 
-    public int getPage() {
-        return page;
-    }
 
-    public List<Result> getResults() {
-        return results;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public int getTotalResults() {
-        return totalResults;
-    }
 }

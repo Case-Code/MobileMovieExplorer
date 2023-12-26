@@ -5,23 +5,26 @@ import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResp
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 
+import javax.inject.Singleton;
+
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
-
 public interface MovieApiService {
-
+    @Headers("Content-Type: application/json")
     @GET("api/movies/")
-    Call<MoviesResponse> getMovies();
+    Single<MoviesResponse> getMovies();
 
     @GET("api/movies/demo/")
-    Call<DemoResponse> getDemoMovies();
+    Single<DemoResponse> getDemoMovies();
 
     @GET("api/movies/{movieId}")
-    Call<MoviesDetailsResponse> getMovieDetails(@Path("movieId") int movieId);
+    Single<MoviesDetailsResponse> getMovieDetails(@Path("movieId") int movieId);
 
     @GET("api/movies/demo/{demoId}")
-    Call<DemoDetailsResponse> getDemoDetails(@Path("demoId") int demoId);
+    Single<DemoDetailsResponse> getDemoDetails(@Path("demoId") int demoId);
 }
 
 
