@@ -7,12 +7,15 @@ import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 
 public class MovieRepositoryImpl implements MovieRepository {
 
     private final MovieApiService movieApiService;
 
+    @Inject
     public MovieRepositoryImpl(MovieApiService movieApiService) {
         this.movieApiService = movieApiService;
     }

@@ -5,9 +5,8 @@ import android.app.Application;
 import com.casecode.mobilemovieexplorer.di.components.AppComponent;
 import com.casecode.mobilemovieexplorer.di.components.DaggerAppComponent;
 
-public class MobileMovieExplorerApplication extends Application {
-
-    private static AppComponent appComponent;
+public class MyApplication extends Application {
+    private AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -15,7 +14,7 @@ public class MobileMovieExplorerApplication extends Application {
         appComponent = DaggerAppComponent.builder().build();
     }
 
-    public static AppComponent getAppComponent() {
+    public AppComponent getAppComponent() {
         return appComponent;
     }
 }

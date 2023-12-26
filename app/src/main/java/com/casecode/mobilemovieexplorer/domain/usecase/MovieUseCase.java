@@ -1,17 +1,6 @@
 package com.casecode.mobilemovieexplorer.domain.usecase;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
-import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
-import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
-import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -32,7 +21,6 @@ public class MovieUseCase {
 
     private final MovieRepository movieRepository;
 
-    @Inject
     public MovieUseCase(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
@@ -76,6 +64,8 @@ public class MovieUseCase {
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
+                Log.e("NetworkError", "Call failed: " + call.request().url(), t);
+
                 // Handle network error
             }
         });

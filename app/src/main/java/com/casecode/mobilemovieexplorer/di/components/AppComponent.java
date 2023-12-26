@@ -1,24 +1,13 @@
 package com.casecode.mobilemovieexplorer.di.components;
 
-import com.casecode.mobilemovieexplorer.MainActivity;
-import com.casecode.mobilemovieexplorer.di.modules.NetworkModule;
-import com.casecode.mobilemovieexplorer.di.modules.RepositoryModule;
-import com.casecode.mobilemovieexplorer.di.modules.UseCaseModule;
-import com.casecode.mobilemovieexplorer.di.modules.ViewModelModule;
-
-import javax.inject.Singleton;
+import com.casecode.mobilemovieexplorer.di.modules.MovieModule;
+import com.casecode.mobilemovieexplorer.presentation.view.MainActivity;
+import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 
 import dagger.Component;
 
-@Singleton
-@Component(modules = {
-        NetworkModule.class,
-        RepositoryModule.class,
-        UseCaseModule.class,
-        ViewModelModule.class})
+@Component(modules = {MovieModule.class})
 public interface AppComponent {
-
     void inject(MainActivity mainActivity);
-
-    // Add more injection methods if needed
+    void inject(MovieViewModel movieViewModel);
 }
