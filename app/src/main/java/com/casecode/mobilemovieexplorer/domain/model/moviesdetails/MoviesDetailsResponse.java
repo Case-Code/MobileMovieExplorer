@@ -1,85 +1,121 @@
 package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.BelongsToCollection;
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.Genre;
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.ProductionCompany;
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.ProductionCountry;
-import com.casecode.mobilemovieexplorer.domain.model.demodetails.SpokenLanguage;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class MoviesDetailsResponse {
-    private final boolean adult;
+    @SerializedName("adult")
+    private boolean adult;
 
     @SerializedName("backdrop_path")
-    private final String backdropPath;
+    private String backdropPath;
 
     @SerializedName("belongs_to_collection")
-    private final BelongsToCollection belongsToCollection;
+    private BelongsToCollection belongsToCollection;
 
-    private final int budget;
+    @SerializedName("budget")
+    private int budget;
 
-    private final List<Cast> cast;
+    @SerializedName("cast")
+    private List<Cast> cast;
 
-    private final List<Crew> crew;
+    @SerializedName("crew")
+    private List<Crew> crew;
 
-    private final List<Genre> genres;
+    @SerializedName("genres")
+    private List<Genre> genres;
 
-    private final String homepage;
+    @SerializedName("homepage")
+    private String homepage;
 
-    private final int id;
+    @SerializedName("id")
+    private int id;
 
     @SerializedName("imdb_id")
-    private final String imdbId;
+    private String imdbId;
 
     @SerializedName("original_language")
-    private final String originalLanguage;
+    private String originalLanguage;
 
     @SerializedName("original_title")
-    private final String originalTitle;
+    private String originalTitle;
 
-    private final String overview;
+    @SerializedName("overview")
+    private String overview;
 
-    private final double popularity;
+    @SerializedName("popularity")
+    private double popularity;
 
     @SerializedName("poster_path")
-    private final String posterPath;
+    private String posterPath;
 
     @SerializedName("production_companies")
-    private final List<ProductionCompany> productionCompanies;
+    private List<ProductionCompany> productionCompanies;
 
     @SerializedName("production_countries")
-    private final List<ProductionCountry> productionCountries;
+    private List<ProductionCountry> productionCountries;
 
     @SerializedName("release_date")
-    private final String releaseDate;
+    private String releaseDate;
 
-    private final int revenue;
+    @SerializedName("revenue")
+    private int revenue;
 
-    private final int runtime;
+    @SerializedName("runtime")
+    private int runtime;
 
     @SerializedName("spoken_languages")
-    private final List<SpokenLanguage> spokenLanguages;
+    private List<SpokenLanguage> spokenLanguages;
 
-    private final String status;
-    private final String tagline;
-    private final String title;
-    private final boolean video;
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("tagline")
+    private String tagline;
+
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("video")
+    private boolean video;
 
     @SerializedName("vote_average")
-    private final double voteAverage;
+    private double voteAverage;
 
     @SerializedName("vote_count")
-    private final int voteCount;
+    private int voteCount;
 
-    public MoviesDetailsResponse(boolean adult, String backdropPath, BelongsToCollection belongsToCollection,
-                                 int budget, List<Cast> cast, List<Crew> crew, List<Genre> genres,
-                                 String homepage, int id, String imdbId, String originalLanguage,
-                                 String originalTitle, String overview, double popularity, String posterPath,
-                                 List<ProductionCompany> productionCompanies, List<ProductionCountry> productionCountries,
-                                 String releaseDate, int revenue, int runtime, List<SpokenLanguage> spokenLanguages,
-                                 String status, String tagline, String title, boolean video, double voteAverage, int voteCount) {
+    // Constructors
+    public MoviesDetailsResponse(
+            boolean adult,
+            String backdropPath,
+            BelongsToCollection belongsToCollection,
+            int budget,
+            List<Cast> cast,
+            List<Crew> crew,
+            List<Genre> genres,
+            String homepage,
+            int id,
+            String imdbId,
+            String originalLanguage,
+            String originalTitle,
+            String overview,
+            double popularity,
+            String posterPath,
+            List<ProductionCompany> productionCompanies,
+            List<ProductionCountry> productionCountries,
+            String releaseDate,
+            int revenue,
+            int runtime,
+            List<SpokenLanguage> spokenLanguages,
+            String status,
+            String tagline,
+            String title,
+            boolean video,
+            double voteAverage,
+            int voteCount
+    ) {
         this.adult = adult;
         this.backdropPath = backdropPath;
         this.belongsToCollection = belongsToCollection;
@@ -108,4 +144,115 @@ public class MoviesDetailsResponse {
         this.voteAverage = voteAverage;
         this.voteCount = voteCount;
     }
+
+    // Getters
+    public boolean isAdult() {
+        return adult;
+    }
+
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    public BelongsToCollection getBelongsToCollection() {
+        return belongsToCollection;
+    }
+
+    public int getBudget() {
+        return budget;
+    }
+
+    public List<Cast> getCast() {
+        return cast;
+    }
+
+    public List<Crew> getCrew() {
+        return crew;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public String getOriginalLanguage() {
+        return originalLanguage;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public List<ProductionCompany> getProductionCompanies() {
+        return productionCompanies;
+    }
+
+    public List<ProductionCountry> getProductionCountries() {
+        return productionCountries;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public int getRevenue() {
+        return revenue;
+    }
+
+    public int getRuntime() {
+        return runtime;
+    }
+
+    public List<SpokenLanguage> getSpokenLanguages() {
+        return spokenLanguages;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isVideo() {
+        return video;
+    }
+
+    public double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    // Other methods as needed...
 }
