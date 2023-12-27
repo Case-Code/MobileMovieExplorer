@@ -39,6 +39,17 @@ public class Cast {
     /**
      * Constructs a new instance of the Cast class.
      *
+     * @param name        The name of the cast member.
+     * @param profilePath The profile path for the cast member.
+     */
+    public Cast(String name, String profilePath) {
+        this.name = name;
+        this.profilePath = profilePath;
+    }
+
+    /**
+     * Constructs a new instance of the Cast class.
+     *
      * @param adult              Indicates whether the cast member is an adult.
      * @param castId             The cast ID associated with the member.
      * @param character          The character played by the cast member.

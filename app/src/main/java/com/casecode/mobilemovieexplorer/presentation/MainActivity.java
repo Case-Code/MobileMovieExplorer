@@ -3,10 +3,14 @@ package com.casecode.mobilemovieexplorer.presentation;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ActivityMainBinding;
 import com.casecode.mobilemovieexplorer.presentation.utils.ViewExtensions;
+import com.casecode.mobilemovieexplorer.presentation.view.MoviesDetailsFragment;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
 import com.google.android.material.snackbar.Snackbar;
@@ -50,13 +54,24 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(mBinding.getRoot());
 
-        mBinding.textViewMain.setOnClickListener(view -> {
-            view.showSnackbar("Snackbar Text", Snackbar.LENGTH_SHORT);
-        });
+        // Create an instance of MoviesDetailsFragment
+        MoviesDetailsFragment moviesDetailsFragment = new MoviesDetailsFragment();
 
-        setupViewModel();
-        fetchViewModel();
-        observeViewModel();
+        // Replace the default container with MoviesDetailsFragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, moviesDetailsFragment);
+        fragmentTransaction.commit();
+
+
+
+//        mBinding.textViewMain.setOnClickListener(view -> {
+//            view.showSnackbar("Snackbar Text", Snackbar.LENGTH_SHORT);
+//        });
+//
+//        setupViewModel();
+//        fetchViewModel();
+//        observeViewModel();
     }
 
     /**

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.view.MoviesDetailsFragment">
+
+        <!-- ImageView for the poster -->
+        <ImageView
+            android:id="@+id/image_backdrop_path"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <!-- Scrim overlay View -->
+        <View
+            android:id="@+id/scrimView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/scrim"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
+            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
+            app:layout_constraintTop_toTopOf="@+id/image_backdrop_path" />
+
+        <ImageButton
+            android:id="@+id/image_button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle_background"
+            android:importantForAccessibility="no"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/image_button_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle_background"
+            android:importantForAccessibility="no"
+            android:padding="8dp"
+            android:src="@drawable/favorite_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_original_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Ant-Man and the Wasp: Quantumania"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
+            app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path" />
+
+        <TextView
+            android:id="@+id/text_vote_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/kid_star_24"
+            android:gravity="center"
+            android:text="9.3"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/text_original_title"
+            app:layout_constraintTop_toBottomOf="@+id/image_backdrop_path" />
+
+        <TextView
+            android:id="@+id/text_runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/schedule_24"
+            android:gravity="center"
+            android:text="178 min"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/text_vote_average"
+            app:layout_constraintTop_toTopOf="@+id/text_vote_average" />
+
+
+        <!-- RecyclerView for Genres -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_genres"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_vote_average"
+            tools:listitem="@layout/item_genre" />
+
+        <TextView
+            android:id="@+id/text_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/summary"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/color_amber"
+            app:layout_constraintStart_toStartOf="@+id/text_vote_average"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_genres" />
+
+        <TextView
+            android:id="@+id/text_actors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/actors"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/color_amber"
+            app:layout_constraintStart_toStartOf="@+id/text_overview"
+            app:layout_constraintTop_toBottomOf="@+id/text_overview" />
+
+        <TextView
+            android:id="@+id/text_overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Overview: Super-Hero partners Scott Lang and Hope van Dyne..."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/text_summary"
+            app:layout_constraintTop_toBottomOf="@+id/text_summary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_actors"
+            tools:listitem="@layout/item_cast" />
+
+        <!-- Add other details as needed -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
