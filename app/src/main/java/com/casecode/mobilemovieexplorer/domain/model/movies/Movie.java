@@ -22,7 +22,7 @@ import java.util.List;
  * @param voteAverage      The average vote score for the movie.
  * @param voteCount        The count of votes for the movie.
  */
-public record Result(
+public record Movie(
         boolean adult,
         @SerializedName("backdrop_path") String backdropPath,
         @SerializedName("genre_ids") List<Integer> genreIds,

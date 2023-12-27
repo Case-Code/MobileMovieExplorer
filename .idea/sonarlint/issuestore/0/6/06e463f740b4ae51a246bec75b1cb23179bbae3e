@@ -1,43 +1,11 @@
 
 d
-java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8æ„áÃÊ1
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8æ„áÃÊ1
 t
-java:S1450"WRemove the "mBinding" field and declare it as a local variable in the relevant methods.(á“¯è8ç„áÃÊ1
+java:S1450#"WRemove the "mBinding" field and declare it as a local variable in the relevant methods.(á“¯è8ç„áÃÊ1
 I
-java:S1602%",Remove useless curly braces around statement(„ıŒ‡8ü„áÃÊ1
+java:S16025",Remove useless curly braces around statement(„ıŒ‡8ü„áÃÊ1
 Š
-java:S3252&"hUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_SHORT".(İşÉıÿÿÿÿ8ş„áÃÊ1
->
-java:S6205I"Remove this redundant block.(Ö…‚Ğûÿÿÿÿ8„…áÃÊ1
-9
-java:S6205M"Remove this redundant block.(áÿ÷Í8……áÃÊ1
->
-java:S6205Q"Remove this redundant block.(ß×ùÙıÿÿÿÿ8†…áÃÊ1
->
-java:S6205U"Remove this redundant block.(¯ä¤Ãşÿÿÿÿ8‡…áÃÊ1
->
-java:S6205`"Remove this redundant block.(Ö…‚Ğûÿÿÿÿ8ˆ…áÃÊ1
-9
-java:S6205d"Remove this redundant block.(áÿ÷Í8Š…áÃÊ1
->
-java:S6205h"Remove this redundant block.(ß×ùÙıÿÿÿÿ8Š…áÃÊ1
->
-java:S6205l"Remove this redundant block.(¯ä¤Ãşÿÿÿÿ8‹…áÃÊ1
->
-java:S6205w"Remove this redundant block.(Ö…‚Ğûÿÿÿÿ8Œ…áÃÊ1
-9
-java:S6205{"Remove this redundant block.(áÿ÷Í8Œ…áÃÊ1
->
-java:S6205"Remove this redundant block.(ß×ùÙıÿÿÿÿ8…áÃÊ1
-?
-java:S6205ƒ"Remove this redundant block.(¯ä¤Ãşÿÿÿÿ8…áÃÊ1
-?
-java:S6205"Remove this redundant block.(Ö…‚Ğûÿÿÿÿ8—ŒâÃÊ1
-:
-java:S6205’"Remove this redundant block.(áÿ÷Í8—ŒâÃÊ1
-?
-java:S6205–"Remove this redundant block.(ß×ùÙıÿÿÿÿ8˜ŒâÃÊ1
-?
-java:S6205š"Remove this redundant block.(¯ä¤Ãşÿÿÿÿ8˜ŒâÃÊ1
+java:S32526"hUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_SHORT".(İşÉıÿÿÿÿ8ş„áÃÊ1
 e
-java:S1126¤"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8…áÃÊ1
+java:S1126¢"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8…áÃÊ1

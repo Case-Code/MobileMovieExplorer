@@ -79,6 +79,7 @@ converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref
 # Image loading
 glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
 glide = { module = "com.github.bumptech.glide:annotations", version.ref = "glideVersion" }
+okhttp3-integration = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glideVersion" }
 
 # lombok
 projectlombok-lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }

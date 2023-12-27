@@ -1,14 +1,10 @@
 
-Ç
-Rapp/src/main/java/com/casecode/mobilemovieexplorer/di/components/AppComponent.java,5\4\5442737a29310695654f56c8d1bf8210273941cc
 Ä
 Papp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/NetworkModule.java,c\e\ce01c3e371baee1b54ef8cfe8b7e79a17b683e5d
 É
 Sapp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/RepositoryModule.java,6\4\642928f0a1bbf56640a923ac6dd2adf494f2ee52
 Ä
 Papp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/UseCaseModule.java,0\4\044da2ad9f4c3225408d1e782b13aa7fb9fbd0f6
-Ç
-Rapp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/ViewModelModule.java,a\5\a58bf8dd44fb5d4ec309cc4baccd53ee847fcfb8
 ã
 [app/src/main/java/com/casecode/mobilemovieexplorer/data/repository/MovieRepositoryImpl.java,9\7\97a9a602d7b5d60c85209300c758683d1c409719
 ç
@@ -31,10 +27,6 @@ Lapp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/AppModule.java,2
 local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
-Ü
-Vapp/src/main/java/com/casecode/mobilemovieexplorer/MobileMovieExplorerApplication.java,c\9\c96b6bf6f7d9dc03500953989a38d4b3be30850b
-t
-Dapp/src/main/java/com/casecode/mobilemovieexplorer/MainActivity.java,0\d\0d53ff9ff7de7c55afece93fccb363549ae910c8
 Å
 Qapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/MainActivity.java,0\6\06e463f740b4ae51a246bec75b1cb23179bbae3e
 ì
@@ -149,10 +141,6 @@ Q.idea/sonarlint/securityhotspotstore/f/4/f4a01d6a4fcb971362ec00a83903fd3902f521
 Q.idea/sonarlint/securityhotspotstore/6/4/642928f0a1bbf56640a923ac6dd2adf494f2ee52,0\5\05d2b4ff691c12f03c3aa82e925e88ad22f5b8d7
 Å
 Q.idea/sonarlint/securityhotspotstore/f/0/f07866736216be0ee2aba49e392191aeae700a35,2\5\25f6469773b9f3ebb994178c1114a60412389f58
-Ä
-Papp/src/main/java/com/casecode/mobilemovieexplorer/di/utils/SchedulerModule.java,8\6\8634f06a44941a53e4e8405e37cd478fa6933212
-Ö
-Uapp/src/main/java/com/casecode/mobilemovieexplorer/di/utils/ComputationScheduler.java,6\3\6338c2cfbb8067db9235818c95d70b4c81e64265
 Ü
 Vapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/demo/DemoResponse.java,e\9\e9b8ef852013a135c366eee4e53d3216a311c2d1
 Ä
@@ -1133,10 +1121,6 @@ dapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/moviesdetails/P
 dapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/moviesdetails/ProductionCountry.java,5\1\51856492dd8cd33a54b8cc5ce18fe33b4ef93026
 ë
 aapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/moviesdetails/SpokenLanguage.java,b\9\b960252c99e754149ad04cae74930a6592cbc5c5
-~
-Napp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/MovieModule.java,d\8\d8f6291a1a9a64b7d5f3ea45173b1c0ddae3dfdb
-Ü
-Vapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MainActivity.java,4\7\4701b8e28da8e9841ca51019d2a664b8a2ea4af6
 Å
 Q.idea/sonarlint/securityhotspotstore/f/3/f36ce133869103e2605e2bc4999bc2adeb9976be,e\4\e466f2fb821c53b0b2d66bf473cec99c5369d9be
 Å
@@ -2719,8 +2703,6 @@ Qapp/src/main/java/com/casecode/mobilemovieexplorer/data/utils/NetworkMonitor.ja
 dapp/src/main/java/com/casecode/mobilemovieexplorer/data/utils/ConnectivityManagerNetworkMonitor.java,c\8\c8d3dacca928a84c1a35da652efabb573d7b4102
 ~
 Napp/src/main/java/com/casecode/mobilemovieexplorer/di/utils/AppSchedulers.java,a\d\add7827f600e12cfbef63ded44eecbf5096baab7
-{
-Kapp/src/main/java/com/casecode/mobilemovieexplorer/di/utils/Schedulers.java,5\c\5c8299ed644227ab60b085bc545f18299c383707
 }
 Mapp/src/main/java/com/casecode/mobilemovieexplorer/di/utils/AppScheduler.java,c\4\c4531f55cd90d060acef79fafacab85ed751192a
 Ç
@@ -2735,7 +2717,17 @@ Xapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/utils/EventObse
 Yapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/utils/ViewExtensions.java,3\1\3110cb6c5c81ea0440570dd7ce79a30ca3375d73
 Å
 Qapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/utils/Status.java,9\e\9ee729c94a4f0ea3b91a5fe6f9880f52d99a4b47
-v
-Fapp/src/main/java/com/casecode/mobilemovieexplorer/MoviesFragment.java,b\1\b1d21855ac6f5937d6f8d023d72cb2eadd28ae2c
 à
 Xapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesFragment.java,4\f\4f0418d4ab0bae049dd80576ea2348a19baa6735
+å
+\app/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesBindingUtils.java,2\8\28446bece0f1c73a48fb910b956da833d3af9263
+é
+^app/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/DemoMoviesAdapter.java,7\7\7776e373de77076bb81ed5dd8e424da117ce1e3d
+É
+Sapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/demo/DemoMovie.java,6\5\65f5dd84dcb55fa07c9abe507529b62ed0462181
+ä
+Zapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/MoviesAdapter.java,c\c\cc78ce30feac44bd9c1f888776147a0fb5196da4
+Å
+Qapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/movies/Movie.java,6\0\603e5de0d545df768922c016b93ccff0c86761fd
+ã
+[app/src/main/java/com/casecode/mobilemovieexplorer/presentation/base/ItemClickListener.java,1\e\1e7f76d9abd65ff1aaed69b4d2346e02ac29587c

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public record MoviesResponse(
         int page,
-        List<Result> results,
+        List<Movie> results,
         @SerializedName("total_pages") int totalPages,
         @SerializedName("total_results") int totalResults
 ) {

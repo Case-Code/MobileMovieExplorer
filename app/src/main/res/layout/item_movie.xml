@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+<variable
+    name="movie"
+    type="com.casecode.mobilemovieexplorer.domain.model.movies.Movie" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+
+        style="@style/Widget.app.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="@dimen/small_spacing"
+        android:layout_marginTop="@dimen/small_spacing"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imv_item_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/small_spacing"
+                android:paddingBottom="@dimen/small_spacing"
+                app:loadImage="@{movie.posterPath()}"
+
+                />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

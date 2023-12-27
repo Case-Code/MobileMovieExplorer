@@ -17,7 +17,7 @@ import com.google.gson.annotations.SerializedName;
  * @param voteAverage   The average vote score for the movie.
  * @param voteCount     The count of votes for the movie.
  */
-public record Result(
+public record DemoMovie(
         @SerializedName("backdrop_path") String backdropPath,
         int id,
         @SerializedName("original_title") String originalTitle,

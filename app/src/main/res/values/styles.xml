@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="TextAppearance.app.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+
+    </style>
+
+    <style name="TextAppearance.app.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/work_sans_medium</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+    <style name="TextAppearance.app.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/work_sans_medium</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+    <style name="TextAppearance.app.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+    </style>
+
+    <style name="TextAppearance.app.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/work_sans_medium</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+    <style name="TextAppearance.app.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/work_sans_medium</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+    <style name="TextAppearance.app.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/work_sans_medium</item>
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+    </style>
+
+
+    <style name="Widget.app.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:checkable">true</item>
+<!--
+        <item name="cardBackgroundColor">@color/card_status</item>
+-->
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">1dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="Widget.app.ExposedDropdownMenu" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+        <item name="errorEnabled">false</item>
+        <item name="helperTextEnabled">true</item>
+    </style>
+
+
+    <style name="Widget.app.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+
+        <item name="errorEnabled">false</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.app.TitleMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.app.BodySmall</item>
+        <item name="hintTextColor">@color/md_theme_light_onSurface</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+
+
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">@dimen/smaller_spacing</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">@dimen/normal_spacing</item>
+    </style>
+
+    <style name="Widget.app.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/md_theme_light_primary</item>
+<!--
+        <item name="collapseIcon">@drawable/ic_nav_back</item>
+-->
+        <item name="navigationIconTint">@color/md_theme_light_onPrimary</item>
+        <item name="titleCentered">true</item>
+        <item name="titleTextColor">@color/md_theme_light_onPrimary</item>
+    </style>
+
+    <style name="Widget.app.button" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+
+        <item name="android:textAlignment">center</item>
+<!--
+        <item name="cornerRadius">@dimen/large_spacing</item>
+-->
+    </style>
+
+
+    <style name="Widget.app.primaryButton" parent="Widget.app.button">
+        <item name="android:textColor">@color/md_theme_light_onPrimary</item>
+        <item name="android:backgroundTint">@color/md_theme_light_primary</item>
+        <item name="rippleColor">@color/md_theme_light_onPrimary</item>
+    </style>
+
+    <style name="Widget.app.secondaryButton" parent="Widget.app.button">
+        <item name="android:textColor">@color/md_theme_light_onSecondary</item>
+        <item name="android:backgroundTint">@color/md_theme_light_secondary</item>
+        <item name="rippleColor">@color/md_theme_light_onSecondaryContainer</item>
+    </style>
+
+    <style name="Widget.app.tertiaryButton" parent="Widget.app.button">
+        <item name="android:textColor">@color/md_theme_light_onTertiary</item>
+        <item name="android:backgroundTint">@color/md_theme_light_tertiary</item>
+        <item name="rippleColor">@color/md_theme_light_onTertiaryContainer</item>
+    </style>
+
+    <style name="Widget.app.iconButton" parent="Widget.Material3.Button.IconButton.Filled">
+        <item name="android:contentDescription">@null</item>
+
+    </style>
+
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.App.ModalBottomSheetDialog</item>
+    </style>
+
+    <style name="Widget.App.ModalBottomSheetDialog" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+
+        <item name="android:windowIsFloating">false</item>
+
+
+    </style>
+
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">12dp</item>
+
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+
+        <item name="itemActiveIndicatorStyle">
+            @style/Widget.App.BottomNavigationView.ActiveIndicator
+        </item>
+     <!--   <item name="itemIconTint">@color/bottom_nav_color_selector</item>
+        <item name="itemTextColor">@color/bottom_nav_color_selector</item>
+-->
+
+    </style>
+
+    <style name="Widget.App.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/md_theme_light_primaryContainer</item>
+
+    </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+</resources>

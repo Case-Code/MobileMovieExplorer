@@ -16,14 +16,14 @@ public class DemoResponse {
      * List of results in the demo response.
      */
     @SerializedName("results")
-    private List<Result> results;
+    private List<DemoMovie> results;
 
     /**
      * Constructs a new {@code DemoResponse} with the given list of results.
      *
      * @param results The list of results in the demo response.
      */
-    public DemoResponse(List<Result> results) {
+    public DemoResponse(List<DemoMovie> results) {
         this.results = results;
     }
 }
