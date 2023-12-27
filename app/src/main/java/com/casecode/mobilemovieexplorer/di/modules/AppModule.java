@@ -14,15 +14,21 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
 /**
- * Created by Mahmoud Abdalhafeez on 12/26/2023
+ * Dagger Hilt module that provides application-wide dependencies.
  */
 @Module
 @InstallIn(SingletonComponent.class)
 public class AppModule {
+
+    /**
+     * Provides a singleton instance of the {@link NetworkMonitor} interface.
+     *
+     * @param context The application context.
+     * @return A {@link NetworkMonitor} instance.
+     */
     @Provides
     @Singleton
     public NetworkMonitor provideConnectivityManagerNetworkMonitor(@ApplicationContext Context context) {
         return new ConnectivityManagerNetworkMonitor(context);
     }
-
 }

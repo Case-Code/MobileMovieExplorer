@@ -12,12 +12,18 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 
 /**
- * Created by Mahmoud Abdalhafeez on 12/25/2023
+ * Dagger Hilt module that provides data source dependencies.
  */
 @Module
 @InstallIn(SingletonComponent.class)
-public class DataSourceModule
-{
+public class DataSourceModule {
+
+    /**
+     * Provides a singleton instance of the {@link MoviesRemoteDataSource} interface.
+     *
+     * @param apiService The {@link MovieApiService} used for making remote requests.
+     * @return A {@link MoviesRemoteDataSource} instance.
+     */
     @Provides
     @Singleton
     public MoviesRemoteDataSource provideMoviesRemoteDataSource(MovieApiService apiService) {

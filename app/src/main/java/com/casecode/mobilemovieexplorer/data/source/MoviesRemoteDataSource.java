@@ -8,14 +8,37 @@ import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetails
 import io.reactivex.rxjava3.core.Single;
 
 /**
- * Created by Mahmoud Abdalhafeez on 12/26/2023
+ * Interface defining methods for retrieving movie-related data from a remote data source.
  */
 public interface MoviesRemoteDataSource {
+
+    /**
+     * Retrieves a list of movies from the remote data source.
+     *
+     * @return A {@link Single} emitting a {@link MoviesResponse}.
+     */
     Single<MoviesResponse> getMovies();
 
+    /**
+     * Retrieves a list of demo movies from the remote data source.
+     *
+     * @return A {@link Single} emitting a {@link DemoResponse}.
+     */
     Single<DemoResponse> getDemoMovies();
 
+    /**
+     * Retrieves details for a specific movie from the remote data source.
+     *
+     * @param movieId The ID of the movie.
+     * @return A {@link Single} emitting a {@link MoviesDetailsResponse}.
+     */
     Single<MoviesDetailsResponse> getMovieDetails(int movieId);
 
+    /**
+     * Retrieves details for a specific demo from the remote data source.
+     *
+     * @param demoId The ID of the demo.
+     * @return A {@link Single} emitting a {@link DemoDetailsResponse}.
+     */
     Single<DemoDetailsResponse> getDemoDetails(int demoId);
 }

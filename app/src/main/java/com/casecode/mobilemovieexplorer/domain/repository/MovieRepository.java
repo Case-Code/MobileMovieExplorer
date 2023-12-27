@@ -6,15 +6,39 @@ import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 
 import io.reactivex.rxjava3.core.Single;
-import retrofit2.Call;
 
+/**
+ * Repository interface for retrieving movie-related data.
+ */
 public interface MovieRepository {
 
+    /**
+     * Retrieves a list of movies.
+     *
+     * @return A Single emitting the response containing a list of movies.
+     */
     Single<MoviesResponse> getMovies();
 
+    /**
+     * Retrieves a list of demo movies.
+     *
+     * @return A Single emitting the response containing a list of demo movies.
+     */
     Single<DemoResponse> getDemoMovies();
 
+    /**
+     * Retrieves details for a specific movie.
+     *
+     * @param movieId The ID of the movie to retrieve details for.
+     * @return A Single emitting the response containing details for the specified movie.
+     */
     Single<MoviesDetailsResponse> getMovieDetails(int movieId);
 
+    /**
+     * Retrieves details for a specific demo.
+     *
+     * @param demoId The ID of the demo to retrieve details for.
+     * @return A Single emitting the response containing details for the specified demo.
+     */
     Single<DemoDetailsResponse> getDemoDetails(int demoId);
 }

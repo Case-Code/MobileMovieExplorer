@@ -19,17 +19,36 @@ import io.reactivex.rxjava3.core.Flowable;
 import timber.log.Timber;
 
 /**
- * Created by Mahmoud Abdalhafeez on 12/26/2023
+ * Implementation of the {@link NetworkMonitor} interface that monitors the device's network
+ * connectivity using the Android ConnectivityManager.
  */
-public class ConnectivityManagerNetworkMonitor implements NetworkMonitor{
+public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
+
+    /**
+     * The tag used for logging.
+     */
     private static final String TAG = "ConnectivityManagerNetworkMonitor";
+
+    /**
+     * The application context.
+     */
     private final Context context;
 
+    /**
+     * Constructs a {@code ConnectivityManagerNetworkMonitor} instance.
+     *
+     * @param context The application context.
+     */
     @Inject
     public ConnectivityManagerNetworkMonitor(@ApplicationContext Context context) {
         this.context = context;
     }
 
+    /**
+     * Returns a {@link Flowable} emitting boolean values indicating whether the device is online.
+     *
+     * @return A {@link Flowable} emitting {@code true} if online, {@code false} otherwise.
+     */
     @Override
     public Flowable<Boolean> isOnline() {
         return Flowable.create(emitter -> {
@@ -56,9 +75,12 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor{
                 }
 
                 @Override
-                public void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
+                public void onCapabilitiesChanged(
+                        Network network,
+                        NetworkCapabilities networkCapabilities) {
                     super.onCapabilitiesChanged(network, networkCapabilities);
-                    boolean unmetered = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
+                    boolean unmetered = networkCapabilities.hasCapability(
+                            NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
                     Timber.tag(TAG).d("onCapabilitiesChanged = %s", unmetered);
                 }
             };
@@ -79,8 +101,15 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor{
         }, BackpressureStrategy.LATEST);
     }
 
+    /**
+     * Checks if the device is currently connected to a network with internet capabilities.
+     *
+     * @param connectivityManager The ConnectivityManager instance.
+     * @return {@code true} if the device is connected to the internet, {@code false} otherwise.
+     */
     private boolean isCurrentlyConnected(ConnectivityManager connectivityManager) {
-        NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+        NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(
+                connectivityManager.getActiveNetwork());
         return capabilities != null &&
                 (capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                         capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) &&
@@ -88,4 +117,3 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor{
                                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)));
     }
 }
-

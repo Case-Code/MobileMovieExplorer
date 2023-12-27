@@ -7,18 +7,26 @@ import com.google.android.material.snackbar.Snackbar;
 import lombok.experimental.ExtensionMethod;
 
 /**
- * Created by Mahmoud Abdalhafeez on 12/26/2023
+ * Utility class for extending functionality related to Android Views.
  */
 @ExtensionMethod({ViewExtensions.class})
 public class ViewExtensions {
 
     /**
-     * Transforms static Java function Snackbar.make() to an extension function on View.
+     * Displays a Snackbar on the specified View.
+     *
+     * @param view         The View on which the Snackbar will be displayed.
+     * @param snackbarText The text to show in the Snackbar.
+     * @param timeLength   Duration of the Snackbar display (e.g., Snackbar.LENGTH_SHORT).
      */
     public static void showSnackbar(View view, String snackbarText, int timeLength) {
-        Snackbar.make(view, snackbarText, timeLength)
-                .show();
+        /**
+         * Transforms static Java function Snackbar.make() to an extension function on View.
+         *
+         * @param view          The View on which the Snackbar will be displayed.
+         * @param snackbarText  The text to show in the Snackbar.
+         * @param timeLength    Duration of the Snackbar display (e.g., Snackbar.LENGTH_SHORT).
+         */
+        Snackbar.make(view, snackbarText, timeLength).show();
     }
-
-
 }
