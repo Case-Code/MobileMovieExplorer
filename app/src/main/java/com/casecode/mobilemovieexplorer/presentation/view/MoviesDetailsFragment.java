@@ -116,7 +116,6 @@ public class MoviesDetailsFragment extends Fragment {
                     // Show progress bar while loading
                     binding.progressBar.setVisibility(View.VISIBLE);
 
-
                     // Example of setting text to a TextView using View Binding
                     binding.textOverview.setText(movieDetails.getOverview());
 
@@ -143,6 +142,10 @@ public class MoviesDetailsFragment extends Fragment {
                     List<Genre> genres = movieDetails.getGenres();
 
                     setupGenresRecyclerView(genres);
+
+                    binding.buttonShare.setOnClickListener(view1 -> {
+                        shareLink(movieDetails.getHomepage());
+                    });
 
                     break;
                 case ERROR:
@@ -185,10 +188,6 @@ public class MoviesDetailsFragment extends Fragment {
 
             // Change the drawable based on the selected state
             updateButtonDrawable();
-        });
-
-        binding.buttonShare.setOnClickListener(view1 -> {
-            shareLink("https://www.marvel.com/movies/ant-man-and-the-wasp-quantumania");
         });
 
         // Fetch movie details when the fragment is created or some event occurs
