@@ -13,4 +13,5 @@
 
     <string name="runtime_format">%s min</string>
     <string name="profile_image_description">profile image description</string>
+    <string name="share_button_description">share button description</string>
 </resources>

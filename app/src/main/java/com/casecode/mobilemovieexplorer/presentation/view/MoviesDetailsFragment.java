@@ -4,6 +4,7 @@ import static com.casecode.mobilemovieexplorer.presentation.utils.Status.ERROR;
 import static com.casecode.mobilemovieexplorer.presentation.utils.Status.LOADING;
 import static com.casecode.mobilemovieexplorer.presentation.utils.Status.SUCCESS;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -186,6 +187,10 @@ public class MoviesDetailsFragment extends Fragment {
             updateButtonDrawable();
         });
 
+        binding.buttonShare.setOnClickListener(view1 -> {
+            shareLink("https://www.marvel.com/movies/ant-man-and-the-wasp-quantumania");
+        });
+
         // Fetch movie details when the fragment is created or some event occurs
         movieViewModel.fetchMovieDetails();
     }
@@ -209,6 +214,14 @@ public class MoviesDetailsFragment extends Fragment {
 
         // Remove the observer when the fragment view is destroyed
 //        movieViewModel.getMovieDetailsLiveData().removeObservers(this);
+    }
+
+    private void shareLink(String link) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, link);
+
+        startActivity(Intent.createChooser(shareIntent, "Share link using"));
     }
 
 }
