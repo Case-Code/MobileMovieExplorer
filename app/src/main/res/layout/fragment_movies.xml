@@ -32,12 +32,75 @@
         android:id="@+id/swipe_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_primary">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/home_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_movie_filter_24"
+
+                    android:layout_weight="0.03"/>
+
+                <TextView
+                    android:id="@+id/home_toolbar_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_spacing"
+                    android:textAppearance="@style/TextAppearance.app.TitleMedium"
+
+                    android:text="Movies App"
+                    android:textColor="@color/md_theme_onPrimary"
+                    android:layout_weight="0.87"/>
+
+                <ImageView
+                    android:id="@+id/error_toolbar_textView"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_spacing"
+                    android:src="@drawable/favorite_fill_24"
+
+                    android:layout_weight="0.05"/>
+
+
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_movies"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+           >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/csl_movies_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/md_theme_primary">
+           >
 
             <AdapterViewFlipper
                 android:id="@+id/avf_movies_demo"
@@ -51,6 +114,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/md_theme_primary"
+                tools:listitem="@layout/item_demo_movie"
                 tools:visibility="visible">
 
             </AdapterViewFlipper>
@@ -66,6 +130,7 @@
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/avf_movies_demo"
+
                 tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -74,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
+                android:nestedScrollingEnabled="false"
 
                 android:paddingStart="@dimen/small_spacing"
                 android:paddingEnd="@dimen/normal_spacing"
@@ -87,39 +152,9 @@
                 app:spanCount="3"
                 tools:listitem="@layout/item_movie" />
 
-            <TextView
-                android:id="@+id/tv_movies_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_spacing"
-                android:layout_marginTop="16dp"
-                android:text="@string/category_title"
-                android:textAppearance="@style/TextAppearance.app.TitleMedium"
-                android:textColor="@color/md_theme_secondary"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_movies"
-                tools:visibility="visible" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_movies_category"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
 
-                android:orientation="horizontal"
 
-                android:paddingStart="@dimen/small_spacing"
-                android:paddingEnd="@dimen/normal_spacing"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_movies_category"
-                app:setDataMoviesAdapter="@{movieList}"
-                app:setMoviesAdapter="@{moviesAdapter}"
-                app:spanCount="3"
-                tools:listitem="@layout/item_movie" />
 
             <ImageView
                 android:id="@+id/imv_movies_empty"
@@ -133,6 +168,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/avf_movies_demo"
                 tools:visibility="gone" />
 
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/sh_movies"
                 android:layout_width="0dp"
@@ -141,7 +180,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
                 tools:visibility="gone">
 
                 <LinearLayout
@@ -162,7 +201,6 @@
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

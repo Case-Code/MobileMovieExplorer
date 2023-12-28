@@ -8,4 +8,5 @@
     <dimen name="largest_spacing">48dp</dimen>
 
     <dimen name="height_item_movie">140dp</dimen>
+    <dimen name="width_item_movie_card">120dp</dimen>
 </resources>

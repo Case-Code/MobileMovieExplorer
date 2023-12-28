@@ -18,9 +18,9 @@ import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
  */
 public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHolder> {
 
-    private final ItemClickListener mItemClickListener;
+    private final ItemClickListener<Movie> mItemClickListener;
 
-    public MoviesAdapter(ItemClickListener itemClickListener) {
+    public MoviesAdapter(ItemClickListener<Movie> itemClickListener) {
         super(new DiffUtil.ItemCallback<Movie>() {
             @Override
             public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
@@ -66,7 +66,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
             });*/
         }
 
-        public void bind(Movie movie, ItemClickListener itemClickListener) {
+        public void bind(Movie movie, ItemClickListener<Movie> itemClickListener) {
             mBinding.setMovie(movie);
             mBinding.setClickListener(itemClickListener);
             mBinding.executePendingBindings();

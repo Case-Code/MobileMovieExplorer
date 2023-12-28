@@ -67,7 +67,7 @@ public class MoviesFragment extends Fragment {
         var shimmer = new Shimmer.AlphaHighlightBuilder().setDuration(
                         2000L) // how long the shimmering animation takes to do one full sweep
                 .setRepeatMode(ValueAnimator.REVERSE)
-                //  .setAutoStart(true)
+                  .setAutoStart(true)
                 .build();
 
 

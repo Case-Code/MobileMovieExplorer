@@ -2735,3 +2735,7 @@ Qapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/movies/Movie.ja
 _app/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesDetailsFragment.java,b\d\bdbb38755c81d066f4927d23f140b9073a3492f0
 é
 ^app/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/ItemClickListener.java,9\3\936921710ad4236472d52b5ea2377d091f694332
+ì
+capp/src/main/java/com/casecode/mobilemovieexplorer/presentation/MobileMovieExplorerGlideModule.java,a\e\ae1eafb8deea79ff846035f6fc74be25d50a4d2c
+ç
+]app/src/main/java/com/casecode/mobilemovieexplorer/presentation/utils/UnsafeOkHttpClient.java,2\5\25eb38c1b4cdbfca11cedc6267b1af5bbc118b0c

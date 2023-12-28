@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
@@ -50,7 +51,7 @@ public class MoviesBindingUtils {
     @BindingAdapter("adapterFlipper")
     public static void setAdapterFlipper(AdapterViewFlipper adapterFlipper, DemoMoviesAdapter adapter) {
         adapterFlipper.setAdapter(adapter);
-        adapterFlipper.setFlipInterval(4000);
+        adapterFlipper.setFlipInterval(3000);
         adapterFlipper.startFlipping();
         adapterFlipper.setHorizontalScrollBarEnabled(true);
 
@@ -97,16 +98,15 @@ public class MoviesBindingUtils {
                     url = imageURL;
                 }
 
-
                 Glide.with(imageView.getContext())
-                           .setDefaultRequestOptions(new RequestOptions()
-                                   .autoClone())
+                        .setDefaultRequestOptions(new RequestOptions()
+                                .autoClone())
                         .load(url)
                         .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache both original and resized image
 
-                        /*.placeholder(getShimmerDrawables(imageView.getContext()))
-                        .error(getShimmerDrawables(imageView.getContext()))
-                        .fallback(getShimmerDrawables(imageView.getContext()))*/
+                        .placeholder(getShimmerDrawables(imageView.getContext()))
+                        .error(AppCompatResources.getDrawable(imageView.getContext(), R.drawable.ic_baseline_movie_filter_24))
+                     //   .fallback(getShimmerDrawables(imageView.getContext()))
                         .into(imageView);
             } catch (Exception e) {
                 Timber.e(e);
@@ -119,17 +119,23 @@ public class MoviesBindingUtils {
 
 
     private static ShimmerDrawable getShimmerDrawables(Context context) {
-
-        Shimmer shimmer = new Shimmer.ColorHighlightBuilder()
-                .setBaseColor(ContextCompat.getColor(context, R.color.md_theme_primaryContainer))
-                .setDuration(1000L) // how long the shimmering animation takes to do one full sweep
-                .setBaseAlpha(0.6f) //the alpha of the underlying children
-                .setHighlightAlpha(0.7f) // the shimmer alpha amount
-                .setHighlightColor(ContextCompat.getColor(context, R.color.md_theme_onPrimaryContainer))
-
+        Shimmer shimmer = new Shimmer.AlphaHighlightBuilder()
+                .setDuration(1800L) // how long the shimmering animation takes to do one full sweep
+                .setBaseAlpha(0.7f) //the alpha of the underlying children
+                .setHighlightAlpha(0.6f) // the shimmer alpha amount
                 .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
                 .setAutoStart(true)
                 .build();
+     /*   Shimmer shimmer = new Shimmer.ColorHighlightBuilder()
+                .setBaseColor(ContextCompat.getColor(context, R.color.md_theme_inversePrimary))
+                .setDuration(400L) // how long the shimmering animation takes to do one full sweep
+                .setBaseAlpha(0.6f) //the alpha of the underlying children
+                .setHighlightAlpha(0.7f) // the shimmer alpha amount
+               // .setHighlightColor(ContextCompat.getColor(context, R.color.md_theme_inversePrimary_highContrast))
+
+                .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+                .setAutoStart(true)
+                .build();*/
 
         ShimmerDrawable shimmerDrawables = new ShimmerDrawable();
         shimmerDrawables.setShimmer(shimmer);

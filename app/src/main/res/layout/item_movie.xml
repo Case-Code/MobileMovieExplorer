@@ -4,44 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="clickListener"
             type="com.casecode.mobilemovieexplorer.presentation.adapter.ItemClickListener" />
+
         <variable
             name="movie"
             type="com.casecode.mobilemovieexplorer.domain.model.movies.Movie" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/csl_item_movie_card"
-        android:layout_width="@dimen/height_item_movie"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-
         android:onClick="@{() -> clickListener.onItemClick(movie)}"
+
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:background="@color/md_theme_primary"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/md_theme_primary">
 
 
         <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_movie_poster"
+            android:id="@+id/cv_movie_poster"
             style="@style/Widget.app.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/width_item_movie_card"
+            android:layout_height="0dp"
             android:layout_margin="@dimen/small_spacing"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imv_item_movie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/width_item_movie_card"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+
                 app:baseImage="@{@drawable/ic_error}"
                 app:loadImage="@{movie.posterPath()}"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -50,17 +56,34 @@
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/tv_item_movie"
+            android:id="@+id/tv_item_movie_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:padding="@dimen/smaller_spacing"
+            android:text="@{movie.title()}"
+            android:textAppearance="@style/TextAppearance.app.TitleSmall"
+            android:textColor="@color/md_theme_onPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_movie_poster"
+            app:layout_constraintTop_toTopOf="@+id/cv_movie_poster"
+            tools:text="Title " />
+
+        <TextView
+            android:id="@+id/tv_item_movie_overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:paddingTop="@dimen/smaller_spacing"
-            android:text="@{movie.title()}"
-            android:textAppearance="@style/TextAppearance.app.BodyMedium"
+            android:layout_marginStart="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:padding="@dimen/smaller_spacing"
+            android:text="@{movie.overview()}"
+            android:textAppearance="@style/TextAppearance.app.LabelSmall"
             android:textColor="@color/md_theme_onPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/cv_movie_poster"
-            app:layout_constraintStart_toStartOf="@+id/cv_movie_poster"
-            app:layout_constraintTop_toBottomOf="@+id/cv_movie_poster"
-            tools:text="Title " />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cv_movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_title"
+            tools:text="A tormented father witnesses his young son die when caught in a gang's crossfire on Christmas Eve. While recovering from a wound that costs him his voice, he makes vengeance his life's mission and embarks on a punishing training regimen in order to avenge his son's death." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

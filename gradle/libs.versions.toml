@@ -36,7 +36,7 @@ lombok = "1.18.28"
 hiltAndroid = "2.46.1"
 
 # Image loading
-glideVersion = "4.15.1"
+glideVersion = "4.16.0"
 
 # Debug
 timber = "4.7.1"
