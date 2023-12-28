@@ -27,6 +27,10 @@
             android:name="movieId"
             app:argType="integer"
             />
+        <action
+            android:id="@+id/action_nav_details_fragment_to_nav_movies"
+            app:destination="@id/nav_movies"
+            app:popUpTo="@id/nav_movies" />
 
     </fragment>
 

@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -75,8 +77,8 @@ public class MoviesDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Initialize ViewModel
-        movieViewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-
+        movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory)
+                .get(MovieViewModel.class);
         // Observe LiveData for movie details
         movieViewModel.getMovieDetailsLiveData().observe(this, resource -> {
             switch (resource.getStatus()) {
@@ -163,6 +165,14 @@ public class MoviesDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.imageButtonBack.setOnClickListener(v -> {
+            // Get the NavController
+            NavController navController = Navigation.findNavController(v);
+
+            // Navigate back
+            navController.navigateUp();
+        });
+
         // Bind views using View Binding
         likeButton = binding.imageButtonLike;
 
@@ -177,8 +187,7 @@ public class MoviesDetailsFragment extends Fragment {
         });
 
         // Fetch movie details when the fragment is created or some event occurs
-        int movieId = 640146; // Replace with the actual movie ID
-        movieViewModel.fetchMovieDetails(movieId);
+        movieViewModel.fetchMovieDetails();
     }
 
     private void setupGenresRecyclerView(List<Genre> genres) {
