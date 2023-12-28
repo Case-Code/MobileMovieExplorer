@@ -4,6 +4,7 @@ import static com.casecode.mobilemovieexplorer.presentation.utils.Status.ERROR;
 import static com.casecode.mobilemovieexplorer.presentation.utils.Status.LOADING;
 import static com.casecode.mobilemovieexplorer.presentation.utils.Status.SUCCESS;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.FragmentMoviesDetailsBinding;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.Cast;
@@ -83,10 +88,31 @@ public class MoviesDetailsFragment extends Fragment {
                     MoviesDetailsResponse movieDetails = resource.getData();
                     // Do something with movieDetails
 
-                    // Example of setting an image using Glide and View Binding
+                    // Assuming 'binding' is the ViewBinding instance for your layout
+                    // Example of setting an image using Glide with a ProgressBar
                     Glide.with(this)
                             .load(movieDetails.getBackdropPath())
+                            .placeholder(R.drawable.panorama_24) // Placeholder image while loading
+                            .listener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    // Hide progress bar on failure
+                                    binding.progressBar.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    // Hide progress bar on success
+                                    binding.progressBar.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
                             .into(binding.imageBackdropPath);
+
+                    // Show progress bar while loading
+                    binding.progressBar.setVisibility(View.VISIBLE);
+
 
                     // Example of setting text to a TextView using View Binding
                     binding.textOverview.setText(movieDetails.getOverview());
