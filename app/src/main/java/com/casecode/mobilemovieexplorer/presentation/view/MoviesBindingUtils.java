@@ -41,7 +41,7 @@ import timber.log.Timber;
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  */
 public class MoviesBindingUtils {
-    private final static String BASE_URL_IMAGE = "https://image.tmdb.org/t/p/original/";
+    private  static final  String BASE_URL_IMAGE = "https://image.tmdb.org/t/p/original/";
 
     @BindingAdapter({"bindImage"})
     public static void setVisibility(@NotNull ImageView imageView, int size) {
@@ -99,8 +99,8 @@ public class MoviesBindingUtils {
                 }
 
                 Glide.with(imageView.getContext())
-                        .setDefaultRequestOptions(new RequestOptions()
-                                .autoClone())
+                        /*.setDefaultRequestOptions(new RequestOptions()
+                                .autoClone())*/
                         .load(url)
                         .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache both original and resized image
 
@@ -119,14 +119,8 @@ public class MoviesBindingUtils {
 
 
     private static ShimmerDrawable getShimmerDrawables(Context context) {
-        Shimmer shimmer = new Shimmer.AlphaHighlightBuilder()
-                .setDuration(1800L) // how long the shimmering animation takes to do one full sweep
-                .setBaseAlpha(0.7f) //the alpha of the underlying children
-                .setHighlightAlpha(0.6f) // the shimmer alpha amount
-                .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
-                .setAutoStart(true)
-                .build();
-     /*   Shimmer shimmer = new Shimmer.ColorHighlightBuilder()
+
+        Shimmer shimmer = new Shimmer.ColorHighlightBuilder()
                 .setBaseColor(ContextCompat.getColor(context, R.color.md_theme_inversePrimary))
                 .setDuration(400L) // how long the shimmering animation takes to do one full sweep
                 .setBaseAlpha(0.6f) //the alpha of the underlying children
@@ -134,8 +128,8 @@ public class MoviesBindingUtils {
                // .setHighlightColor(ContextCompat.getColor(context, R.color.md_theme_inversePrimary_highContrast))
 
                 .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
-                .setAutoStart(true)
-                .build();*/
+                //.setAutoStart(true)
+                .build();
 
         ShimmerDrawable shimmerDrawables = new ShimmerDrawable();
         shimmerDrawables.setShimmer(shimmer);

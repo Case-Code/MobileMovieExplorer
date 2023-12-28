@@ -9,31 +9,36 @@
             name="demoMovie"
             type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
     </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
 
         style="@style/Widget.app.CardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_spacing"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/md_theme_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-        android:layout_marginTop="@dimen/small_spacing">
 
-        <LinearLayout
+        app:layout_constraintDimensionRatio="H,2:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imv_item_movie"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_spacing"
+            app:layout_constraintDimensionRatio="H,2:1"
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imv_item_movie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            app:loadImage="@{demoMovie.posterPath()}"
+            tools:srcCompat="@tools:sample/avatars"
 
-                app:loadImage="@{demoMovie.posterPath()}"
-                tools:srcCompat="@tools:sample/avatars"
-
-                />
-        </LinearLayout>
+            />
     </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
