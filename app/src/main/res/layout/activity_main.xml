@@ -4,22 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="isAvailable"
+            type="Boolean" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/csl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.MainActivity">
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_graph" />
+        <TextView
+            android:id="@+id/tv_main_network"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_onSurface"
+            android:gravity="center"
+            android:text="@string/all_network_error"
+            android:textAppearance="@style/TextAppearance.app.LabelSmall"
+            android:textColor="@color/md_theme_surface"
+            app:isAvailable="@{isAvailable}"
+
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

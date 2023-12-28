@@ -2,10 +2,15 @@ package com.casecode.mobilemovieexplorer.presentation;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ActivityMainBinding;
@@ -13,7 +18,6 @@ import com.casecode.mobilemovieexplorer.presentation.utils.ViewExtensions;
 import com.casecode.mobilemovieexplorer.presentation.view.MoviesDetailsFragment;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
-import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
 
@@ -32,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private ActivityMainBinding mBinding;
+    private NavController navController;
     @Inject
     MovieViewModelFactory movieViewModelFactory;
-
     private MovieViewModel movieViewModel;
-    private ActivityMainBinding mBinding;
 
     /**
      * Called when the activity is first created. Initializes UI components, sets up ViewModel,
@@ -51,29 +55,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         mBinding.setLifecycleOwner(this);
+        // Create an instance of MoviesDetailsFragment
+
 
         setContentView(mBinding.getRoot());
-
-        // Create an instance of MoviesDetailsFragment
-        MoviesDetailsFragment moviesDetailsFragment = new MoviesDetailsFragment();
-
-        // Replace the default container with MoviesDetailsFragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, moviesDetailsFragment);
-        fragmentTransaction.commit();
-
-
-
-//        mBinding.textViewMain.setOnClickListener(view -> {
-//            view.showSnackbar("Snackbar Text", Snackbar.LENGTH_SHORT);
-//        });
-//
-//        setupViewModel();
-//        fetchViewModel();
-//        observeViewModel();
+        setupTitle();
+        setupViewModel();
+        fetchViewModel();
+        observeViewModel();
     }
 
+    private void setupTitle(){
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+        navController.addOnDestinationChangedListener((navController, navDestination, bundle) ->
+                setTitle(navDestination.getLabel()));
+    }
     /**
      * Initializes the MovieViewModel using Hilt for dependency injection.
      */
@@ -87,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void fetchViewModel() {
         movieViewModel.setNetworkMonitor();
-        movieViewModel.fetchMovies();
+      /*  movieViewModel.fetchMovies();
         movieViewModel.fetchDemoMovies();
         movieViewModel.fetchMovieDetails(640146);  // Replace with a valid movieId
-        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId
+        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId*/
     }
 
     /**
@@ -112,9 +110,8 @@ public class MainActivity extends AppCompatActivity {
             Timber.tag(TAG).d("Demo details response received: %s", demoDetailsResponse);
             switch (demoDetailsResponse.status) {
                 case LOADING -> Timber.tag(TAG).d("Demo details LOADING");
-                case SUCCESS ->
-                        Timber.tag(TAG).d("Demo details response received: %s",
-                                demoDetailsResponse);
+                case SUCCESS -> Timber.tag(TAG).d("Demo details response received: %s",
+                        demoDetailsResponse);
                 case ERROR ->
                         Timber.tag(TAG).e("Demo details ERROR: %s", demoDetailsResponse.message);
                 case NULL -> Timber.tag(TAG).e("Demo details NULL");
@@ -129,9 +126,8 @@ public class MainActivity extends AppCompatActivity {
         movieViewModel.getMovieDetailsLiveData().observe(this, moviesDetailsResponse -> {
             switch (moviesDetailsResponse.status) {
                 case LOADING -> Timber.tag(TAG).d("Movie details LOADING");
-                case SUCCESS ->
-                        Timber.tag(TAG).d("Movie details response received: %s",
-                                moviesDetailsResponse);
+                case SUCCESS -> Timber.tag(TAG).d("Movie details response received: %s",
+                        moviesDetailsResponse);
                 case ERROR ->
                         Timber.tag(TAG).e("Movie details ERROR: %s", moviesDetailsResponse.message);
                 case NULL -> Timber.tag(TAG).e("Movie details NULL");
@@ -174,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void observerNetworkMonitor() {
         movieViewModel.getIsOnline().observe(this, isOnline -> {
+            mBinding.setIsAvailable(isOnline);
+
             if (Boolean.TRUE.equals(isOnline)) {
                 Timber.e("isOnline = %s", true);
             } else {

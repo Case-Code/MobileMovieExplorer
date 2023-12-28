@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ItemMovieBinding;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
-import com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener;
 
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  */
 public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHolder> {
 
- private final ItemClickListener mItemClickListener;
-    protected MoviesAdapter(ItemClickListener itemClickListener) {
+    private final ItemClickListener mItemClickListener;
+
+    public MoviesAdapter(ItemClickListener itemClickListener) {
         super(new DiffUtil.ItemCallback<Movie>() {
             @Override
             public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
@@ -48,26 +48,27 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int position) {
         Movie movie = getItem(position);
-        movieViewHolder.bind(movie);
+        movieViewHolder.bind(movie, mItemClickListener);
     }
 
-     class MovieViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder {
         private ItemMovieBinding mBinding;
 
         public MovieViewHolder(@NonNull ItemMovieBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
-            itemView.setOnClickListener(v -> {
+          /*  itemView.setOnClickListener(v -> {
                 int position = getBindingAdapterPosition();
                 if(position != RecyclerView.NO_POSITION)
                 {
                     mItemClickListener.onItemClick(getItem(position));
                 }
-            });
+            });*/
         }
 
-        public void bind(Movie movie) {
+        public void bind(Movie movie, ItemClickListener itemClickListener) {
             mBinding.setMovie(movie);
+            mBinding.setClickListener(itemClickListener);
             mBinding.executePendingBindings();
         }
 

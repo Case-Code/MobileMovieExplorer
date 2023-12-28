@@ -6,6 +6,7 @@
     <data>
 
         <import type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
+
         <import type="com.casecode.mobilemovieexplorer.domain.model.movies.Movie" />
 
         <import type="java.util.List" />
@@ -21,6 +22,7 @@
         <variable
             name="moviesAdapter"
             type="com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter" />
+
         <variable
             name="movieList"
             type="List&lt;Movie>" />
@@ -35,21 +37,20 @@
             android:id="@+id/csl_movies_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
-            tools:visibility="visible">
+            android:background="@color/md_theme_primary">
 
             <AdapterViewFlipper
                 android:id="@+id/avf_movies_demo"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/md_theme_light_primary"
+                android:visibility="invisible"
                 app:adapterFlipper="@{demoAdapter}"
                 app:dataFlipper="@{demoList}"
                 app:layout_constraintDimensionRatio="H,2:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
+                android:background="@color/md_theme_primary"
                 tools:visibility="visible">
 
             </AdapterViewFlipper>
@@ -59,31 +60,107 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_spacing"
-                android:background="@color/md_theme_light_surfaceVariant"
-                android:text="@string/movies_title"
+                android:textColor="@color/md_theme_secondary"
+                android:text="@string/best_movies_title"
                 android:textAppearance="@style/TextAppearance.app.TitleMedium"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/avf_movies_demo"
-
-                />
+                tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_price_list"
+                android:id="@+id/rv_movies"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
 
                 android:paddingStart="@dimen/small_spacing"
                 android:paddingEnd="@dimen/normal_spacing"
-                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movies_title"
                 app:setDataMoviesAdapter="@{movieList}"
                 app:setMoviesAdapter="@{moviesAdapter}"
-                app:spanCount="2"
+                app:spanCount="3"
                 tools:listitem="@layout/item_movie" />
 
+            <TextView
+                android:id="@+id/tv_movies_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_spacing"
+                android:layout_marginTop="16dp"
+                android:text="@string/category_title"
+                android:textAppearance="@style/TextAppearance.app.TitleMedium"
+                android:textColor="@color/md_theme_secondary"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_movies"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_movies_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+
+                android:orientation="horizontal"
+
+                android:paddingStart="@dimen/small_spacing"
+                android:paddingEnd="@dimen/normal_spacing"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_movies_category"
+                app:setDataMoviesAdapter="@{movieList}"
+                app:setMoviesAdapter="@{moviesAdapter}"
+                app:spanCount="3"
+                tools:listitem="@layout/item_movie" />
+
+            <ImageView
+                android:id="@+id/imv_movies_empty"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_error"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/avf_movies_demo"
+                tools:visibility="gone" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/sh_movies"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_item_movie"
+                        android:background="@color/md_theme_inversePrimary" />
+
+                    <include layout="@layout/shimmer_movies" />
+
+                    <include layout="@layout/shimmer_movies" />
+
+                    <include layout="@layout/shimmer_movies" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

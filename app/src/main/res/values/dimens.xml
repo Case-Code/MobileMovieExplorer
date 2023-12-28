@@ -6,4 +6,6 @@
     <dimen name="normal_spacing">16dp</dimen>
     <dimen name="larger_spacing">32dp</dimen>
     <dimen name="largest_spacing">48dp</dimen>
+
+    <dimen name="height_item_movie">140dp</dimen>
 </resources>

@@ -12,7 +12,9 @@ navigation = "2.7.6"
 lifecycleVersion = "2.6.2"
 swipeRefreshLayoutVersion = "1.1.0"
 
+# Ui tools
 materialVersion = "1.11.0"
+shimmer = "0.5.0"
 
 # Network
 retrofit = "2.9.0"
@@ -58,7 +60,9 @@ lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime", version.re
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipeRefreshLayoutVersion" }
 coreSplashScreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashScreen" }
 
+# Ui tools
 material = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 
 # hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }

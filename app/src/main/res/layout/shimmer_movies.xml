@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_price_list_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/normal_spacing"
+    android:layout_marginTop="@dimen/normal_spacing"
+    android:layout_marginEnd="@dimen/normal_spacing"
+    android:orientation="horizontal"
+
+    >
+
+        <com.google.android.material.card.MaterialCardView
+
+            style="@style/Widget.app.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_item_movie"
+            android:layout_weight="1">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+
+            style="@style/Widget.app.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_item_movie"
+            android:layout_marginStart="@dimen/small_spacing"
+
+            android:layout_weight="1">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+    </LinearLayout>
+

@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="demoMovie"
-    type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
+
+        <variable
+            name="demoMovie"
+            type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        style="@style/Widget.app.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_spacing"
+        android:background="@color/md_theme_primary"
+
+        android:layout_marginTop="@dimen/small_spacing">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imv_item_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:loadImage="@{demoMovie.posterPath()}"
+                tools:srcCompat="@tools:sample/avatars"
+
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

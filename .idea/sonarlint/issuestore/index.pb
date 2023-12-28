@@ -2731,3 +2731,7 @@ Zapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/MoviesA
 Qapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/movies/Movie.java,6\0\603e5de0d545df768922c016b93ccff0c86761fd
 ã
 [app/src/main/java/com/casecode/mobilemovieexplorer/presentation/base/ItemClickListener.java,1\e\1e7f76d9abd65ff1aaed69b4d2346e02ac29587c
+è
+_app/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesDetailsFragment.java,b\d\bdbb38755c81d066f4927d23f140b9073a3492f0
+é
+^app/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/ItemClickListener.java,9\3\936921710ad4236472d52b5ea2377d091f694332

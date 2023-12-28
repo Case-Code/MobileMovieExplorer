@@ -1,11 +1,8 @@
 
 d
-java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8æ„áÃÊ1
-t
-java:S1450#"WRemove the "mBinding" field and declare it as a local variable in the relevant methods.(á“¯è8ç„áÃÊ1
-I
-java:S16025",Remove useless curly braces around statement(„ıŒ‡8ü„áÃÊ1
-Š
-java:S32526"hUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_SHORT".(İşÉıÿÿÿÿ8ş„áÃÊ1
+java:S6813)"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ÓÛÑüÊ1
+~
+java:S1450("\Remove the "navController" field and declare it as a local variable in the relevant methods.(¿”Æƒøÿÿÿÿ8İÛÑüÊ1
+X	java:S125X"<This block of commented-out lines of code should be removed.(€ÔĞÒ8ˆÜÑüÊ1
 e
-java:S1126¢"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8…áÃÊ1
+java:S1126¯"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8‚òÇŞÊ1

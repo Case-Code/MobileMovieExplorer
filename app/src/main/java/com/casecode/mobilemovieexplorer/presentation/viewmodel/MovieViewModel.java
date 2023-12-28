@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.casecode.mobilemovieexplorer.data.utils.NetworkMonitor;
+import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
+import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.usecase.MovieUseCase;
@@ -18,6 +20,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import lombok.Getter;
+import lombok.Setter;
 import timber.log.Timber;
 
 /**
@@ -48,6 +51,11 @@ public class MovieViewModel extends ViewModel {
     @Getter
     private final MutableLiveData<Resource<DemoDetailsResponse>> demoDetailsLiveData =
             new MutableLiveData<>();
+    @Setter
+    private Movie movieSelected = null;
+
+    @Setter
+    private DemoMovie demoMovieSelected = null;
 
     private final NetworkMonitor networkMonitor;
 
@@ -145,6 +153,11 @@ public class MovieViewModel extends ViewModel {
                 }));
     }
 
+    public void fetchMovieDetails(){
+        int movieId = movieSelected.id();
+        fetchMovieDetails(movieId);
+    }
+
     /**
      * Fetches details for a specific movie and updates the corresponding LiveData.
      *
@@ -170,6 +183,10 @@ public class MovieViewModel extends ViewModel {
                 }));
     }
 
+    public void fetchDemoDetails(){
+        int movieId = demoMovieSelected.id();
+        fetchDemoDetails(movieId);
+    }
     /**
      * Fetches details for a specific demo and updates the corresponding LiveData.
      *
@@ -204,4 +221,6 @@ public class MovieViewModel extends ViewModel {
         mCompositeDisposable.clear();
         mCompositeDisposable.dispose();
     }
+
+
 }

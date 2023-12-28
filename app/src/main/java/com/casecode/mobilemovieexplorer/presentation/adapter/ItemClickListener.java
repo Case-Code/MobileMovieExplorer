@@ -1,4 +1,4 @@
-package com.casecode.mobilemovieexplorer.presentation.base;
+package com.casecode.mobilemovieexplorer.presentation.adapter;
 
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 
