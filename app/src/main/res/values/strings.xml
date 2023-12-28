@@ -12,4 +12,5 @@
     <string name="actors">Actors</string>
 
     <string name="runtime_format">%s min</string>
+    <string name="profile_image_description">profile image description</string>
 </resources>

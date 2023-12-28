@@ -1,19 +1,33 @@
-<!-- res/layout/item_cast.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
-    android:orientation="vertical"
     android:padding="8dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewProfile"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:contentDescription="@string/profile_image_description"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/person_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/circularImageView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewProfile"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewProfile"
+        app:layout_constraintStart_toStartOf="@+id/imageViewProfile"
+        app:layout_constraintTop_toTopOf="@+id/imageViewProfile" />
 
     <TextView
         android:id="@+id/textViewName"
@@ -22,7 +36,9 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:textColor="@android:color/black"
-        android:textScaleX="0.9"
         android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile"
         tools:text="Paul Rudd" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
