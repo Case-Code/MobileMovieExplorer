@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.FragmentMoviesBinding;
+import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter;
@@ -109,17 +110,19 @@ public class MoviesFragment extends Fragment {
 
     private void setupDemoAdapter()
     {
-        var demoAdapter = new DemoMoviesAdapter();
+        var demoAdapter = new DemoMoviesAdapter(this.getContext());
+        demoAdapter.setItemClickListener(this::onItemDemoMovieClick);
         mBinding.setDemoAdapter(demoAdapter);
-        mBinding.avfMoviesDemo.setOnItemClickListener((parent, view, position, id) -> {
-            mBinding.getRoot().showSnackbar("itemCLick", Snackbar.LENGTH_SHORT);
-            Timber.e("itemclick");
-            var demo = demoAdapter.getItem(position);
-            movieViewModel.setDemoMovieSelected(demo);
-            Navigation.findNavController(requireView())
-                    .navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
 
-        });
+    }
+
+    private void onItemDemoMovieClick(View view,DemoMovie demoMovie) {
+        Timber.e("ItemClick");
+        mBinding.getRoot().showSnackbar("itemCLick", Snackbar.LENGTH_SHORT);
+
+        movieViewModel.setDemoMovieSelected(demoMovie);
+        Navigation.findNavController(view)
+                .navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
     }
 
     private void setupMoviesAdapter() {
@@ -128,9 +131,9 @@ public class MoviesFragment extends Fragment {
 
     }
 
-    private void onItemMovieClick(Movie movie) {
+    private void onItemMovieClick(View view,Movie movie) {
         movieViewModel.setMovieSelected(movie);
-        Navigation.findNavController(requireView()).navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
+        Navigation.findNavController(view).navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
     }
 
     private void setupObserver() {

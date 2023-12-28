@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:onClick="@{() -> clickListener.onItemClick(movie)}"
+        android:onClick="@{(view) -> clickListener.onItemClick(view,movie)}"
 
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +34,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_movie_poster"
             style="@style/Widget.app.CardView"
+
             android:layout_width="@dimen/width_item_movie_card"
             android:layout_height="0dp"
             android:layout_margin="@dimen/small_spacing"

@@ -109,7 +109,7 @@ public class MoviesBindingUtils {
                      //   .fallback(getShimmerDrawables(imageView.getContext()))
                         .into(imageView);
             } catch (Exception e) {
-                Timber.e(e);
+                Timber.e(e.getMessage());
                 imageView.setImageDrawable(baseImage);
 
             }

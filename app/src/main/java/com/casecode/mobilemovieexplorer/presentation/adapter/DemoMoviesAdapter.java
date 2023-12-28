@@ -1,5 +1,6 @@
 package com.casecode.mobilemovieexplorer.presentation.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,20 @@ import java.util.List;
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  */
 public class DemoMoviesAdapter extends BaseAdapter {
-    private final ArrayList<DemoMovie> mDemoMovie = new ArrayList<>();
+    private final List<DemoMovie> mDemoMovie = new ArrayList<>();
+    private final LayoutInflater inflater;
 
-    public DemoMoviesAdapter() {
+    private ItemClickListener<DemoMovie> itemClickListener;
+
+
+    public DemoMoviesAdapter(Context context) {
+        inflater = LayoutInflater.from(context);
+    }
+
+    public void setItemClickListener(ItemClickListener<DemoMovie> itemClickListener) {
+        this.itemClickListener = itemClickListener;
+
+
     }
 
     public void setDemoMovies(List<DemoMovie> demoMovies) {
@@ -38,7 +50,7 @@ public class DemoMoviesAdapter extends BaseAdapter {
 
     @Override
     public DemoMovie getItem(int position) {
-        return getCount() > 0 ? mDemoMovie.get(position): null;
+        return getCount() > 0 ? mDemoMovie.get(position) : null;
     }
 
     @Override
@@ -48,12 +60,20 @@ public class DemoMoviesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemDemoMovieBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
-                , R.layout.item_demo_movie, parent, false);
+        ItemDemoMovieBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.item_demo_movie, parent, false);
+
+
         DemoMovie demo = mDemoMovie.get(position);
         binding.setDemoMovie(demo);
+        binding.setClickListener(itemClickListener);
         binding.executePendingBindings();
 
+       /* binding.imvItemMovie.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(demo);
+            }
+        });*/
         return binding.getRoot();
     }
 

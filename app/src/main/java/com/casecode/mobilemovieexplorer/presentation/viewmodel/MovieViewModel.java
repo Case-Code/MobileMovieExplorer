@@ -157,6 +157,9 @@ public class MovieViewModel extends ViewModel {
         int movieId = movieSelected.id();
         fetchMovieDetails(movieId);
     }
+    private void restMovieSelected(){
+        movieSelected = null;
+    }
 
     /**
      * Fetches details for a specific movie and updates the corresponding LiveData.
@@ -186,6 +189,9 @@ public class MovieViewModel extends ViewModel {
     public void fetchDemoDetails(){
         int movieId = demoMovieSelected.id();
         fetchDemoDetails(movieId);
+    }
+    private void restDemoMovieSelected(){
+        demoMovieSelected = null;
     }
     /**
      * Fetches details for a specific demo and updates the corresponding LiveData.

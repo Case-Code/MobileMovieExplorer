@@ -1,10 +1,12 @@
 package com.casecode.mobilemovieexplorer.presentation.adapter;
 
 
+import android.view.View;
+
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/223
  */
 public @FunctionalInterface interface ItemClickListener<T> {
-        void onItemClick(T data);
+        void onItemClick(View view, T data);
 
 }

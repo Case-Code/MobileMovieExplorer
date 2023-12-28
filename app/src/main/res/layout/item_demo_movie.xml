@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="clickListener"
+            type="com.casecode.mobilemovieexplorer.presentation.adapter.ItemClickListener" />
         <variable
             name="demoMovie"
             type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
@@ -16,6 +18,8 @@
     <com.google.android.material.card.MaterialCardView
 
         style="@style/Widget.app.CardView"
+        android:onClick="@{(view) -> clickListener.onItemClick(view,demoMovie)}"
+
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/md_theme_primary"

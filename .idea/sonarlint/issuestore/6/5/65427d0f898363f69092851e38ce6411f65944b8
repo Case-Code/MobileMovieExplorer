@@ -1,11 +1,15 @@
 
 I
-java:S1602_",Remove useless curly braces around statement(™Û£Ç8ĞÆèƒË1
+java:S1602_",Remove useless curly braces around statement(™Û£Ç8øˆ¨Ë1
 \
-java:S1612_"?Replace this lambda with method reference 'this::setConnected'.(™Û£Ç8ÑÆèƒË1
+java:S1612_"?Replace this lambda with method reference 'this::setConnected'.(™Û£Ç8øˆ¨Ë1
 Y
-java:S1117_"<Rename "isOnline" which hides the field declared at line 38.(™Û£Ç8ÔÆèƒË1
+java:S1117_"<Rename "isOnline" which hides the field declared at line 38.(™Û£Ç8ûˆ¨Ë1
 I
-java:S1068""'Remove this unused "TAG" private field.(º³ôùÿÿÿÿ8åÆèƒË1
+java:S1068""'Remove this unused "TAG" private field.(º³ôùÿÿÿÿ8Š‰¨Ë1
 Z
-java:S1144V"8Remove this unused private "showSnackbarMessage" method.(ÁšóÍıÿÿÿÿ8åÆèƒË1
+java:S1144V"8Remove this unused private "showSnackbarMessage" method.(ÁšóÍıÿÿÿÿ8Š‰¨Ë1
+Y
+java:S1144 "6Remove this unused private "restMovieSelected" method.(ÁÊˆˆÿÿÿÿÿ8ÜáË1
+X
+java:S1144Á":Remove this unused private "restDemoMovieSelected" method.(íÑš·8ÜáË1
