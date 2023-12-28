@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    This layout represents an item view for a favorite movie in a RecyclerView.
+    It includes details such as the movie poster, like button, progress bar, original title, vote average, and runtime.
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!-- Define the variable for the binding -->
+<!--        <variable-->
+<!--            name="binding"-->
+<!--            type="com.casecode.mobilemovieexplorer.databinding." />-->
+
+    </data>
+
+    <!--
+        ConstraintLayout is used for efficient positioning and sizing of child views.
+        The layout_width and layout_height are set to wrap_content, and match_parent respectively.
+    -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- ImageView for the poster -->
+        <ImageView
+            android:id="@+id/image_backdrop_path"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Scrim overlay View -->
+        <View
+            android:id="@+id/scrimView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/scrim"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
+            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
+            app:layout_constraintTop_toTopOf="@+id/image_backdrop_path" />
+
+        <!-- ImageButton for marking the movie as a favorite -->
+        <ImageButton
+            android:id="@+id/image_button_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_with_selectable_item"
+            android:importantForAccessibility="no"
+            android:padding="8dp"
+            android:src="@drawable/favorite_white_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- ProgressBar indicating loading or processing state -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
+            app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
+            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
+            app:layout_constraintTop_toTopOf="@+id/image_backdrop_path" />
+
+        <!-- TextView for displaying the original title of the movie -->
+        <TextView
+            android:id="@+id/text_original_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
+            app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
+            tools:text="Ant-Man and the Wasp: Quantumania" />
+
+        <!-- TextView for displaying the vote average of the movie -->
+        <TextView
+            android:id="@+id/text_vote_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/kid_star_24"
+            app:layout_constraintBottom_toTopOf="@+id/text_original_title"
+            app:layout_constraintStart_toStartOf="@+id/text_original_title"
+            tools:text="9.3" />
+
+        <!-- TextView for displaying the runtime of the movie -->
+        <TextView
+            android:id="@+id/text_runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/schedule_24"
+            app:layout_constraintBottom_toBottomOf="@+id/text_vote_average"
+            app:layout_constraintStart_toEndOf="@+id/text_vote_average"
+            app:layout_constraintTop_toTopOf="@+id/text_vote_average"
+            tools:text="178 min" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
