@@ -144,8 +144,7 @@
 
     <color name="color_amber">#FFBF0D</color>
     <color name="color_steel_gray">#1F1D2B</color>
+    <color name="color_ebony_clay">#252935</color>
+    <color name="color_crusta">#FE7527</color>
 
-    <color name="normalColor">#FF0000</color> <!-- Normal color when not pressed or selected -->
-    <color name="pressedColor">#00FF00</color> <!-- Color when pressed -->
-    <color name="selectedColor">#0000FF</color> <!-- Color when selected (liked) -->
 </resources>

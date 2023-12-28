@@ -59,7 +59,7 @@
             android:background="@drawable/circle_background"
             android:importantForAccessibility="no"
             android:padding="8dp"
-            android:src="@drawable/favorite_24"
+            android:src="@drawable/favorite_white_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,38 +80,39 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Ant-Man and the Wasp: Quantumania"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
             app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path" />
+            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
+            tools:text="Ant-Man and the Wasp: Quantumania" />
 
         <TextView
             android:id="@+id/text_vote_average"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:drawableStart="@drawable/kid_star_24"
             android:gravity="center"
-            android:text="9.3"
+            android:textColor="@android:color/white"
             android:textSize="14sp"
+            app:drawableStartCompat="@drawable/kid_star_24"
             app:layout_constraintStart_toStartOf="@+id/text_original_title"
-            app:layout_constraintTop_toBottomOf="@+id/image_backdrop_path" />
+            app:layout_constraintTop_toBottomOf="@+id/image_backdrop_path"
+            tools:text="9.3" />
 
         <TextView
             android:id="@+id/text_runtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:drawableStart="@drawable/schedule_24"
             android:gravity="center"
-            android:text="178 min"
+            android:textColor="@android:color/white"
             android:textSize="14sp"
+            app:drawableStartCompat="@drawable/schedule_24"
             app:layout_constraintStart_toEndOf="@+id/text_vote_average"
-            app:layout_constraintTop_toTopOf="@+id/text_vote_average" />
-
+            app:layout_constraintTop_toTopOf="@+id/text_vote_average"
+            tools:text="178 min" />
 
         <!-- RecyclerView for Genres -->
         <androidx.recyclerview.widget.RecyclerView
@@ -157,11 +158,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Overview: Super-Hero partners Scott Lang and Hope van Dyne..."
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/text_summary"
-            app:layout_constraintTop_toBottomOf="@+id/text_summary" />
+            app:layout_constraintTop_toBottomOf="@+id/text_summary"
+            tools:text="Overview: Super-Hero partners Scott Lang and Hope van Dyne..." />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCast"

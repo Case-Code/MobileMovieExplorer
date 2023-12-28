@@ -53,12 +53,6 @@ dependencies {
     implementation libs.coreSplashScreen
     implementation libs.swiperefreshlayout
 
-    /*   implementation libs.lifecycleViewmodelSavedstate
-       annotationProcessor libs.lifecycleCompiler
-       implementation libs.lifecycleCommonJava8
-       implementation libs.lifecycleService
-       implementation libs.lifecycleProcess*/
-
     // material
     implementation libs.material
 
@@ -90,12 +84,5 @@ dependencies {
     implementation libs.rxandroid
     implementation libs.rxjava
 
-    // ViewModel and LiveData
-    /*implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.4.0'*/
-
-
     implementation(libs.timber)
-
 }

@@ -189,7 +189,7 @@ public class MoviesDetailsFragment extends Fragment {
     }
 
     private void updateButtonDrawable() {
-        int drawableResId = likeButton.isSelected() ? R.drawable.favorite_fill_24 : R.drawable.favorite_24;
+        int drawableResId = likeButton.isSelected() ? R.drawable.favorite_crusta_24 : R.drawable.favorite_white_24;
         likeButton.setImageResource(drawableResId);
     }
 
