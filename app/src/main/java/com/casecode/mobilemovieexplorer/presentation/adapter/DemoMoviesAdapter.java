@@ -37,8 +37,8 @@ public class DemoMoviesAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return mDemoMovie.get(position);
+    public DemoMovie getItem(int position) {
+        return getCount() > 0 ? mDemoMovie.get(position): null;
     }
 
     @Override

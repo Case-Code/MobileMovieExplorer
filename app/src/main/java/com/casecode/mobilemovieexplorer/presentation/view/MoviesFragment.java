@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFac
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
 
@@ -105,13 +107,25 @@ public class MoviesFragment extends Fragment {
     }
 
 
-    private void setupDemoAdapter() {
-        mBinding.setDemoAdapter(new DemoMoviesAdapter());
+    private void setupDemoAdapter()
+    {
+        var demoAdapter = new DemoMoviesAdapter();
+        mBinding.setDemoAdapter(demoAdapter);
+        mBinding.avfMoviesDemo.setOnItemClickListener((parent, view, position, id) -> {
+            mBinding.getRoot().showSnackbar("itemCLick", Snackbar.LENGTH_SHORT);
+            Timber.e("itemclick");
+            var demo = demoAdapter.getItem(position);
+            movieViewModel.setDemoMovieSelected(demo);
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
+
+        });
     }
 
     private void setupMoviesAdapter() {
         MoviesAdapter moviesAdapter = new MoviesAdapter(this::onItemMovieClick);
         mBinding.setMoviesAdapter(moviesAdapter);
+
     }
 
     private void onItemMovieClick(Movie movie) {
