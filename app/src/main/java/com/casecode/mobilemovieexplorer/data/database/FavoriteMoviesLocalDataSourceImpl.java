@@ -16,19 +16,25 @@ import io.reactivex.rxjava3.core.Single;
 
 public class FavoriteMoviesLocalDataSourceImpl implements FavoriteMoviesLocalDataSource {
     private final FavoriteMoviesDao mFavoriteMoviesDao;
+
     @Inject
-    public FavoriteMoviesLocalDataSourceImpl(FavoriteMoviesDao favoriteMoviesDao)
-    {
+    public FavoriteMoviesLocalDataSourceImpl(FavoriteMoviesDao favoriteMoviesDao) {
         this.mFavoriteMoviesDao = favoriteMoviesDao;
     }
+
     @Override
     public Completable addFavoriteMovie(FavoriteMovie favoriteMovie) {
-        return  mFavoriteMoviesDao.addFavoriteMovie(favoriteMovie);
+        return mFavoriteMoviesDao.addFavoriteMovie(favoriteMovie);
     }
 
     @Override
     public Single<List<FavoriteMovie>> getListFavorite() {
         return mFavoriteMoviesDao.getListFavorite();
+    }
+
+    @Override
+    public Single<List<FavoriteMovie>> getListFavorite(int id) {
+        return mFavoriteMoviesDao.getListFavorite(id);
     }
 
     @Override

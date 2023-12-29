@@ -49,6 +49,15 @@ public class FavoriteMoviesFragment extends Fragment {
         setupViewModel();
         observerViewModel();
         setupAdapter();
+        setupToolbar();
+    }
+
+    private void setupToolbar() {
+        // Set click listener for the back button
+        mBinding.toolbar.setNavigationOnClickListener(v -> {
+            // Handle back button click
+            requireActivity().onBackPressed();
+        });
     }
 
     private void setupAdapter() {
@@ -85,8 +94,6 @@ public class FavoriteMoviesFragment extends Fragment {
            }
        });
     }
-
-
 
     @Override
     public void onDestroy() {

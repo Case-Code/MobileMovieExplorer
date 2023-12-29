@@ -15,6 +15,8 @@ public interface FavoriteMoviesLocalDataSource {
 
     Single<List<FavoriteMovie>> getListFavorite();
 
+    Single<List<FavoriteMovie>> getListFavorite(int id);
+
     Completable deleteFavoriteMovie(FavoriteMovie favoriteMovie);
 
 }

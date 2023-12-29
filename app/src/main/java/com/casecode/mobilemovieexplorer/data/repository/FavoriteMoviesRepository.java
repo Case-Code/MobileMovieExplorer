@@ -40,6 +40,11 @@ public class FavoriteMoviesRepository {
                 .observeOn(mainScheduler);
     }
 
+    public Single<List<FavoriteMovie>> getListFavorite(int id) {
+        return mFavoriteMoviesLocalDataSource.getListFavorite(id).subscribeOn(ioScheduler)
+                .observeOn(mainScheduler);
+    }
+
     public Completable deleteFavoriteMovie(FavoriteMovie favoriteMovie) {
         return mFavoriteMoviesLocalDataSource.deleteFavoriteMovie(favoriteMovie).subscribeOn(ioScheduler).observeOn(mainScheduler);
     }

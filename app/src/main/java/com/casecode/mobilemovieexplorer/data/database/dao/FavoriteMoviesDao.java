@@ -26,6 +26,10 @@ public interface FavoriteMoviesDao {
     @Query("SELECT * FROM favorite_movie")
     Single<List<FavoriteMovie>> getListFavorite();
 
+    @Transaction
+    @Query("SELECT * FROM favorite_movie WHERE id_movie = :idMovie")
+    Single<List<FavoriteMovie>> getListFavorite(int idMovie);
+
     @Delete
     Completable deleteFavoriteMovie(FavoriteMovie favoriteMovie);
 

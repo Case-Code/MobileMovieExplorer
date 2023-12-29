@@ -37,7 +37,6 @@ public class FavoriteViewModel extends ViewModel {
     }
 
     public void addFavoriteMovie(FavoriteMovie favoriteMovie) {
-
         compositeDisposable.add(favoriteMoviesRepository.addFavoriteMovie(favoriteMovie).subscribeWith(new DisposableCompletableObserver() {
             @Override
             public void onComplete() {
@@ -55,6 +54,28 @@ public class FavoriteViewModel extends ViewModel {
         favoriteMoviesResource.setValue(Resource.loading());
 
         compositeDisposable.add(favoriteMoviesRepository.getListFavorite()
+                .subscribeWith(new DisposableSingleObserver<List<FavoriteMovie>>() {
+                    @Override
+                    public void onSuccess(@NonNull List<FavoriteMovie> favoriteMovies) {
+                        if (favoriteMovies.isEmpty()) {
+                            favoriteMoviesResource.setValue(Resource.empty(null));
+                        } else {
+                            favoriteMoviesResource.setValue(Resource.success(favoriteMovies));
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        favoriteMoviesResource.setValue(Resource.error(e.getMessage(), null));
+
+                    }
+                }));
+    }
+
+    public void getListFavorite(int id) {
+        favoriteMoviesResource.setValue(Resource.loading());
+
+        compositeDisposable.add(favoriteMoviesRepository.getListFavorite(id)
                 .subscribeWith(new DisposableSingleObserver<List<FavoriteMovie>>() {
                     @Override
                     public void onSuccess(@NonNull List<FavoriteMovie> favoriteMovies) {

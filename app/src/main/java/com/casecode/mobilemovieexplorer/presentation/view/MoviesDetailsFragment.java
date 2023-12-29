@@ -41,11 +41,13 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import lombok.experimental.ExtensionMethod;
-
+import timber.log.Timber;
 
 @ExtensionMethod(ViewExtensions.class)
 @AndroidEntryPoint
 public class MoviesDetailsFragment extends Fragment {
+
+    public static final String TAG = MoviesDetailsFragment.class.getSimpleName();
 
     @Inject
     FavoriteViewModelFactory favoriteViewModelFactory;
@@ -73,6 +75,7 @@ public class MoviesDetailsFragment extends Fragment {
         // Initialize ViewModel
         movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory)
                 .get(MovieViewModel.class);
+
         // Observe LiveData for movie details
         movieViewModel.getMovieDetailsLiveData().observe(getViewLifecycleOwner(), resource -> {
             switch (resource.getStatus()) {
@@ -83,6 +86,8 @@ public class MoviesDetailsFragment extends Fragment {
                     // Handle success state, and access movie details from resource.getData()
                     MoviesDetailsResponse movieDetails = resource.getData();
                     // Do something with movieDetails
+
+                    favoriteViewModel.getListFavorite(movieDetails.getId());
 
                     // Assuming 'binding' is the ViewBinding instance for your layout
                     // Example of setting an image using Glide with a ProgressBar
@@ -149,6 +154,8 @@ public class MoviesDetailsFragment extends Fragment {
             }
         });
 
+        observerFavoriteViewModel();
+
         binding.imageButtonBack.setOnClickListener(v -> {
             // Get the NavController
             NavController navController = Navigation.findNavController(v);
@@ -173,7 +180,6 @@ public class MoviesDetailsFragment extends Fragment {
         // Fetch movie details when the fragment is created or some event occurs
         movieViewModel.fetchMovieDetails();
     }
-
 
     private void setupGenresRecyclerView(List<Genre> genres) {
         // Set up RecyclerView for genres using View Binding
@@ -219,4 +225,29 @@ public class MoviesDetailsFragment extends Fragment {
         startActivity(Intent.createChooser(shareIntent, "Share link using"));
     }
 
+    private void observerFavoriteViewModel() {
+        favoriteViewModel.getFavoriteMoviesResource().observe(getViewLifecycleOwner(), favoirteMoviesResource -> {
+            switch (favoirteMoviesResource.status) {
+                case LOADING -> {
+                    Timber.tag(TAG).d("favoirteMoviesResource  LOADING");
+                }
+                case SUCCESS -> {
+                    Timber.tag(TAG).i("favoirteMoviesResource Success: %s", favoirteMoviesResource);
+                    int drawableResId;
+                    if (favoirteMoviesResource.getData().size() > 0) {
+                        drawableResId = R.drawable.favorite_crusta_24;
+                    } else {
+                        drawableResId = R.drawable.favorite_white_24;
+                    }
+                    likeButton.setImageResource(drawableResId);
+                }
+                case ERROR -> {
+                    Timber.tag(TAG).e("favoirteMoviesResource  ERROR: %s", favoirteMoviesResource.message);
+                }
+                case NULL -> {
+                    Timber.tag(TAG).e("favoirteMoviesResource  NULL: %s", favoirteMoviesResource.message);
+                }
+            }
+        });
+    }
 }

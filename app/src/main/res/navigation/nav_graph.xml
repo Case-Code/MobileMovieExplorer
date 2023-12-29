@@ -30,6 +30,10 @@
         <action
             android:id="@+id/action_nav_favoirte_fragment_to_nav_details_fragment"
             app:destination="@id/nav_details_fragment" />
+        <action
+            android:id="@+id/action_nav_favorite_fragment_to_nav_movies2"
+            app:destination="@id/nav_movies"
+            app:popUpTo="@id/nav_movies" />
 
     </fragment>
     <fragment
