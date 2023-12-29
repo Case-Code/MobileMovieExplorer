@@ -1,15 +1,27 @@
 
+w
+java:S2293¤"YReplace the type specification in this constructor call with the diamond operator ("<>").(´†æñ8Ì„­Ë1
+|
+java:S2293§"YReplace the type specification in this constructor call with the diamond operator ("<>").(š„²Ñùÿÿÿÿ8Ì„­Ë1
+w
+java:S2293©"YReplace the type specification in this constructor call with the diamond operator ("<>").(ü’æÇ8Ì„­Ë1
 I
-java:S1602_",Remove useless curly braces around statement(™Û£Ç8øˆ¨Ë1
+java:S1602g",Remove useless curly braces around statement(™Û£Ç8˜‚„­Ë1
 \
-java:S1612_"?Replace this lambda with method reference 'this::setConnected'.(™Û£Ç8øˆ¨Ë1
+java:S1612g"?Replace this lambda with method reference 'this::setConnected'.(™Û£Ç8˜‚„­Ë1
 Y
-java:S1117_"<Rename "isOnline" which hides the field declared at line 38.(™Û£Ç8ûˆ¨Ë1
+java:S1117g"<Rename "isOnline" which hides the field declared at line 39.(™Û£Ç8›‚„­Ë1
 I
-java:S1068""'Remove this unused "TAG" private field.(º³ôùÿÿÿÿ8Š‰¨Ë1
+java:S1068#"'Remove this unused "TAG" private field.(º³ôùÿÿÿÿ8µ‚„­Ë1
 Z
-java:S1144V"8Remove this unused private "showSnackbarMessage" method.(ÁšóÍıÿÿÿÿ8Š‰¨Ë1
+java:S1144^"8Remove this unused private "showSnackbarMessage" method.(ÁšóÍıÿÿÿÿ8µ‚„­Ë1
+S
+java:S1144«"0Remove this unused private "restMovieId" method.(ÂµÇùÿÿÿÿ8µ‚„­Ë1
+_
+java:S1144®"<Remove this unused private "restDemoMovieIdSelected" method.(›Ùğøûÿÿÿÿ8¥˜†­Ë1
+]
+java:S1144±"@Remove this unused private "restFavoriteMovieIdSelected" method.(¯Ê‘e8ÜÈ†­Ë1
 Y
-java:S1144 "6Remove this unused private "restMovieSelected" method.(ÁÊˆˆÿÿÿÿÿ8ÜáË1
+java:S1144¹"6Remove this unused private "restMovieSelected" method.(ÁÊˆˆÿÿÿÿÿ8µ‚„­Ë1
 X
-java:S1144Á":Remove this unused private "restDemoMovieSelected" method.(íÑš·8ÜáË1
+java:S1144Ú":Remove this unused private "restDemoMovieSelected" method.(íÑš·8¶‚„­Ë1

@@ -64,6 +64,10 @@ public class MoviesFragment extends Fragment {
         setupObserver();
         setupAdapter();
         setupRefreshView();
+        mBinding.imageButtonLike.setOnClickListener(v -> {
+            Navigation.findNavController(v)
+                    .navigate(R.id.action_nav_movies_fragment_to_nav_favorite_fragment);
+        });
     }
 
     private void setupShimmerAnimation() {

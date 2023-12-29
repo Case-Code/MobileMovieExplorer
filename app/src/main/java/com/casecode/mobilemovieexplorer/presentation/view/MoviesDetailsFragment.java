@@ -1,9 +1,5 @@
 package com.casecode.mobilemovieexplorer.presentation.view;
 
-import static com.casecode.mobilemovieexplorer.presentation.utils.Status.ERROR;
-import static com.casecode.mobilemovieexplorer.presentation.utils.Status.LOADING;
-import static com.casecode.mobilemovieexplorer.presentation.utils.Status.SUCCESS;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +22,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.casecode.mobilemovieexplorer.R;
+import com.casecode.mobilemovieexplorer.data.model.FavoriteMovies;
 import com.casecode.mobilemovieexplorer.databinding.FragmentMoviesDetailsBinding;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.Cast;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.Genre;
@@ -33,6 +30,8 @@ import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetails
 import com.casecode.mobilemovieexplorer.presentation.adapter.CastAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.GenresAdapter;
 import com.casecode.mobilemovieexplorer.presentation.utils.ViewExtensions;
+import com.casecode.mobilemovieexplorer.presentation.viewmodel.FavoriteViewModel;
+import com.casecode.mobilemovieexplorer.presentation.viewmodel.FavoriteViewModelFactory;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
 
@@ -43,45 +42,39 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 import lombok.experimental.ExtensionMethod;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MoviesDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 @ExtensionMethod(ViewExtensions.class)
 @AndroidEntryPoint
 public class MoviesDetailsFragment extends Fragment {
 
-    private FragmentMoviesDetailsBinding binding;
-    private ImageButton likeButton;
-
-    private List<Cast> castList;
-
+    @Inject
+    FavoriteViewModelFactory favoriteViewModelFactory;
     @Inject
     MovieViewModelFactory movieViewModelFactory;
-
+    private FragmentMoviesDetailsBinding binding;
+    private ImageButton likeButton;
+    private FavoriteViewModel favoriteViewModel;
+    private List<Cast> castList;
     private MovieViewModel movieViewModel;
 
-    public MoviesDetailsFragment() {
-        // Required empty public constructor
-    }
 
-    public static MoviesDetailsFragment newInstance(String param1, String param2) {
-        MoviesDetailsFragment fragment = new MoviesDetailsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupViewModel();
 
         // Initialize ViewModel
         movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory)
                 .get(MovieViewModel.class);
         // Observe LiveData for movie details
-        movieViewModel.getMovieDetailsLiveData().observe(this, resource -> {
+        movieViewModel.getMovieDetailsLiveData().observe(getViewLifecycleOwner(), resource -> {
             switch (resource.getStatus()) {
                 case LOADING:
                     // Handle loading state
@@ -156,19 +149,6 @@ public class MoviesDetailsFragment extends Fragment {
             }
         });
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         binding.imageButtonBack.setOnClickListener(v -> {
             // Get the NavController
             NavController navController = Navigation.findNavController(v);
@@ -194,6 +174,7 @@ public class MoviesDetailsFragment extends Fragment {
         movieViewModel.fetchMovieDetails();
     }
 
+
     private void setupGenresRecyclerView(List<Genre> genres) {
         // Set up RecyclerView for genres using View Binding
         binding.recyclerGenres.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -202,8 +183,23 @@ public class MoviesDetailsFragment extends Fragment {
     }
 
     private void updateButtonDrawable() {
-        int drawableResId = likeButton.isSelected() ? R.drawable.favorite_crusta_24 : R.drawable.favorite_white_24;
+        int drawableResId;
+        var moviesDetails = movieViewModel.getMovieDetailsLiveData().getValue().getData();
+        if (likeButton.isSelected()) {
+            drawableResId = R.drawable.favorite_crusta_24;
+            favoriteViewModel.addFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
+
+        } else {
+            drawableResId = R.drawable.favorite_white_24;
+            favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
+
+        }
         likeButton.setImageResource(drawableResId);
+    }
+
+    private void setupViewModel() {
+        favoriteViewModel = new ViewModelProvider(this)
+                .get(FavoriteViewModel.class);
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.usecase.MovieUseCase;
+import com.casecode.mobilemovieexplorer.presentation.utils.Event;
 import com.casecode.mobilemovieexplorer.presentation.utils.Resource;
 
 import javax.inject.Inject;
@@ -51,6 +52,7 @@ public class MovieViewModel extends ViewModel {
     @Getter
     private final MutableLiveData<Resource<DemoDetailsResponse>> demoDetailsLiveData =
             new MutableLiveData<>();
+
     @Setter
     private Movie movieSelected = null;
 
@@ -58,6 +60,12 @@ public class MovieViewModel extends ViewModel {
     private DemoMovie demoMovieSelected = null;
 
     private final NetworkMonitor networkMonitor;
+    @Getter
+    private MutableLiveData<Event<Integer>> demoMovieIdSelected = new MutableLiveData<>();
+    @Getter
+    private MutableLiveData<Event<Integer>> movieIdSelected = new MutableLiveData<>();
+    @Getter
+    private MutableLiveData<Event<Integer>> favoriteMovieIdSelected = new MutableLiveData<>();
 
     /**
      * Constructs a MovieViewModel with the specified dependencies.
@@ -151,6 +159,23 @@ public class MovieViewModel extends ViewModel {
                         Timber.e(e);
                     }
                 }));
+    }
+    public void setMovieIdSelected(int id){
+        movieIdSelected.setValue(new Event<Integer>(id));
+    }
+    public void setDemoMovieIdSelected(int id){
+        demoMovieIdSelected.setValue(new Event<Integer>(id));
+    } public void setFavoriteMovieIdSelected(int id){
+        favoriteMovieIdSelected.setValue(new Event<Integer>(id));
+    }
+    private void restMovieId(){
+        movieIdSelected.setValue(null);
+    }
+    private void restDemoMovieIdSelected(){
+        demoMovieIdSelected.setValue(null);
+    }
+    private void restFavoriteMovieIdSelected(){
+        favoriteMovieIdSelected.setValue(null);
     }
 
     public void fetchMovieDetails(){

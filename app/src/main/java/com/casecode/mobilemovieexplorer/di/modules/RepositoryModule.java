@@ -43,4 +43,5 @@ public abstract class RepositoryModule {
             @AppScheduler(appSchedulers = AppSchedulers.MAIN) Scheduler mainScheduler) {
         return new MovieRepositoryImpl(moviesRemoteDataSource, ioScheduler, mainScheduler);
     }
+
 }

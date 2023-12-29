@@ -24,9 +24,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.casecode.mobilemovieexplorer.R;
+import com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter;
+import com.casecode.mobilemovieexplorer.presentation.adapter.FavoriteAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerDrawable;
@@ -76,6 +78,23 @@ public class MoviesBindingUtils {
         var adapter = (MoviesAdapter) recyclerView.getAdapter();
         if (list != null && adapter != null) {
             adapter.submitList(list);
+
+        } else {
+            Timber.e("adapter = " + adapter + ", List = " + list);
+        }
+
+    }
+    @BindingAdapter("setFavoriteMoviesAdapter")
+    public static void setFavoriteMoviesAdapter(RecyclerView recyclerView,
+                                                FavoriteAdapter adapter) {
+        recyclerView.setAdapter(adapter);
+
+    }
+    @BindingAdapter("setDataFavoriteMoviesAdapter")
+    public static void setDataFavoriteMoviesAdapter(RecyclerView recyclerView, @Nullable List<FavoriteMovie> list) {
+        var adapter = (FavoriteAdapter) recyclerView.getAdapter();
+        if (list != null && adapter != null) {
+            adapter.updateList(list);
 
         } else {
             Timber.e("adapter = " + adapter + ", List = " + list);

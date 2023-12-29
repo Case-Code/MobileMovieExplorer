@@ -39,6 +39,7 @@ public class MovieViewModelFactory implements ViewModelProvider.Factory {
      * @return A new instance of the specified ViewModel class.
      * @throws IllegalArgumentException If the provided ViewModel class is unknown.
      */
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {

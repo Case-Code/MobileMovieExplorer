@@ -7,6 +7,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="clickListener"
+            type="com.casecode.mobilemovieexplorer.presentation.adapter.ItemClickListener" />
+        <variable
+            name="favoriteMovie"
+            type="com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie" />
+
         <!-- Define the variable for the binding -->
 <!--        <variable-->
 <!--            name="binding"-->
@@ -14,13 +21,12 @@
 
     </data>
 
-    <!--
-        ConstraintLayout is used for efficient positioning and sizing of child views.
-        The layout_width and layout_height are set to wrap_content, and match_parent respectively.
-    -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> clickListener.onItemClick(view,favoriteMovie)}"
+        >
 
         <!-- ImageView for the poster -->
         <ImageView
@@ -28,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
+            app:loadImage="@{favoriteMovie.backdropPath}"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,16 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- ProgressBar indicating loading or processing state -->
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
-            app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
-            app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
-            app:layout_constraintTop_toTopOf="@+id/image_backdrop_path" />
+
 
         <!-- TextView for displaying the original title of the movie -->
         <TextView
@@ -79,6 +77,7 @@
             android:layout_marginBottom="16dp"
             android:textColor="@android:color/white"
             android:textSize="20sp"
+            android:text="@{favoriteMovie.originalTitle}"
             app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
             app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
             app:layout_constraintHorizontal_bias="0.0"
@@ -92,6 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:gravity="center"
+            android:text="@{String.valueOf(favoriteMovie.voteAverage)}"
+
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/kid_star_24"
@@ -106,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:gravity="center"
+            android:text="@{String.format(@string/runtime_format, String.valueOf(favoriteMovie.runtime))}"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/schedule_24"

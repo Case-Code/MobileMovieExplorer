@@ -57,13 +57,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
         public MovieViewHolder(@NonNull ItemMovieBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
-          /*  itemView.setOnClickListener(v -> {
-                int position = getBindingAdapterPosition();
-                if(position != RecyclerView.NO_POSITION)
-                {
-                    mItemClickListener.onItemClick(getItem(position));
-                }
-            });*/
+
         }
 
         public void bind(Movie movie, ItemClickListener<Movie> itemClickListener) {

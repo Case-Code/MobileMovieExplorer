@@ -84,5 +84,10 @@ dependencies {
     implementation libs.rxandroid
     implementation libs.rxjava
 
+    // Room
+    //room
+    implementation(libs.room.runtime)
+    implementation(libs.androidx.room.rxjava3)
+    annotationProcessor libs.androidx.room.compiler
     implementation(libs.timber)
 }
