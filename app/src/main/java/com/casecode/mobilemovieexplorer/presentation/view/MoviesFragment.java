@@ -2,7 +2,11 @@ package com.casecode.mobilemovieexplorer.presentation.view;
 
 import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,7 +39,7 @@ import timber.log.Timber;
 
 @ExtensionMethod(ViewExtensions.class)
 @AndroidEntryPoint
-public class MoviesFragment extends Fragment {
+public class MoviesFragment extends Fragment  {
     private static final String TAG = "MoviesFragment";
     @Inject
     MovieViewModelFactory movieViewModelFactory;
@@ -44,7 +48,7 @@ public class MoviesFragment extends Fragment {
     private MovieViewModel movieViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentMoviesBinding.inflate(inflater, container, false);
         return mBinding.getRoot();
@@ -61,8 +65,8 @@ public class MoviesFragment extends Fragment {
     private void setupUi() {
         setupShimmerAnimation();
         setupViewModel();
-        setupObserver();
         setupAdapter();
+        setupObserver();
         setupRefreshView();
 
     }
@@ -90,12 +94,12 @@ public class MoviesFragment extends Fragment {
 
     private void stopAnimation() {
 
+        mShimmerFrameLayout.stopShimmer();
         mBinding.rvMovies.setVisibility(View.VISIBLE);
         mBinding.avfMoviesDemo.setVisibility(View.VISIBLE);
         mBinding.tvMoviesTitle.setVisibility(View.VISIBLE);
-        mShimmerFrameLayout.stopShimmer();
-
         mShimmerFrameLayout.setVisibility(View.GONE);
+
     }
 
     private void setupViewModel() {
@@ -107,7 +111,6 @@ public class MoviesFragment extends Fragment {
         setupDemoAdapter();
         setupMoviesAdapter();
     }
-
 
     private void setupDemoAdapter()
     {
@@ -129,7 +132,6 @@ public class MoviesFragment extends Fragment {
     private void setupMoviesAdapter() {
         MoviesAdapter moviesAdapter = new MoviesAdapter(this::onItemMovieClick);
         mBinding.setMoviesAdapter(moviesAdapter);
-
     }
 
     private void onItemMovieClick(View view,Movie movie) {
@@ -168,7 +170,9 @@ public class MoviesFragment extends Fragment {
                     mBinding.setMovieList(moviesResponse.getData().results());
                     Timber.tag(TAG).i("Movies Success: %s", moviesResponse);
                     mBinding.imvMoviesEmpty.setVisibility(View.GONE);
-                    stopAnimation();
+
+                    new Handler(Looper.getMainLooper()).postDelayed(this::stopAnimation,2000L);
+
                 }
                 case ERROR -> {
                     mBinding.imvMoviesEmpty.setVisibility(View.VISIBLE);
@@ -210,7 +214,7 @@ public class MoviesFragment extends Fragment {
 
     private void setupRefreshView() {
         mBinding.swipeMovies.setOnRefreshListener(() -> {
-            // reloadDataUI();
+             setupNetworkMonitor();
             mBinding.swipeMovies.setRefreshing(false);
         });
     }
@@ -220,8 +224,6 @@ public class MoviesFragment extends Fragment {
         super.onStart();
         startAnimation();
     }
-
-
 
     @Override
     public void onStop() {
@@ -234,6 +236,5 @@ public class MoviesFragment extends Fragment {
         super.onDestroy();
         mBinding = null;
         mShimmerFrameLayout = null;
-        getViewModelStore().clear();
     }
 }

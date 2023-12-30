@@ -28,6 +28,7 @@ import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.FavoriteAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter;
+import com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerDrawable;
 
@@ -44,42 +45,41 @@ public class MoviesBindingUtils {
     private static final String BASE_URL_IMAGE = "https://image.tmdb.org/t/p/original/";
 
     @BindingAdapter("adapterFlipper")
-    public static void setAdapterFlipper(AdapterViewFlipper adapterFlipper, DemoMoviesAdapter adapter) {
+    public static void setAdapterFlipper(CustomAdapterViewFlipper adapterFlipper, DemoMoviesAdapter adapter) {
         adapterFlipper.setAdapter(adapter);
         adapterFlipper.setFlipInterval(3000);
+        adapterFlipper.setBackgroundResource(R.color.md_theme_inversePrimary);
         adapterFlipper.startFlipping();
-        adapterFlipper.setHorizontalScrollBarEnabled(true);
 
     }
 
     @BindingAdapter("dataFlipper")
-    public static void setDataFlipper(AdapterViewFlipper adapterViewFlipper, @Nullable List<DemoMovie> demoList) {
+    public static void setDataFlipper(CustomAdapterViewFlipper adapterViewFlipper, @Nullable List<DemoMovie> demoList) {
         var adapter = (DemoMoviesAdapter) adapterViewFlipper.getAdapter();
         adapter.setDemoMovies(demoList);
         adapterViewFlipper.setAdapter(adapter);
     }
 
     @BindingAdapter("setMoviesAdapter")
-    public static void setMoviesAdapter(RecyclerView recyclerView,
+    public static void setMoviesAdapter(@NonNull RecyclerView recyclerView,
                                         MoviesAdapter adapter) {
         recyclerView.setAdapter(adapter);
 
     }
 
     @BindingAdapter("setDataMoviesAdapter")
-    public static void setDataMoviesAdapter(RecyclerView recyclerView, @Nullable List<Movie> list) {
+    public static void setDataMoviesAdapter(@NonNull RecyclerView recyclerView, @Nullable List<Movie> list) {
         var adapter = (MoviesAdapter) recyclerView.getAdapter();
-        if (list != null && adapter != null) {
-            adapter.submitList(list);
+        if (adapter == null) return;
 
-        } else {
-            Timber.e("adapter = " + adapter + ", List = " + list);
+        if (list != null) {
+            adapter.submitList(list);
         }
 
     }
 
     @BindingAdapter("setFavoriteMoviesAdapter")
-    public static void setFavoriteMoviesAdapter(RecyclerView recyclerView,
+    public static void setFavoriteMoviesAdapter(@NonNull RecyclerView recyclerView,
                                                 FavoriteAdapter adapter) {
         recyclerView.setAdapter(adapter);
 
@@ -88,7 +88,9 @@ public class MoviesBindingUtils {
     @BindingAdapter("setDataFavoriteMoviesAdapter")
     public static void setDataFavoriteMoviesAdapter(RecyclerView recyclerView, @Nullable List<FavoriteMovie> list) {
         var adapter = (FavoriteAdapter) recyclerView.getAdapter();
-        if (list != null && adapter != null) {
+        if (adapter == null) return;
+
+        if (list != null) {
             adapter.updateList(list);
 
         } else {

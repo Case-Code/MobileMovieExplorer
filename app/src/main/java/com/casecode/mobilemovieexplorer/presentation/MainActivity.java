@@ -1,11 +1,11 @@
 package com.casecode.mobilemovieexplorer.presentation;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.casecode.mobilemovieexplorer.R;
@@ -29,11 +29,9 @@ import timber.log.Timber;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
     @Inject
     MovieViewModelFactory movieViewModelFactory;
     private ActivityMainBinding mBinding;
-    private NavController navController;
     private MovieViewModel movieViewModel;
 
     /**
@@ -50,35 +48,40 @@ public class MainActivity extends AppCompatActivity {
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         mBinding.setLifecycleOwner(this);
         // Create an instance of MoviesDetailsFragment
-
-
         setContentView(mBinding.getRoot());
-        setupTitle();
+        setupNavigation();
         setupViewModel();
         fetchViewModel();
         observeViewModel();
 
     }
 
-    private void setupTitle() {
+    private void setupNavigation() {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
-        navController = navHostFragment.getNavController();
-        navController.addOnDestinationChangedListener((navController, navDestination, bundle) ->{
-                mBinding.tvMainToolbar.setText(navDestination.getLabel());
-                Timber.e("id navDestination = " + navDestination.getId());
-                if(navDestination.getId() == R.id.nav_movies){
-                    mBinding.imvMainIcon.setImageResource(R.drawable.ic_baseline_movie_filter_24);
-                }else{
-                    mBinding.imvMainIcon.setImageResource(R.drawable.ic_back);
-                    mBinding.imvMainIcon.setOnClickListener(v ->{
+        NavController navController = navHostFragment.getNavController();
+
+        navController.addOnDestinationChangedListener((nav, navDestination, bundle) -> {
+            mBinding.tvMainToolbar.setText(navDestination.getLabel());
+
+            mBinding.imvMainToolbarLike.setVisibility(navDestination.getId() == R.id.nav_favorite_fragment ? View.INVISIBLE : View.VISIBLE);
+            if (navDestination.getId() == R.id.nav_movies) {
+                mBinding.imvMainIcon.setImageResource(R.drawable.ic_baseline_movie_filter_24);
+            } else {
+                mBinding.imvMainIcon.setImageResource(R.drawable.ic_back);
+                mBinding.imvMainIcon.setOnClickListener(v -> {
                     navController.navigateUp();
-                    });
-                }
+                });
+            }
         });
 
+        setupClickedLiked(navController);
+    }
+
+    private void setupClickedLiked(NavController navController) {
         mBinding.imvMainToolbarLike.setOnClickListener(v -> {
+
             navController
                     .navigate(R.id.nav_favorite_fragment);
         });
@@ -97,10 +100,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void fetchViewModel() {
         movieViewModel.setNetworkMonitor();
-      /*  movieViewModel.fetchMovies();
-        movieViewModel.fetchDemoMovies();
-        movieViewModel.fetchMovieDetails(640146);  // Replace with a valid movieId
-        movieViewModel.fetchDemoDetails(297761);   // Replace with a valid demoId*/
+
     }
 
     /**
@@ -108,74 +108,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void observeViewModel() {
         observerNetworkMonitor();
-        observerMovies();
-        observerDemoMovies();
-        observerMoviesDetails();
-        observerDemoDetailsMovie();
     }
 
-    /**
-     * Observes changes in demo details LiveData and logs corresponding events.
-     */
-    private void observerDemoDetailsMovie() {
-        movieViewModel.getDemoDetailsLiveData().observe(this, demoDetailsResponse -> {
-            Timber.tag(TAG).d("Demo details response received: %s", demoDetailsResponse);
-            switch (demoDetailsResponse.status) {
-                case LOADING -> Timber.tag(TAG).d("Demo details LOADING");
-                case SUCCESS -> Timber.tag(TAG).d("Demo details response received: %s",
-                        demoDetailsResponse);
-                case ERROR ->
-                        Timber.tag(TAG).e("Demo details ERROR: %s", demoDetailsResponse.message);
-                case NULL -> Timber.tag(TAG).e("Demo details NULL");
-            }
-        });
-    }
-
-    /**
-     * Observes changes in movie details LiveData and logs corresponding events.
-     */
-    private void observerMoviesDetails() {
-        movieViewModel.getMovieDetailsLiveData().observe(this, moviesDetailsResponse -> {
-            switch (moviesDetailsResponse.status) {
-                case LOADING -> Timber.tag(TAG).d("Movie details LOADING");
-                case SUCCESS -> Timber.tag(TAG).d("Movie details response received: %s",
-                        moviesDetailsResponse);
-                case ERROR ->
-                        Timber.tag(TAG).e("Movie details ERROR: %s", moviesDetailsResponse.message);
-                case NULL -> Timber.tag(TAG).e("Movie details NULL");
-            }
-        });
-    }
-
-    /**
-     * Observes changes in demo movies LiveData and logs corresponding events.
-     */
-    private void observerDemoMovies() {
-        movieViewModel.getDemoMoviesLiveData().observe(this, demoResponse -> {
-            switch (demoResponse.status) {
-                case LOADING -> Timber.tag(TAG).d("Demo movies LOADING");
-                case SUCCESS ->
-                        Timber.tag(TAG).d("Demo movies response received: %s", demoResponse);
-                case ERROR -> Timber.tag(TAG).e("Demo movies ERROR: %s", demoResponse.message);
-                case NULL -> Timber.tag(TAG).e("Demo movies NULL");
-            }
-        });
-    }
-
-    /**
-     * Observes changes in movies LiveData and logs corresponding events.
-     */
-    private void observerMovies() {
-        movieViewModel.getMoviesLiveData().observe(this, moviesResponse -> {
-            switch (moviesResponse.status) {
-                case LOADING -> Timber.tag(TAG).d("Movies response LOADING");
-                case SUCCESS -> Timber.tag(TAG).d("Movies response received: %s", moviesResponse);
-                case ERROR ->
-                        Timber.tag(TAG).e("Movies response ERROR: %s", moviesResponse.message);
-                case NULL -> Timber.tag(TAG).e("Movies response NULL: %s", moviesResponse.message);
-            }
-        });
-    }
 
     /**
      * Observes changes in the network monitor LiveData and logs the connectivity status.
@@ -190,5 +124,11 @@ public class MainActivity extends AppCompatActivity {
                 Timber.e("isOnline = %s", false);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mBinding = null;
     }
 }

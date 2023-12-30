@@ -22,7 +22,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
     private final ItemClickListener<Movie> mItemClickListener;
 
     public MoviesAdapter(ItemClickListener<Movie> itemClickListener) {
-        super(new DiffUtil.ItemCallback<Movie>() {
+        super(new DiffUtil.ItemCallback<>() {
             @Override
             public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
                 return oldItem.id() == newItem.id();
@@ -40,8 +40,8 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemMovieBinding binding = ItemMovieBinding.inflate(layoutInflater, parent, false);
+        ItemMovieBinding binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.getContext()),
+                parent, false);
 
         return new MovieViewHolder(binding);
     }
@@ -52,7 +52,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
         movieViewHolder.bind(movie, mItemClickListener);
     }
 
-   static class MovieViewHolder extends RecyclerView.ViewHolder {
+  public static class MovieViewHolder extends RecyclerView.ViewHolder {
         private final ItemMovieBinding mBinding;
 
         public MovieViewHolder(@NonNull ItemMovieBinding binding) {

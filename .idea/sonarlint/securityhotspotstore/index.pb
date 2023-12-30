@@ -67,3 +67,5 @@ Qapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/MainActivity.ja
 Rapp/src/main/java/com/casecode/mobilemovieexplorer/data/mapper/FavoriteMovies.java,e\8\e81adb1fe9bca916807cca26d7bf9c1ce60c893e
 ‹
 [app/src/main/java/com/casecode/mobilemovieexplorer/presentation/base/ItemClickListener.java,1\e\1e7f76d9abd65ff1aaed69b4d2346e02ac29587c
+’
+bapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/base/CustomAdapterViewFlipper.java,5\8\58c48bf6edd9da9ac8c96347ac4e75a22918f9be

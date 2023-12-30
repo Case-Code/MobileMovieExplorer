@@ -2,10 +2,12 @@ package com.casecode.mobilemovieexplorer.presentation.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.HorizontalScrollView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -25,6 +27,7 @@ public class DemoMoviesAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
 
     private ItemClickListener<DemoMovie> itemClickListener;
+
 
 
     public DemoMoviesAdapter(Context context) {
@@ -59,18 +62,23 @@ public class DemoMoviesAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return mDemoMovie.get(position).id();
     }
-
+    @SuppressLint("ViewHolder")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        @SuppressLint("ViewHolder") ItemDemoMovieBinding binding = ItemDemoMovieBinding.inflate(inflater, parent, false);
+        ItemDemoMovieBinding binding = ItemDemoMovieBinding.inflate(inflater, parent, false);
 
+       // HorizontalScrollView horizontalScrollView = new HorizontalScrollView(parent.getContext());
+        //horizontalScrollView.addView(binding.getRoot());
 
         DemoMovie demo = mDemoMovie.get(position);
         binding.setDemoMovie(demo);
         binding.setClickListener(itemClickListener);
         binding.executePendingBindings();
 
+
         return binding.getRoot();
     }
+
+
 
 }

@@ -50,11 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <AdapterViewFlipper
+                    <com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper
                         android:id="@+id/avf_movies_demo"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:background="@color/md_theme_primary"
                         android:visibility="invisible"
                         app:adapterFlipper="@{demoAdapter}"
                         app:dataFlipper="@{demoList}"
@@ -63,9 +62,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:listitem="@layout/item_demo_movie"
-                        tools:visibility="gone">
+                        tools:visibility="visible">
 
-                    </AdapterViewFlipper>
+                    </com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper>
 
                     <TextView
                         android:id="@+id/tv_movies_title"
@@ -94,7 +93,7 @@
                         app:setDataMoviesAdapter="@{movieList}"
                         app:setMoviesAdapter="@{moviesAdapter}"
                         app:spanCount="3"
-                        tools:visibility="gone"
+                        tools:visibility="visible"
                         tools:listitem="@layout/item_movie" />
 
 
@@ -120,7 +119,7 @@
                         app:layout_constraintStart_toStartOf="parent"
 
                         app:layout_constraintTop_toTopOf="@+id/avf_movies_demo"
-                        tools:visibility="visible">
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
