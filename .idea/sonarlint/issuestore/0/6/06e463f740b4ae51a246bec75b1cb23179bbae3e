@@ -1,8 +1,12 @@
 
 d
-java:S6813)"BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ8ÓÛÑüÊ1
+java:S6813!"BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ8£¯½ÖË1
 ~
-java:S1450("\Remove the "navController" field and declare it as a local variable in the relevant methods.(¿”Æƒøÿÿÿÿ8ÝÛÑüÊ1
-X	java:S125X"<This block of commented-out lines of code should be removed.(€ÔÐÒ8ˆÜÑüÊ1
+java:S1450$"\Remove the "navController" field and declare it as a local variable in the relevant methods.(¿”Æƒøÿÿÿÿ8¤¯½ÖË1
+N
+java:S1602K",Remove useless curly braces around statement(½šý‚ýÿÿÿÿ8Õ¯½ÖË1
+I
+java:S1602Q",Remove useless curly braces around statement(ÚÖ­î8³ùÖË1
+X	java:S125d"<This block of commented-out lines of code should be removed.(€ÔÐÒ8Õ¯½ÖË1
 e
-java:S1126¯"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8‚òÇÞÊ1
+java:S1126»"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8ñ¯½ÖË1

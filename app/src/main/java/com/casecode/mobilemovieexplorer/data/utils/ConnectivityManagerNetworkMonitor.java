@@ -8,14 +8,20 @@ import android.net.NetworkRequest;
 
 import androidx.core.content.ContextCompat;
 
+import com.casecode.mobilemovieexplorer.di.utils.AppScheduler;
+import com.casecode.mobilemovieexplorer.di.utils.AppSchedulers;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.qualifiers.ApplicationContext;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -34,14 +40,21 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
      */
     private final Context context;
 
+    private final Scheduler ioScheduler;
+    private final Scheduler mainScheduler;
+
     /**
      * Constructs a {@code ConnectivityManagerNetworkMonitor} instance.
      *
      * @param context The application context.
      */
     @Inject
-    public ConnectivityManagerNetworkMonitor(@ApplicationContext Context context) {
+    public ConnectivityManagerNetworkMonitor(@ApplicationContext Context context,
+                                             @AppScheduler(appSchedulers = AppSchedulers.IO) Scheduler ioScheduler,
+                                             @AppScheduler(appSchedulers = AppSchedulers.MAIN) Scheduler mainScheduler) {
         this.context = context;
+        this.ioScheduler = ioScheduler;
+        this.mainScheduler = mainScheduler;
     }
 
     /**
@@ -51,7 +64,8 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
      */
     @Override
     public Flowable<Boolean> isOnline() {
-        return Flowable.create(emitter -> {
+        return Flowable.<Boolean>create(emitter -> {
+
             ConnectivityManager connectivityManager = ContextCompat.getSystemService(context, ConnectivityManager.class);
             if (connectivityManager == null) {
                 emitter.onNext(false);
@@ -98,7 +112,7 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
                 connectivityManager.unregisterNetworkCallback(callback);
                 Timber.d("close connectivity manager");
             });
-        }, BackpressureStrategy.LATEST);
+        }, BackpressureStrategy.LATEST).subscribeOn(ioScheduler).observeOn(mainScheduler);
     }
 
     /**

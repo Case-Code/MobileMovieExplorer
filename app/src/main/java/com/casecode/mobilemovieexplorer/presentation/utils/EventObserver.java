@@ -11,15 +11,6 @@ import androidx.lifecycle.Observer;
 public class EventObserver<T> implements Observer<Event<T>> {
 
     /**
-     * Interface for handling the content of unhandled events.
-     *
-     * @param <T> The type of content associated with the event.
-     */
-    public interface OnEventUnhandledContent<T> {
-        void onEventUnhandledContent(T content);
-    }
-
-    /**
      * The callback to be invoked when an unhandled event is observed.
      */
     private final OnEventUnhandledContent<T> onEventUnhandledContent;
@@ -41,9 +32,21 @@ public class EventObserver<T> implements Observer<Event<T>> {
      */
     @Override
     public void onChanged(Event<T> value) {
-        T content = value.getContentIfNotHandled();
-        if (content != null) {
-            onEventUnhandledContent.onEventUnhandledContent(content);
+        if(value != null) {
+            T content = value.getContentIfNotHandled();
+            if (content != null) {
+                onEventUnhandledContent.onEventUnhandledContent(content);
+            }
         }
+    }
+
+    /**
+     * Interface for handling the content of unhandled events.
+     *
+     * @param <T> The type of content associated with the event.
+     */
+    public interface OnEventUnhandledContent<T> {
+        void onEventUnhandledContent(T content);
+
     }
 }

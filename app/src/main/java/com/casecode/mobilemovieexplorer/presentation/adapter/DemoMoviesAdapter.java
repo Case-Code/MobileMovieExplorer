@@ -1,5 +1,6 @@
 package com.casecode.mobilemovieexplorer.presentation.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ItemDemoMovieBinding;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
+import com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +62,7 @@ public class DemoMoviesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemDemoMovieBinding binding = DataBindingUtil.inflate(inflater,
-                R.layout.item_demo_movie, parent, false);
+        @SuppressLint("ViewHolder") ItemDemoMovieBinding binding = ItemDemoMovieBinding.inflate(inflater, parent, false);
 
 
         DemoMovie demo = mDemoMovie.get(position);
@@ -69,11 +70,6 @@ public class DemoMoviesAdapter extends BaseAdapter {
         binding.setClickListener(itemClickListener);
         binding.executePendingBindings();
 
-       /* binding.imvItemMovie.setOnClickListener(v -> {
-            if (itemClickListener != null) {
-                itemClickListener.onItemClick(demo);
-            }
-        });*/
         return binding.getRoot();
     }
 

@@ -2,20 +2,15 @@ package com.casecode.mobilemovieexplorer.presentation;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ActivityMainBinding;
 import com.casecode.mobilemovieexplorer.presentation.utils.ViewExtensions;
-import com.casecode.mobilemovieexplorer.presentation.view.MoviesDetailsFragment;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
 
@@ -35,11 +30,10 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-
-    private ActivityMainBinding mBinding;
-    private NavController navController;
     @Inject
     MovieViewModelFactory movieViewModelFactory;
+    private ActivityMainBinding mBinding;
+    private NavController navController;
     private MovieViewModel movieViewModel;
 
     /**
@@ -63,15 +57,33 @@ public class MainActivity extends AppCompatActivity {
         setupViewModel();
         fetchViewModel();
         observeViewModel();
+
     }
 
-    private void setupTitle(){
+    private void setupTitle() {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
+        assert navHostFragment != null;
         navController = navHostFragment.getNavController();
-        navController.addOnDestinationChangedListener((navController, navDestination, bundle) ->
-                setTitle(navDestination.getLabel()));
+        navController.addOnDestinationChangedListener((navController, navDestination, bundle) ->{
+                mBinding.tvMainToolbar.setText(navDestination.getLabel());
+                Timber.e("id navDestination = " + navDestination.getId());
+                if(navDestination.getId() == R.id.nav_movies){
+                    mBinding.imvMainIcon.setImageResource(R.drawable.ic_baseline_movie_filter_24);
+                }else{
+                    mBinding.imvMainIcon.setImageResource(R.drawable.ic_back);
+                    mBinding.imvMainIcon.setOnClickListener(v ->{
+                    navController.navigateUp();
+                    });
+                }
+        });
+
+        mBinding.imvMainToolbarLike.setOnClickListener(v -> {
+            navController
+                    .navigate(R.id.nav_favorite_fragment);
+        });
     }
+
     /**
      * Initializes the MovieViewModel using Hilt for dependency injection.
      */

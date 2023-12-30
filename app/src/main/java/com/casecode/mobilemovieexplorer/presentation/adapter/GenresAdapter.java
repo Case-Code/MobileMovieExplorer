@@ -1,7 +1,7 @@
 package com.casecode.mobilemovieexplorer.presentation.adapter;
 
-// GenresAdapter.java
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.casecode.mobilemovieexplorer.R;
-import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.Genre;
+import com.casecode.mobilemovieexplorer.domain.model.demodetails.Genre;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenreViewHolder> {
 
-    private List<Genre> genres;
+    private List<Genre> genres = new ArrayList<>();
 
-    public GenresAdapter(List<Genre> genres) {
+    public GenresAdapter() {
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateList(List<Genre> genres) {
         this.genres = genres;
+        notifyDataSetChanged();
+
     }
 
     @NonNull
@@ -50,7 +57,7 @@ public class GenresAdapter extends RecyclerView.Adapter<GenresAdapter.GenreViewH
         }
 
         public void bind(Genre genre) {
-            textViewGenre.setText(genre.getName());
+            textViewGenre.setText(genre.name());
         }
     }
 }

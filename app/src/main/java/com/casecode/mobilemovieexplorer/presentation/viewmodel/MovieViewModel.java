@@ -3,11 +3,10 @@ package com.casecode.mobilemovieexplorer.presentation.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.data.utils.NetworkMonitor;
-import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
-import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.usecase.MovieUseCase;
@@ -21,7 +20,6 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import lombok.Getter;
-import lombok.Setter;
 import timber.log.Timber;
 
 /**
@@ -53,11 +51,6 @@ public class MovieViewModel extends ViewModel {
     private final MutableLiveData<Resource<DemoDetailsResponse>> demoDetailsLiveData =
             new MutableLiveData<>();
 
-    @Setter
-    private Movie movieSelected = null;
-
-    @Setter
-    private DemoMovie demoMovieSelected = null;
 
     private final NetworkMonitor networkMonitor;
     @Getter
@@ -102,6 +95,7 @@ public class MovieViewModel extends ViewModel {
     public void setNetworkMonitor() {
         mCompositeDisposable.add(networkMonitor.isOnline().subscribe(isOnline -> {
                     setConnected(isOnline);
+                    showSnackbarMessage(R.string.all_network_error);
                 }, Timber::e
         ));
     }
@@ -160,31 +154,36 @@ public class MovieViewModel extends ViewModel {
                     }
                 }));
     }
-    public void setMovieIdSelected(int id){
-        movieIdSelected.setValue(new Event<Integer>(id));
-    }
-    public void setDemoMovieIdSelected(int id){
-        demoMovieIdSelected.setValue(new Event<Integer>(id));
-    } public void setFavoriteMovieIdSelected(int id){
-        favoriteMovieIdSelected.setValue(new Event<Integer>(id));
-    }
-    private void restMovieId(){
-        movieIdSelected.setValue(null);
-    }
-    private void restDemoMovieIdSelected(){
-        demoMovieIdSelected.setValue(null);
-    }
-    private void restFavoriteMovieIdSelected(){
-        favoriteMovieIdSelected.setValue(null);
+
+    public void setMovieIdSelected(int id) {
+        movieIdSelected.setValue(new Event<>(id));
     }
 
-    public void fetchMovieDetails(){
-        int movieId = movieSelected.id();
-        fetchMovieDetails(movieId);
+    public void setDemoMovieIdSelected(int id) {
+        demoMovieIdSelected.setValue(new Event<>(id));
     }
-    private void restMovieSelected(){
-        movieSelected = null;
+
+    public void setFavoriteMovieIdSelected(int id) {
+        favoriteMovieIdSelected.setValue(new Event<>(id));
     }
+
+    private void restMovieIdSelected() {
+        if (movieIdSelected.getValue() != null)
+            movieIdSelected.setValue(null);
+    }
+
+    private void restDemoMovieIdSelected() {
+        if (demoMovieIdSelected.getValue() != null)
+
+            demoMovieIdSelected.setValue(null);
+    }
+
+    private void restFavoriteMovieIdSelected() {
+        if (favoriteMovieIdSelected.getValue() != null)
+
+            favoriteMovieIdSelected.setValue(null);
+    }
+
 
     /**
      * Fetches details for a specific movie and updates the corresponding LiveData.
@@ -201,6 +200,8 @@ public class MovieViewModel extends ViewModel {
                         movieDetailsLiveData.setValue(Resource.success(moviesDetailsResponse));
                         Timber.d("MoviesDetailsResponse = %s",
                                 moviesDetailsResponse.toString());
+                        restMovieIdSelected();
+                        restFavoriteMovieIdSelected();
                     }
 
                     @Override
@@ -211,13 +212,7 @@ public class MovieViewModel extends ViewModel {
                 }));
     }
 
-    public void fetchDemoDetails(){
-        int movieId = demoMovieSelected.id();
-        fetchDemoDetails(movieId);
-    }
-    private void restDemoMovieSelected(){
-        demoMovieSelected = null;
-    }
+
     /**
      * Fetches details for a specific demo and updates the corresponding LiveData.
      *
@@ -233,6 +228,7 @@ public class MovieViewModel extends ViewModel {
                         demoDetailsLiveData.setValue(Resource.success(demoDetailsResponse));
                         Timber.d("demoDetailsResponse = %s",
                                 demoDetailsResponse.toString());
+                        restDemoMovieIdSelected();
                     }
 
                     @Override

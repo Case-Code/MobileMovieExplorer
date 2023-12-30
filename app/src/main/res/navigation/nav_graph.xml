@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/nav_favorite_fragment"
         android:name="com.casecode.mobilemovieexplorer.presentation.view.FavoriteMoviesFragment"
-        android:label="@string/best_movies_title"
+        android:label=""
         tools:layout="@layout/fragment_favorite_movies"
         >
         <action
@@ -33,13 +33,14 @@
         <action
             android:id="@+id/action_nav_favorite_fragment_to_nav_movies2"
             app:destination="@id/nav_movies"
+
             app:popUpTo="@id/nav_movies" />
 
     </fragment>
     <fragment
         android:id="@+id/nav_details_fragment"
         android:name="com.casecode.mobilemovieexplorer.presentation.view.MoviesDetailsFragment"
-        android:label="@string/best_movies_title"
+        android:label=""
         tools:layout="@layout/fragment_movies_details"
          >
         <argument

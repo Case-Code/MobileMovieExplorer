@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
+ *
  */
 public class FavoriteViewModelFactory implements ViewModelProvider.Factory {
 
@@ -25,7 +26,8 @@ public class FavoriteViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(MovieViewModel.class)) {
+
+        if (modelClass.isAssignableFrom(FavoriteViewModel.class)) {
             return (T) new FavoriteViewModel(favoriteMoviesRepository);
         }
         throw new IllegalArgumentException("Unknown class name: FavoriteViewModel");

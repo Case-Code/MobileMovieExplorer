@@ -22,7 +22,7 @@ import lombok.Getter;
 @HiltViewModel
 public class FavoriteViewModel extends ViewModel {
     private final FavoriteMoviesRepository favoriteMoviesRepository;
-    private final CompositeDisposable compositeDisposable;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Getter
     private MutableLiveData<Resource<List<FavoriteMovie>>> favoriteMoviesResource = new MutableLiveData<>();
     @Getter
@@ -33,7 +33,6 @@ public class FavoriteViewModel extends ViewModel {
     @Inject
     public FavoriteViewModel(FavoriteMoviesRepository favoriteMoviesRepository) {
         this.favoriteMoviesRepository = favoriteMoviesRepository;
-        this.compositeDisposable = new CompositeDisposable();
     }
 
     public void addFavoriteMovie(FavoriteMovie favoriteMovie) {

@@ -9,7 +9,7 @@
 
         <variable
             name="clickListener"
-            type="com.casecode.mobilemovieexplorer.presentation.adapter.ItemClickListener" />
+            type="com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener" />
 
         <variable
             name="movie"

@@ -1,5 +1,6 @@
 package com.casecode.mobilemovieexplorer.domain.model.moviesdetails;
 
+import com.casecode.mobilemovieexplorer.domain.model.demodetails.Genre;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

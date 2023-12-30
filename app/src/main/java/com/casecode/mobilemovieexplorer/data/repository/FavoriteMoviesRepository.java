@@ -8,6 +8,7 @@ import com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Scheduler;
@@ -16,6 +17,7 @@ import io.reactivex.rxjava3.core.Single;
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  */
+@Singleton
 public class FavoriteMoviesRepository {
     private final FavoriteMoviesLocalDataSource mFavoriteMoviesLocalDataSource;
     private final Scheduler ioScheduler;

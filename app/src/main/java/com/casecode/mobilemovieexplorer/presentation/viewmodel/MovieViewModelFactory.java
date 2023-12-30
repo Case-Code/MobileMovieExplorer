@@ -15,7 +15,6 @@ import javax.inject.Inject;
  * when creating the MovieViewModel.
  */
 public class MovieViewModelFactory implements ViewModelProvider.Factory {
-
     private final MovieUseCase mMovieUseCase;
     private final NetworkMonitor networkMonitor;
 

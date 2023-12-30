@@ -33,66 +33,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/home_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_weight="0.03"
-
-                        android:src="@drawable/ic_baseline_movie_filter_24" />
-
-                    <TextView
-                        android:id="@+id/home_toolbar_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/small_spacing"
-                        android:layout_weight="0.87"
-                        android:text="Movies App"
-                        android:textAppearance="@style/TextAppearance.app.TitleMedium"
-                        android:textColor="@color/md_theme_onPrimary" />
-
-                    <ImageButton
-                        android:id="@+id/image_button_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/background_with_selectable_item"
-                        android:importantForAccessibility="no"
-                        android:padding="8dp"
-                        android:src="@drawable/favorite_white_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-
-            </androidx.appcompat.widget.Toolbar>
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nsv_movies"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/csl_movies_root"
@@ -112,7 +63,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:listitem="@layout/item_demo_movie"
-                        tools:visibility="visible">
+                        tools:visibility="gone">
 
                     </AdapterViewFlipper>
 
@@ -143,6 +94,7 @@
                         app:setDataMoviesAdapter="@{movieList}"
                         app:setMoviesAdapter="@{moviesAdapter}"
                         app:spanCount="3"
+                        tools:visibility="gone"
                         tools:listitem="@layout/item_movie" />
 
 
@@ -156,41 +108,42 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/avf_movies_demo"
-                        tools:visibility="gone" />
+                        tools:visibility="invisible" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/sh_movies"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+
+                        app:layout_constraintTop_toTopOf="@+id/avf_movies_demo"
+                        tools:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_item_movie"
+                                android:background="@color/md_theme_inversePrimary" />
+
+                            <include layout="@layout/shimmer_movies" />
+
+                            <include layout="@layout/shimmer_movies" />
+
+                            <include layout="@layout/shimmer_movies" />
+                        </LinearLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/sh_movies"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
-                tools:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/height_item_movie"
-                        android:background="@color/md_theme_inversePrimary" />
-
-                    <include layout="@layout/shimmer_movies" />
-
-                    <include layout="@layout/shimmer_movies" />
-
-                    <include layout="@layout/shimmer_movies" />
-                </LinearLayout>
-            </com.facebook.shimmer.ShimmerFrameLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

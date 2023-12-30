@@ -60,6 +60,7 @@ navigationDynamicFeatures = { module = "androidx.navigation:navigation-dynamic-f
 lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleVersion" }
 lifecycleLivedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycleVersion" }
 lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycleVersion" }
+lifecycleCompiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleVersion" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipeRefreshLayoutVersion" }
 coreSplashScreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashScreen" }
 

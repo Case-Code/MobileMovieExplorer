@@ -6,7 +6,7 @@
     <data>
         <variable
             name="clickListener"
-            type="com.casecode.mobilemovieexplorer.presentation.adapter.ItemClickListener" />
+            type="com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener" />
         <variable
             name="demoMovie"
             type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
@@ -33,10 +33,10 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imv_item_movie"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="@dimen/small_spacing"
             app:layout_constraintDimensionRatio="H,2:1"
-
+            app:baseImage="@{@drawable/panorama_24}"
             app:loadImage="@{demoMovie.posterPath()}"
             tools:srcCompat="@tools:sample/avatars"
 

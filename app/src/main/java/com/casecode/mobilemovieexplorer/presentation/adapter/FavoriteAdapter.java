@@ -1,8 +1,8 @@
 package com.casecode.mobilemovieexplorer.presentation.adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,11 +17,10 @@ import com.bumptech.glide.request.target.Target;
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ItemFavoriteBinding;
 import com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie;
+import com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Setter;
 
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
@@ -33,6 +32,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     public void updateList(List<FavoriteMovie> favoriteList){
         this.favoriteList.clear();
         this.favoriteList.addAll(favoriteList);

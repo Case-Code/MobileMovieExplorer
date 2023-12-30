@@ -5,6 +5,29 @@
 
     <data>
 
+        <variable
+            name="isDemo"
+            type="Boolean" />
+
+        <variable
+            name="movie"
+            type="com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse" />
+
+        <variable
+            name="demoMovie"
+            type="com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse" />
+
+        <variable
+            name="castAdapter"
+            type="com.casecode.mobilemovieexplorer.presentation.adapter.CastAdapter" />
+
+        <variable
+            name="generAdapter"
+            type="com.casecode.mobilemovieexplorer.presentation.adapter.GenresAdapter" />
+
+        <variable
+            name="shareListener"
+            type="com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +44,8 @@
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{isDemo == true ? demoMovie.backdropPath(): movie.backdropPath}" />
 
         <!-- Scrim overlay View -->
         <View
@@ -35,39 +59,23 @@
             app:layout_constraintTop_toTopOf="@+id/image_backdrop_path" />
 
         <ImageButton
-            android:id="@+id/image_button_back"
+            android:id="@+id/imv_movies_details_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/background_with_selectable_item"
-            android:importantForAccessibility="no"
-            android:padding="8dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/image_button_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/background_with_selectable_item"
             android:importantForAccessibility="no"
             android:padding="8dp"
             android:src="@drawable/favorite_white_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/button_share"
+            app:layout_constraintTop_toTopOf="@+id/button_share" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
             app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
             app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
@@ -80,6 +88,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:text="@{isDemo == true ? demoMovie.title(): movie.title}"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
@@ -93,6 +102,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="@{isDemo == true ? String.valueOf(demoMovie.voteAverage()): String.valueOf(movie.voteAverage)}"
+
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/kid_star_24"
@@ -107,6 +118,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center"
+
+            android:text="@{isDemo == true ? String.format(@string/runtime_format,demoMovie.runtime()): String.format(@string/runtime_format,movie.runtime)}"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/schedule_24"
@@ -123,6 +136,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_with_selectable_item"
             android:contentDescription="@string/share_button_description"
+            android:onClick="@{(view) -> shareListener.onItemClick(view, isDemo ? demoMovie.homepage() : movie.homepage)}"
             android:padding="8dp"
             android:src="@drawable/share_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -142,6 +156,8 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_share"
+            app:setDataGenresAdapter="@{isDemo == true ? demoMovie.genres(): movie.genres}"
+            app:setGenresAdapter="@{generAdapter}"
             tools:listitem="@layout/item_genre" />
 
         <TextView
@@ -172,6 +188,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:text="@{isDemo == true ? demoMovie.overview(): movie.overview}"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -190,6 +207,8 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_actors"
+            app:setCastAdapter="@{castAdapter}"
+            app:setDataCastAdapter="@{isDemo == true ? null : movie.cast}"
             tools:listitem="@layout/item_cast" />
 
         <!-- Add other details as needed -->

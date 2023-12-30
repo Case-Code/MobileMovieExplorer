@@ -64,10 +64,7 @@ public class MoviesFragment extends Fragment {
         setupObserver();
         setupAdapter();
         setupRefreshView();
-        mBinding.imageButtonLike.setOnClickListener(v -> {
-            Navigation.findNavController(v)
-                    .navigate(R.id.action_nav_movies_fragment_to_nav_favorite_fragment);
-        });
+
     }
 
     private void setupShimmerAnimation() {
@@ -121,10 +118,10 @@ public class MoviesFragment extends Fragment {
     }
 
     private void onItemDemoMovieClick(View view,DemoMovie demoMovie) {
-        Timber.e("ItemClick");
-        mBinding.getRoot().showSnackbar("itemCLick", Snackbar.LENGTH_SHORT);
+        mBinding.getRoot().showSnackbar("itemCLick", BaseTransientBottomBar.LENGTH_SHORT);
 
-        movieViewModel.setDemoMovieSelected(demoMovie);
+        movieViewModel.setDemoMovieIdSelected(demoMovie.id());
+
         Navigation.findNavController(view)
                 .navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
     }
@@ -136,7 +133,8 @@ public class MoviesFragment extends Fragment {
     }
 
     private void onItemMovieClick(View view,Movie movie) {
-        movieViewModel.setMovieSelected(movie);
+        movieViewModel.setMovieIdSelected(movie.id());
+
         Navigation.findNavController(view).navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
     }
 
@@ -167,8 +165,8 @@ public class MoviesFragment extends Fragment {
                     Timber.tag(TAG).d("Movies  LOADING");
                 }
                 case SUCCESS -> {
-                    Timber.tag(TAG).i("Movies Success: %s", moviesResponse);
                     mBinding.setMovieList(moviesResponse.getData().results());
+                    Timber.tag(TAG).i("Movies Success: %s", moviesResponse);
                     mBinding.imvMoviesEmpty.setVisibility(View.GONE);
                     stopAnimation();
                 }
@@ -192,18 +190,15 @@ public class MoviesFragment extends Fragment {
             switch (demoResponse.status) {
                 case LOADING -> {
                     Timber.tag(TAG).d("Demo movies LOADING");
-                    startAnimation();
                 }
 
                 case SUCCESS -> {
                     Timber.tag(TAG).d("Demo movies : %s", demoResponse);
                     mBinding.setDemoList(demoResponse.getData().getResults());
-                    stopAnimation();
 
                 }
                 case ERROR -> {
                     Timber.tag(TAG).e("Demo movies ERROR: %s", demoResponse.message);
-                    stopAnimation();
                 }
                 case NULL -> {
                     Timber.tag(TAG).e("Demo movies NULL");

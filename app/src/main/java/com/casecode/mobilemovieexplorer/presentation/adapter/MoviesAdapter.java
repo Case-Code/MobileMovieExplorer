@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ItemMovieBinding;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
+import com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener;
 
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
@@ -40,7 +41,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemMovieBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_movie, parent, false);
+        ItemMovieBinding binding = ItemMovieBinding.inflate(layoutInflater, parent, false);
 
         return new MovieViewHolder(binding);
     }
@@ -51,8 +52,8 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
         movieViewHolder.bind(movie, mItemClickListener);
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
-        private ItemMovieBinding mBinding;
+   static class MovieViewHolder extends RecyclerView.ViewHolder {
+        private final ItemMovieBinding mBinding;
 
         public MovieViewHolder(@NonNull ItemMovieBinding binding) {
             super(binding.getRoot());

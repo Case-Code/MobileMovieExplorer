@@ -1,5 +1,7 @@
 package com.casecode.mobilemovieexplorer.di.modules;
 
+import com.casecode.mobilemovieexplorer.data.database.FavoriteMoviesLocalDataSource;
+import com.casecode.mobilemovieexplorer.data.repository.FavoriteMoviesRepository;
 import com.casecode.mobilemovieexplorer.data.repository.MovieRepositoryImpl;
 import com.casecode.mobilemovieexplorer.data.source.MoviesRemoteDataSource;
 import com.casecode.mobilemovieexplorer.di.utils.AppScheduler;
@@ -11,6 +13,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.scopes.ViewModelScoped;
 import dagger.hilt.components.SingletonComponent;
 import io.reactivex.rxjava3.core.Scheduler;
 
@@ -42,6 +45,13 @@ public abstract class RepositoryModule {
             @AppScheduler(appSchedulers = AppSchedulers.IO) Scheduler ioScheduler,
             @AppScheduler(appSchedulers = AppSchedulers.MAIN) Scheduler mainScheduler) {
         return new MovieRepositoryImpl(moviesRemoteDataSource, ioScheduler, mainScheduler);
+    }
+    @Singleton
+    @Provides
+    public static FavoriteMoviesRepository provideFavoriteMoviesRepository(FavoriteMoviesLocalDataSource favoriteMoviesLocalDataSource,
+                                                                           @AppScheduler(appSchedulers = AppSchedulers.IO) Scheduler ioScheduler,
+                                                                           @AppScheduler(appSchedulers = AppSchedulers.MAIN) Scheduler mainScheduler){
+        return new FavoriteMoviesRepository(favoriteMoviesLocalDataSource, ioScheduler, mainScheduler);
     }
 
 }

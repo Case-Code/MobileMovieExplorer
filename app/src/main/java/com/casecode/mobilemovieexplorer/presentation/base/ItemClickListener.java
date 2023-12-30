@@ -1,4 +1,4 @@
-package com.casecode.mobilemovieexplorer.presentation.adapter;
+package com.casecode.mobilemovieexplorer.presentation.base;
 
 
 import android.view.View;

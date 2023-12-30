@@ -1,4 +1,4 @@
-package com.casecode.mobilemovieexplorer.data.model;
+package com.casecode.mobilemovieexplorer.data.mapper;
 
 import androidx.annotation.NonNull;
 
