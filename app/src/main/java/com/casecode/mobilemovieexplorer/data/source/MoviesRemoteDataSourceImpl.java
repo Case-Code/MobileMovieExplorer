@@ -5,6 +5,7 @@ import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
+import com.casecode.mobilemovieexplorer.presentation.utils.Resource;
 
 import javax.inject.Inject;
 
@@ -39,6 +40,11 @@ public class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
     @Override
     public Single<MoviesResponse> getMovies() {
         return mMovieApiService.getMovies();
+    }
+
+    @Override
+    public Single<Resource<MoviesResponse>> getMovies(int page) {
+        return mMovieApiService.getMovies(page).map(Resource::success).onErrorReturn(Resource::error);
     }
 
     /**

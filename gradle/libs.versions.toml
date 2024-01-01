@@ -2,6 +2,7 @@
 androidGradlePlugin = "8.2.0"
 
 # AndroidX
+autodispose = "2.2.1"
 coreVersion = "1.12.0"
 coreSplashScreen = "1.0.1"
 appcompat = "1.7.0-alpha03"
@@ -11,6 +12,7 @@ recyclerViewSelection = "1.1.0"
 navigation = "2.7.6"
 lifecycleVersion = "2.6.2"
 swipeRefreshLayoutVersion = "1.1.0"
+pagngvesrsion = "3.2.1"
 
 # Ui tools
 materialVersion = "1.11.0"
@@ -48,6 +50,8 @@ timber = "4.7.1"
 [libraries]
 
 # Andriodx
+autodispose = { module = "com.uber.autodispose2:autodispose", version.ref = "autodispose" }
+autodispose-androidx-lifecycle = { module = "com.uber.autodispose2:autodispose-androidx-lifecycle", version.ref = "autodispose" }
 core = { module = "androidx.core:core", version.ref = "coreVersion" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 appcompat-resources = { module = "androidx.appcompat:appcompat-resources", version.ref = "appcompat" }
@@ -63,6 +67,8 @@ lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime", version.re
 lifecycleCompiler = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleVersion" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swipeRefreshLayoutVersion" }
 coreSplashScreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashScreen" }
+paginig = { module = "androidx.paging:paging-runtime", version.ref = "pagngvesrsion" }
+paginigRxjava = { module = "androidx.paging:paging-rxjava3", version.ref = "pagngvesrsion" }
 
 # Ui tools
 material = { module = "com.google.android.material:material", version.ref = "materialVersion" }

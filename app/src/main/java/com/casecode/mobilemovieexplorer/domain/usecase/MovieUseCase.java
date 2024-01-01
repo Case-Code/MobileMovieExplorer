@@ -1,15 +1,18 @@
 package com.casecode.mobilemovieexplorer.domain.usecase;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.paging.PagingData;
 
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
+import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,6 +68,11 @@ public class MovieUseCase {
      */
     public Single<MoviesResponse> getMovies() {
         return movieRepository.getMovies();
+
+    }
+
+    public Flowable<PagingData<Movie>> getMoviesPaging() {
+        return movieRepository.getMoviesPaging();
     }
 
     /**

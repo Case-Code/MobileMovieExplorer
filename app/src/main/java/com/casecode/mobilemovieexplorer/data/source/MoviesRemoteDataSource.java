@@ -4,6 +4,7 @@ import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
+import com.casecode.mobilemovieexplorer.presentation.utils.Resource;
 
 import io.reactivex.rxjava3.core.Single;
 
@@ -18,6 +19,9 @@ public interface MoviesRemoteDataSource {
      * @return A {@link Single} emitting a {@link MoviesResponse}.
      */
     Single<MoviesResponse> getMovies();
+
+
+    Single<Resource<MoviesResponse>> getMovies(int page);
 
     /**
      * Retrieves a list of demo movies from the remote data source.

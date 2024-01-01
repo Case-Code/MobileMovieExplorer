@@ -5,156 +5,90 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import lombok.Data;
-
 /**
  * Class representing details of a movie, including information about its cast, crew, genres, and more.
  */
-@Data
-public class MoviesDetailsResponse {
-    @SerializedName("adult")
-    private boolean adult;
+public record MoviesDetailsResponse(
+        @SerializedName("adult")
+        boolean adult,
 
-    @SerializedName("backdrop_path")
-    private String backdropPath;
+        @SerializedName("backdrop_path")
+        String backdropPath,
 
-    @SerializedName("belongs_to_collection")
-    private BelongsToCollection belongsToCollection;
+        @SerializedName("belongs_to_collection")
+        BelongsToCollection belongsToCollection,
 
-    @SerializedName("budget")
-    private int budget;
+        @SerializedName("budget")
+        int budget,
 
-    @SerializedName("cast")
-    private List<Cast> cast;
+        @SerializedName("cast")
+        List<Cast> cast,
 
-    @SerializedName("crew")
-    private List<Crew> crew;
+        @SerializedName("crew")
+        List<Crew> crew,
 
-    @SerializedName("genres")
-    private List<Genre> genres;
+        @SerializedName("genres")
+        List<Genre> genres,
 
-    @SerializedName("homepage")
-    private String homepage;
+        @SerializedName("homepage")
+        String homepage,
 
-    @SerializedName("id")
-    private int id;
+        @SerializedName("id")
+        int id,
 
-    @SerializedName("imdb_id")
-    private String imdbId;
+        @SerializedName("imdb_id")
+        String imdbId,
 
-    @SerializedName("original_language")
-    private String originalLanguage;
+        @SerializedName("original_language")
+        String originalLanguage,
 
-    @SerializedName("original_title")
-    private String originalTitle;
+        @SerializedName("original_title")
+        String originalTitle,
 
-    @SerializedName("overview")
-    private String overview;
+        @SerializedName("overview")
+        String overview,
 
-    @SerializedName("popularity")
-    private double popularity;
+        @SerializedName("popularity")
+        double popularity,
 
-    @SerializedName("poster_path")
-    private String posterPath;
+        @SerializedName("poster_path")
+        String posterPath,
 
-    @SerializedName("production_companies")
-    private List<ProductionCompany> productionCompanies;
+        @SerializedName("production_companies")
+        List<ProductionCompany> productionCompanies,
 
-    @SerializedName("production_countries")
-    private List<ProductionCountry> productionCountries;
+        @SerializedName("production_countries")
+        List<ProductionCountry> productionCountries,
 
-    @SerializedName("release_date")
-    private String releaseDate;
+        @SerializedName("release_date")
+        String releaseDate,
 
-    @SerializedName("revenue")
-    private int revenue;
+        @SerializedName("revenue")
+        int revenue,
 
-    @SerializedName("runtime")
-    private int runtime;
+        @SerializedName("runtime")
+        int runtime,
 
-    @SerializedName("spoken_languages")
-    private List<SpokenLanguage> spokenLanguages;
+        @SerializedName("spoken_languages")
+        List<SpokenLanguage> spokenLanguages,
 
-    @SerializedName("status")
-    private String status;
+        @SerializedName("status")
+        String status,
 
-    @SerializedName("tagline")
-    private String tagline;
+        @SerializedName("tagline")
+        String tagline,
 
-    @SerializedName("title")
-    private String title;
+        @SerializedName("title")
+        String title,
 
-    @SerializedName("video")
-    private boolean video;
+        @SerializedName("video")
+        boolean video,
 
-    @SerializedName("vote_average")
-    private double voteAverage;
+        @SerializedName("vote_average")
+        double voteAverage,
 
-    @SerializedName("vote_count")
-    private int voteCount;
+        @SerializedName("vote_count")
+        int voteCount
+) {
 
-    /**
-     * Constructs a new instance of the MoviesDetailsResponse class with detailed movie information.
-     *
-     * @param adult               Indicates if the movie is intended for adults.
-     * @param backdropPath        The path to the backdrop image.
-     * @param belongsToCollection Information about the collection to which the movie belongs.
-     * @param budget              The budget of the movie.
-     * @param cast                The list of cast members associated with the movie.
-     * @param crew                The list of crew members associated with the movie.
-     * @param genres              The list of genres associated with the movie.
-     * @param homepage            The homepage URL of the movie.
-     * @param id                  The unique identifier of the movie.
-     * @param imdbId              The IMDb ID of the movie.
-     * @param originalLanguage    The original language of the movie.
-     * @param originalTitle       The original title of the movie.
-     * @param overview            An overview or summary of the movie.
-     * @param popularity          The popularity score of the movie.
-     * @param posterPath          The path to the poster image.
-     * @param productionCompanies The list of production companies involved in the movie.
-     * @param productionCountries The list of production countries associated with the movie.
-     * @param releaseDate         The release date of the movie.
-     * @param revenue             The revenue generated by the movie.
-     * @param runtime             The duration of the movie in minutes.
-     * @param spokenLanguages     The list of spoken languages in the movie.
-     * @param status              The status of the movie (e.g., "Released").
-     * @param tagline             The tagline or slogan of the movie.
-     * @param title               The title of the movie.
-     * @param video               Indicates if the movie has a video.
-     * @param voteAverage         The average vote score for the movie.
-     * @param voteCount           The total count of votes received by the movie.
-     */
-    public MoviesDetailsResponse(
-            boolean adult,
-            String backdropPath,
-            BelongsToCollection belongsToCollection,
-            int budget,
-            List<Cast> cast,
-            List<Crew> crew,
-            List<Genre> genres,
-            String homepage,
-            int id,
-            String imdbId,
-            String originalLanguage,
-            String originalTitle,
-            String overview,
-            double popularity,
-            String posterPath,
-            List<ProductionCompany> productionCompanies,
-            List<ProductionCountry> productionCountries,
-            String releaseDate,
-            int revenue,
-            int runtime,
-            List<SpokenLanguage> spokenLanguages,
-            String status,
-            String tagline,
-            String title,
-            boolean video,
-            double voteAverage,
-            int voteCount
-    ) {
-        // Initialization of fields...
-    }
-
-    // Other methods as needed...
 }

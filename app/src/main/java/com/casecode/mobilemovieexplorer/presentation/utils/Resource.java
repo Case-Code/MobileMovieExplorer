@@ -1,5 +1,7 @@
 package com.casecode.mobilemovieexplorer.presentation.utils;
 
+import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
+
 import lombok.Getter;
 
 /**
@@ -92,5 +94,11 @@ public class Resource<T> {
     public static <T> Resource<T> loading() {
 
         return new Resource<>(Status.LOADING, null, null);
+    }
+
+    public static<T> Resource<T> error(Throwable throwable) {
+        return new Resource<>(Status.ERROR,null, throwable.getMessage());
+
+
     }
 }

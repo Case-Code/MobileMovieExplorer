@@ -56,6 +56,14 @@ dependencies {
     implementation libs.coreSplashScreen
     implementation libs.swiperefreshlayout
 
+    implementation libs.paginig
+    implementation libs.paginigRxjava
+
+    implementation libs.autodispose
+    implementation libs.autodispose.androidx.lifecycle
+   // implementation 'com.uber.autodispose:autodispose-rxlifecycle3:1.4.0'
+
+
     // material
     implementation libs.material
 

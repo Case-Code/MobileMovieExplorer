@@ -34,114 +34,134 @@
         android:layout_height="match_parent">
 
 
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nsv_movies"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/csl_movies_root"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/csl_movies_root"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper
+                    android:id="@+id/avf_movies_demo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:adapterFlipper="@{demoAdapter}"
+                    app:dataFlipper="@{demoList}"
+                    app:layout_constraintDimensionRatio="H,2:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_demo_movie"
+                    tools:visibility="visible">
 
-                    <com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper
-                        android:id="@+id/avf_movies_demo"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:visibility="invisible"
-                        app:adapterFlipper="@{demoAdapter}"
-                        app:dataFlipper="@{demoList}"
-                        app:layout_constraintDimensionRatio="H,2:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_demo_movie"
-                        tools:visibility="visible">
+                </com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper>
 
-                    </com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper>
+                <TextView
+                    android:id="@+id/tv_movies_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_spacing"
+                    android:text="@string/best_movies_title"
+                    android:textAppearance="@style/TextAppearance.app.BodyMedium"
+                    android:textColor="@color/color_amber"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/avf_movies_demo" />
 
-                    <TextView
-                        android:id="@+id/tv_movies_title"
-                        android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_movies"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="@dimen/small_spacing"
+                    android:paddingEnd="@dimen/normal_spacing"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_movies_title"
+                    app:setMoviesAdapter="@{moviesAdapter}"
+
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_movie"
+                    tools:visibility="visible" />
+
+
+                <ImageView
+                    android:id="@+id/imv_movies_empty"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/ic_error"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avf_movies_demo"
+                    tools:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tv_movies_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_spacing"
+                    android:text="@string/movies_loading_error"
+                    android:textAppearance="@style/TextAppearance.app.BodyMedium"
+                    android:textColor="@color/md_theme_onPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imv_movies_empty" />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/sh_movies"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toTopOf="@+id/avf_movies_demo"
+                    tools:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/small_spacing"
-                        android:text="@string/best_movies_title"
-                        android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="@color/color_amber"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/avf_movies_demo" />
+                        android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_movies"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingStart="@dimen/small_spacing"
-                        android:paddingEnd="@dimen/normal_spacing"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_movies_title"
-                        app:setDataMoviesAdapter="@{movieList}"
-                        app:setMoviesAdapter="@{moviesAdapter}"
-                        app:spanCount="3"
-                        tools:visibility="visible"
-                        tools:listitem="@layout/item_movie" />
-
-
-                    <ImageView
-                        android:id="@+id/imv_movies_empty"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:src="@drawable/ic_error"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/avf_movies_demo"
-                        tools:visibility="invisible" />
-
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/sh_movies"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-
-                        app:layout_constraintTop_toTopOf="@+id/avf_movies_demo"
-                        tools:visibility="gone">
-
-                        <LinearLayout
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_height="@dimen/height_item_movie"
+                            android:background="@color/md_theme_inversePrimary" />
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/height_item_movie"
-                                android:background="@color/md_theme_inversePrimary" />
+                        <include layout="@layout/shimmer_movies" />
 
-                            <include layout="@layout/shimmer_movies" />
+                        <include layout="@layout/shimmer_movies" />
 
-                            <include layout="@layout/shimmer_movies" />
+                        <include layout="@layout/shimmer_movies" />
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
-                            <include layout="@layout/shimmer_movies" />
-                        </LinearLayout>
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_movies_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="rv_movies, avf_movies_demo, tv_movies_title" />
 
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_movies_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="imv_movies_empty, tv_movies_empty" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.core.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterViewFlipper;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +24,7 @@ import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
+import com.casecode.mobilemovieexplorer.paging.LoaderAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.FavoriteAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter;
@@ -63,20 +63,24 @@ public class MoviesBindingUtils {
     @BindingAdapter("setMoviesAdapter")
     public static void setMoviesAdapter(@NonNull RecyclerView recyclerView,
                                         MoviesAdapter adapter) {
+        adapter.setStateRestorationPolicy(
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY);
+        adapter.withLoadStateHeaderAndFooter(new LoaderAdapter(), new LoaderAdapter());
+
+        recyclerView.setHasFixedSize(true);
+
         recyclerView.setAdapter(adapter);
 
     }
 
-    @BindingAdapter("setDataMoviesAdapter")
-    public static void setDataMoviesAdapter(@NonNull RecyclerView recyclerView, @Nullable List<Movie> list) {
-        var adapter = (MoviesAdapter) recyclerView.getAdapter();
-        if (adapter == null) return;
-
-        if (list != null) {
-            adapter.submitList(list);
+    /*@BindingAdapter("moviesPaging")
+    public static void bindMoviesPaging(RecyclerView recyclerView, PagingData<Movie> pagingData) {
+        if (recyclerView.getAdapter() instanceof MoviesAdapter adapter) {
+            adapter.submitData(recyclerView.getLifecycle(),pagingData);
         }
+    }*/
 
-    }
+
 
     @BindingAdapter("setFavoriteMoviesAdapter")
     public static void setFavoriteMoviesAdapter(@NonNull RecyclerView recyclerView,

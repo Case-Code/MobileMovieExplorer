@@ -11,6 +11,7 @@
             name="demoMovie"
             type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
     </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -37,7 +38,7 @@
             android:padding="@dimen/small_spacing"
             app:layout_constraintDimensionRatio="H,2:1"
             app:baseImage="@{@drawable/panorama_24}"
-            app:loadImage="@{demoMovie.posterPath()}"
+            app:loadImage="@{demoMovie.backdropPath()}"
             tools:srcCompat="@tools:sample/avatars"
 
             />

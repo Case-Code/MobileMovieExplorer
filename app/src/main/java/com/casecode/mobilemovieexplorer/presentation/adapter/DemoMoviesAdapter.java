@@ -71,7 +71,8 @@ public class DemoMoviesAdapter extends BaseAdapter {
         //horizontalScrollView.addView(binding.getRoot());
 
         DemoMovie demo = mDemoMovie.get(position);
-        binding.setDemoMovie(demo);
+        binding.imvItemMovie.setImageResource(R.drawable.account_circle_24);
+       // binding.setDemoMovie(demo);
         binding.setClickListener(itemClickListener);
         binding.executePendingBindings();
 

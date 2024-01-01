@@ -4,12 +4,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ItemMovieBinding;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener;
@@ -17,7 +15,7 @@ import com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener;
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  */
-public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHolder> {
+public class MoviesAdapter extends PagingDataAdapter<Movie, MoviesAdapter.MovieViewHolder> {
 
     private final ItemClickListener<Movie> mItemClickListener;
 
@@ -40,10 +38,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        ItemMovieBinding binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.getContext()),
-                parent, false);
-
-        return new MovieViewHolder(binding);
+        return MovieViewHolder.from(parent);
     }
 
     @Override
@@ -52,7 +47,7 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
         movieViewHolder.bind(movie, mItemClickListener);
     }
 
-  public static class MovieViewHolder extends RecyclerView.ViewHolder {
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
         private final ItemMovieBinding mBinding;
 
         public MovieViewHolder(@NonNull ItemMovieBinding binding) {
@@ -61,11 +56,17 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieViewHol
 
         }
 
+        public static MovieViewHolder from(ViewGroup parent) {
+            ItemMovieBinding binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.getContext()),
+                    parent, false);
+
+            return new MovieViewHolder(binding);
+        }
+
         public void bind(Movie movie, ItemClickListener<Movie> itemClickListener) {
             mBinding.setMovie(movie);
             mBinding.setClickListener(itemClickListener);
             mBinding.executePendingBindings();
         }
-
     }
 }

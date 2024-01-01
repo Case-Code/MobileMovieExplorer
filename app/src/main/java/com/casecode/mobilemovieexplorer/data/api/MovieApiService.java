@@ -8,6 +8,7 @@ import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetails
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Retrofit service interface for making API requests related to movies.
@@ -21,6 +22,9 @@ public interface MovieApiService {
      */
     @GET("api/movies/")
     Single<MoviesResponse> getMovies();
+
+    @GET("api/movies/")
+    Single<MoviesResponse> getMovies(@Query("page") int page);
 
     /**
      * Retrieves a list of demo movies.

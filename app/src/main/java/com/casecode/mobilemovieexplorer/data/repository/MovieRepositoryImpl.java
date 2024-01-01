@@ -1,18 +1,28 @@
 package com.casecode.mobilemovieexplorer.data.repository;
 
+import androidx.paging.Pager;
+import androidx.paging.PagingConfig;
+import androidx.paging.PagingData;
+import androidx.paging.rxjava3.PagingRx;
+import androidx.paging.rxjava3.RxPagingSource;
+
 import com.casecode.mobilemovieexplorer.data.source.MoviesRemoteDataSource;
 import com.casecode.mobilemovieexplorer.di.utils.AppScheduler;
 import com.casecode.mobilemovieexplorer.di.utils.AppSchedulers;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
+import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.repository.MovieRepository;
+import com.casecode.mobilemovieexplorer.paging.MoviePagingSource;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Implementation of the {@link MovieRepository} interface that retrieves movie-related data from a
@@ -50,6 +60,18 @@ public class MovieRepositoryImpl implements MovieRepository {
     public Single<MoviesResponse> getMovies() {
         return remoteDataSource.getMovies().subscribeOn(ioScheduler)
                 .observeOn(mainScheduler);
+    }
+
+    @Override
+    public Flowable<PagingData<Movie>> getMoviesPaging() {
+
+        Pager<Integer, Movie> pager =
+                new Pager<>(new PagingConfig(20)
+                ,() -> new  MoviePagingSource(remoteDataSource));
+
+
+        return PagingRx.getFlowable(pager).subscribeOn(ioScheduler)
+               .observeOn(mainScheduler);
     }
 
     /**

@@ -6,13 +6,11 @@ import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity(tableName = "favorite_movie")
 public class FavoriteMovie {

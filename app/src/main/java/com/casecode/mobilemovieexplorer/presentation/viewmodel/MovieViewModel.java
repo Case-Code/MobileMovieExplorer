@@ -2,11 +2,15 @@ package com.casecode.mobilemovieexplorer.presentation.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelKt;
+import androidx.paging.PagingData;
+import androidx.paging.rxjava3.PagingRx;
 
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.data.utils.NetworkMonitor;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoResponse;
 import com.casecode.mobilemovieexplorer.domain.model.demodetails.DemoDetailsResponse;
+import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.MoviesResponse;
 import com.casecode.mobilemovieexplorer.domain.model.moviesdetails.MoviesDetailsResponse;
 import com.casecode.mobilemovieexplorer.domain.usecase.MovieUseCase;
@@ -17,8 +21,11 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.subscribers.DisposableSubscriber;
+import kotlinx.coroutines.CoroutineScope;
 import lombok.Getter;
 import timber.log.Timber;
 
@@ -38,6 +45,9 @@ public class MovieViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isOnline = new MutableLiveData<>();
     @Getter
     private final MutableLiveData<Integer> userMessage = new MutableLiveData<>();
+    @Getter
+    private final MutableLiveData<PagingData<Movie>> moviesPaging = new MutableLiveData<>();
+
     @Getter
     private final MutableLiveData<Resource<MoviesResponse>> moviesLiveData =
             new MutableLiveData<>();
@@ -71,6 +81,7 @@ public class MovieViewModel extends ViewModel {
         this.movieUseCase = movieUseCase;
         this.networkMonitor = networkMonitor;
     }
+
 
     /**
      * Clears the LiveData holding the user message after it has been shown.
@@ -109,6 +120,35 @@ public class MovieViewModel extends ViewModel {
         isOnline.postValue(isConnected);
     }
 
+    public  void fetchMoviesPaging(){
+        mCompositeDisposable.add(getMoviesPagingFlowable().subscribeWith(new DisposableSubscriber<>() {
+            @Override
+            public void onNext(PagingData<Movie> moviePagingData) {
+                Timber.e("Success in moviePagingData ");
+            moviesPaging.setValue(moviePagingData);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                Timber.e("Error in moviePagingData " + throwable);
+
+            }
+
+            @Override
+            public void onComplete() {
+                Timber.e("onComplete in moviePagingData " );
+
+            }
+        }));
+    }
+    public Flowable<PagingData<Movie>> getMoviesPagingFlowable() {
+        CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
+
+        return PagingRx.cachedIn(movieUseCase.getMoviesPaging(), viewModelScope);
+
+
+    }
+
     /**
      * Fetches a list of movies and updates the corresponding LiveData.
      */
@@ -144,7 +184,7 @@ public class MovieViewModel extends ViewModel {
                     public void onSuccess(@NonNull DemoResponse demoResponse) {
                         demoMoviesLiveData.setValue(Resource.success(demoResponse));
                         Timber.d("DemoResponse = %s", demoResponse.toString());
-                        Timber.d("DemoResponse result = %s", demoResponse.getResults());
+                        Timber.d("DemoResponse result = %s", demoResponse.results());
                     }
 
                     @Override
