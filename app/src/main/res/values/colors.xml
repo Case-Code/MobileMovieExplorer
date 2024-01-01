@@ -146,5 +146,6 @@
     <color name="color_steel_gray">#1F1D2B</color>
     <color name="color_ebony_clay">#252935</color>
     <color name="color_crusta">#FE7527</color>
+    <color name="gray_color">#D4D3DB</color>
 
 </resources>

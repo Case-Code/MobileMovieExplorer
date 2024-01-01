@@ -169,4 +169,9 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <!-- Splash Theme -->
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>
