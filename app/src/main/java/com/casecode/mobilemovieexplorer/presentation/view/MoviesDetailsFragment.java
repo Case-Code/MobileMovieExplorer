@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.data.mapper.FavoriteMovies;
@@ -87,8 +85,8 @@ public class MoviesDetailsFragment extends Fragment {
         binding.setGenerAdapter(new GenresAdapter());
 
     }
-    private void setupClickedListener() {
 
+    private void setupClickedListener() {
         // Set an OnClickListener for the likeButton
         binding.imvMoviesDetailsLike.setOnClickListener(viewLikeButton -> {
             // Toggle the selected state
@@ -97,13 +95,13 @@ public class MoviesDetailsFragment extends Fragment {
             // Change the drawable based on the selected state
             updateButtonDrawable(viewLikeButton);
         });
+
         binding.setShareListener((view, data) -> {
             Timber.e("shareLink = %s", data);
             String moviePage = data.toString();
             shareLink(moviePage);
 
         });
-
     }
 
     private void updateButtonDrawable(View likeButton) {
@@ -121,6 +119,7 @@ public class MoviesDetailsFragment extends Fragment {
         }
         binding.imvMoviesDetailsLike.setImageResource(drawableResId);
     }
+
     private void shareLink(String link) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
@@ -128,23 +127,22 @@ public class MoviesDetailsFragment extends Fragment {
 
         startActivity(Intent.createChooser(shareIntent, "Share link using"));
     }
+
     private void observerViewModel() {
         movieViewModel.getDemoDetailsLiveData().observe(getViewLifecycleOwner(), deomResource -> {
             switch (deomResource.getStatus()) {
                 case LOADING -> {
-
                 }
                 case SUCCESS -> {
                     binding.setIsDemo(true);
                     binding.setDemoMovie(deomResource.getData());
                     binding.executePendingBindings();
-
                 }
                 case ERROR -> {
-
                 }
             }
         });
+
         movieViewModel.getMovieDetailsLiveData().observe(getViewLifecycleOwner(), resource -> {
             switch (resource.getStatus()) {
                 case LOADING -> {
@@ -156,10 +154,30 @@ public class MoviesDetailsFragment extends Fragment {
                     // Do something with movieDetails
                     binding.executePendingBindings();
 
+                    favoriteViewModel.getListFavorite(resource.getData().id());
                 }
                 case ERROR -> {
                     // Handle error state
+                }
+            }
+        });
 
+        favoriteViewModel.getFavoriteMoviesResource().observe(getViewLifecycleOwner(), favoirteMoviesResource -> {
+            switch (favoirteMoviesResource.status) {
+                case LOADING -> {
+                }
+                case SUCCESS -> {
+                    int drawableResId;
+                    if (favoirteMoviesResource.getData().size()>0) {
+                        drawableResId = R.drawable.favorite_crusta_24;
+                    } else {
+                        drawableResId = R.drawable.favorite_white_24;
+                    }
+                    binding.imvMoviesDetailsLike.setImageResource(drawableResId);
+                }
+                case ERROR -> {
+                }
+                case NULL -> {
                 }
             }
         });
@@ -178,17 +196,13 @@ public class MoviesDetailsFragment extends Fragment {
 
                 movieViewModel.getDemoMovieIdSelected().observe(getViewLifecycleOwner(),
                         new EventObserver<>(id -> movieViewModel.fetchDemoDetails(id)));
-
             } else {
                 binding.getRoot().showSnackbar(getString(idMessage), BaseTransientBottomBar.LENGTH_LONG);
                 movieViewModel.snackbarMessageShown();
                 Timber.e("isOnline false");
             }
-
         });
     }
-
-
 
 
     @Override
