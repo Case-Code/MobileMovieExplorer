@@ -34,7 +34,6 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_movie_poster"
             style="@style/Widget.app.CardView"
-
             android:layout_width="@dimen/width_item_movie_card"
             android:layout_height="0dp"
             android:layout_margin="@dimen/small_spacing"
