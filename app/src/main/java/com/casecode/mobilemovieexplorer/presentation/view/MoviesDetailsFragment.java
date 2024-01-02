@@ -197,7 +197,6 @@ public class MoviesDetailsFragment extends Fragment {
                 movieViewModel.getDemoMovieIdSelected().observe(getViewLifecycleOwner(),
                         new EventObserver<>(id -> movieViewModel.fetchDemoDetails(id)));
             } else {
-                binding.getRoot().showSnackbar(getString(idMessage), BaseTransientBottomBar.LENGTH_LONG);
                 movieViewModel.snackbarMessageShown();
                 Timber.e("isOnline false");
             }
@@ -208,10 +207,7 @@ public class MoviesDetailsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // Release the binding when the view is destroyed
-
-        // Remove the observer when the fragment view is destroyed
-//        movieViewModel.getMovieDetailsLiveData().removeObservers(this);
+        binding = null;
     }
 
     private void updateOptionsMenu() {

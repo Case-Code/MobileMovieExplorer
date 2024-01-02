@@ -66,20 +66,10 @@ public class DemoMoviesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemDemoMovieBinding binding = ItemDemoMovieBinding.inflate(inflater, parent, false);
-
-       // HorizontalScrollView horizontalScrollView = new HorizontalScrollView(parent.getContext());
-        //horizontalScrollView.addView(binding.getRoot());
-
         DemoMovie demo = mDemoMovie.get(position);
-        binding.imvItemMovie.setImageResource(R.drawable.account_circle_24);
-       // binding.setDemoMovie(demo);
+        binding.setDemoMovie(demo);
         binding.setClickListener(itemClickListener);
         binding.executePendingBindings();
-
-
         return binding.getRoot();
     }
-
-
-
 }
