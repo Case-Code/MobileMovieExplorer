@@ -1,8 +1,10 @@
 
 d
 java:S6813+"BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ8Ã—ƒ´Ì1
-^	java:S125¯"<This block of commented-out lines of code should be removed.(Æ²§éùÿÿÿÿ8‡˜ƒ´Ì1
+[
+java:S18746"9Remove this use of "setHasOptionsMenu"; it is deprecated.(Ï™ñþÿÿÿÿ8°Ë¬ØÌ1
+^	java:S125®"<This block of commented-out lines of code should be removed.(Æ²§éùÿÿÿÿ8Ì¬ØÌ1
 ?
-java:S6205Ó"Remove this redundant block.(Ö…‚Ðûÿÿÿÿ8˜ƒ´Ì1
+java:S6205Ò"Remove this redundant block.(Ö…‚Ðûÿÿÿÿ8‘Ì¬ØÌ1
 ?
-java:S6205Ü"Remove this redundant block.(ß×ùÙýÿÿÿÿ8‘˜ƒ´Ì1
+java:S6205Û"Remove this redundant block.(ß×ùÙýÿÿÿÿ8•Ì¬ØÌ1

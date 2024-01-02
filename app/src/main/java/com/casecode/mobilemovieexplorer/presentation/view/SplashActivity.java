@@ -3,6 +3,7 @@ package com.casecode.mobilemovieexplorer.presentation.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
@@ -27,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
 
         // Use a Handler to delay the start of the main activity
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             // Start the main activity
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);

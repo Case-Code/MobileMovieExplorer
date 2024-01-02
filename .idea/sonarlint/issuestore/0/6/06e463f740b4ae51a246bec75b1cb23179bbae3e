@@ -1,9 +1,7 @@
 
 d
-java:S6813 "BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ÑØ˜áË1
-N
-java:S1602I",Remove useless curly braces around statement(½šı‚ıÿÿÿÿ8÷ÿ™áË1
-I
-java:S1602S",Remove useless curly braces around statement(ÚÖ­î8÷æœáË1
-d
-java:S1126y"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8ûæœáË1
+java:S6813%"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8Ë²ÀØÌ1
+e
+java:S1126"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8‡³ÀØÌ1
+k
+java:S1871¸"MThis branch's code block is the same as the block for the branch on line 182.(Ûº÷ú8—³ÀØÌ1

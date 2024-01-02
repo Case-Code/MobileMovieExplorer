@@ -49,11 +49,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/normal_spacing"
+                    android:paddingEnd="@dimen/normal_spacing"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
                 <com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper
                     android:id="@+id/avf_movies_demo"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:visibility="invisible"
                     app:adapterFlipper="@{demoAdapter}"
                     app:dataFlipper="@{demoList}"
                     app:layout_constraintDimensionRatio="H,2:1"
@@ -61,7 +69,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:listitem="@layout/item_demo_movie"
-                    tools:visibility="visible">
+                  >
 
                 </com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper>
 
@@ -74,7 +82,8 @@
                     android:textAppearance="@style/TextAppearance.app.BodyMedium"
                     android:textColor="@color/color_amber"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/avf_movies_demo" />
+                    app:layout_constraintTop_toBottomOf="@id/avf_movies_demo"
+                     />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_movies"
@@ -89,24 +98,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_movies_title"
-                    app:setMoviesAdapter="@{moviesAdapter}"
 
+                    app:setMoviesAdapter="@{moviesAdapter}"
                     app:spanCount="3"
                     tools:listitem="@layout/item_movie"
-                    tools:visibility="visible" />
+                    />
 
 
                 <ImageView
                     android:id="@+id/imv_movies_empty"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="200dp"
+                    android:padding="@dimen/small_spacing"
+                    android:contentDescription="@null"
                     android:src="@drawable/ic_error"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/avf_movies_demo"
-                    tools:visibility="invisible" />
+                    app:layout_constraintTop_toTopOf="@id/gdl_movies_top" />
 
                 <TextView
                     android:id="@+id/tv_movies_empty"
@@ -114,9 +122,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_spacing"
                     android:text="@string/movies_loading_error"
-                    android:textAppearance="@style/TextAppearance.app.BodyMedium"
+                    android:textAppearance="@style/TextAppearance.app.BodyLarge"
                     android:textColor="@color/md_theme_onPrimary"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imv_movies_empty" />
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/sh_movies"
@@ -152,14 +161,24 @@
                     android:id="@+id/group_movies_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="rv_movies, avf_movies_demo, tv_movies_title" />
+                    android:visibility="visible"
+
+                    app:constraint_referenced_ids="rv_movies, avf_movies_demo, tv_movies_title"
+                    tools:visibility="gone" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/group_movies_error"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="imv_movies_empty, tv_movies_empty" />
-
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="imv_movies_empty, tv_movies_empty"
+                    tools:visibility="visible" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gdl_movies_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 

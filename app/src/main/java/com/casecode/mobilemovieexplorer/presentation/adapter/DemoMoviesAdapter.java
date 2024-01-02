@@ -36,8 +36,6 @@ public class DemoMoviesAdapter extends BaseAdapter {
 
     public void setItemClickListener(ItemClickListener<DemoMovie> itemClickListener) {
         this.itemClickListener = itemClickListener;
-
-
     }
 
     public void setDemoMovies(List<DemoMovie> demoMovies) {
@@ -66,10 +64,16 @@ public class DemoMoviesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemDemoMovieBinding binding = ItemDemoMovieBinding.inflate(inflater, parent, false);
+        
         DemoMovie demo = mDemoMovie.get(position);
-        binding.setDemoMovie(demo);
+       binding.setDemoMovie(demo);
         binding.setClickListener(itemClickListener);
         binding.executePendingBindings();
+
+
         return binding.getRoot();
     }
+
+
+
 }

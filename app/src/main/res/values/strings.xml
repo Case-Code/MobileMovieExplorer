@@ -20,4 +20,6 @@
     <string name="favorite_movies">Favorite movies</string>
     <string name="movies_app">Movies App</string>
     <string name="movie_details">Movie details</string>
+    <string name="favorite_empty">Favorite movies are Empty, please add select favorite movie.</string>
+
 </resources>

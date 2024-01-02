@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.casecode.mobilemovieexplorer.R;
@@ -65,7 +64,6 @@ public class FavoriteMoviesFragment extends Fragment {
     }
 
 
-
     private void setupAdapter() {
         var favoriteAdapter = new FavoriteAdapter(this::onItemClick);
         mBinding.setFavoriteAdapter(favoriteAdapter);
@@ -92,7 +90,14 @@ public class FavoriteMoviesFragment extends Fragment {
                 }
                 case SUCCESS -> {
                     Timber.tag(TAG).i("favoirteMoviesResource Success: %s", favoirteMoviesResource);
-                    mBinding.setFavoriteMovies(favoirteMoviesResource.getData());
+                    var favoriteItems = favoirteMoviesResource.getData();
+                    if (favoriteItems.size() == 0) {
+                        mBinding.groupFavoriteEmpty.setVisibility(View.VISIBLE);
+                    } else {
+                        mBinding.groupFavoriteEmpty.setVisibility(View.GONE);
+                        mBinding.setFavoriteMovies(favoirteMoviesResource.getData());
+
+                    }
                 }
                 case ERROR -> {
                     Timber.tag(TAG).e("favoirteMoviesResource  ERROR: %s", favoirteMoviesResource.message);

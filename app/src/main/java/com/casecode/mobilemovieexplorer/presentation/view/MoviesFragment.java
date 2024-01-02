@@ -94,6 +94,8 @@ public class MoviesFragment extends Fragment {
     private void stopAnimationAndShowImageError() {
         mBinding.shMovies.stopShimmer();
         mBinding.groupMoviesError.setVisibility(View.VISIBLE);
+        mBinding.shMovies.setVisibility(View.GONE);
+
         mBinding.groupMoviesData.setVisibility(View.GONE);
     }
 

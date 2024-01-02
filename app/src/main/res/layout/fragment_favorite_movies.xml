@@ -50,5 +50,47 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/imv_favorite_empty"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_item_movie"
+            android:backgroundTint="@color/md_theme_inversePrimary"
+            android:backgroundTintMode="screen"
+            android:contentDescription="@null"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gdl_favorite_top"
+            app:srcCompat="@drawable/favorite_24"
+            app:tint="@color/md_theme_inversePrimary"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_favorite_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/normal_spacing"
+            android:text="@string/favorite_empty"
+            android:textAppearance="@style/TextAppearance.app.BodyLarge"
+            android:textColor="@color/md_theme_inversePrimary"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imv_favorite_empty"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_favorite_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_favorite_empty, imv_favorite_empty" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gdl_favorite_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
