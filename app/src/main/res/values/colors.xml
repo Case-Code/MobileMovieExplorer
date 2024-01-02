@@ -141,17 +141,13 @@
     <color name="md_theme_surfaceContainer_highContrast">#F0ECF4</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#EBE7EF</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E5E1E9</color>
-
     <color name="color_amber">#FFBF0D</color>
     <color name="color_steel_gray">#1F1D2B</color>
-    <color name="color_ebony_clay">#252935</color>
     <color name="color_crusta">#FE7527</color>
     <color name="gray_color">#D4D3DB</color>
-
-<!--    <color name="gray_color0">#1C1A26</color>-->
-<!--    <color name="gray_color0">#D0D2D9</color>-->
-<!--    <color name="gray_color0">#F2A007</color>-->
-<!--    <color name="gray_color0">#F25D27</color>-->
-<!--    <color name="gray_color0">#8C1B11</color>-->
-
+    <color name="color_ebony_clay">#252935</color>
+    <color name="color_mischka">#D0D2D9</color>
+    <color name="color_california">#F2A007</color>
+    <color name="color_flamingo">#F25D27</color>
+    <color name="color_tamarillo">#8C1B11</color>
 </resources>

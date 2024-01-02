@@ -177,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Customize the icon for specific fragments
         if (destinationId == R.id.nav_favorite_fragment) {
-            iconResId = R.drawable.favorite_white_24;
+            iconResId = R.drawable.ic_back;
         } else if (destinationId == R.id.nav_details_fragment) {
-            iconResId = R.drawable.subtitles_white_24;
+            iconResId = R.drawable.ic_back;
         }
 
         // Set the icon in the Toolbar
