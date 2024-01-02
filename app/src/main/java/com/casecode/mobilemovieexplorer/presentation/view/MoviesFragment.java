@@ -89,8 +89,6 @@ public class MoviesFragment extends Fragment {
         mBinding.shMovies.startShimmer();
         mBinding.groupMoviesData.setVisibility(View.GONE);
         mBinding.groupMoviesError.setVisibility(View.GONE);
-
-
     }
 
     private void stopAnimationAndShowImageError() {
@@ -100,12 +98,10 @@ public class MoviesFragment extends Fragment {
     }
 
     private void stopAnimation() {
-
         mBinding.shMovies.stopShimmer();
         mBinding.groupMoviesData.setVisibility(View.VISIBLE);
         mBinding.groupMoviesError.setVisibility(View.GONE);
         mBinding.shMovies.setVisibility(View.GONE);
-
     }
 
     private void setupViewModel() {
@@ -122,12 +118,9 @@ public class MoviesFragment extends Fragment {
         var demoAdapter = new DemoMoviesAdapter(this.getContext());
         demoAdapter.setItemClickListener(this::onItemDemoMovieClick);
         mBinding.setDemoAdapter(demoAdapter);
-
     }
 
     private void onItemDemoMovieClick(View view, DemoMovie demoMovie) {
-        mBinding.getRoot().showSnackbar("itemCLick", BaseTransientBottomBar.LENGTH_SHORT);
-
         movieViewModel.setDemoMovieIdSelected(demoMovie.id());
 
         Navigation.findNavController(view)
