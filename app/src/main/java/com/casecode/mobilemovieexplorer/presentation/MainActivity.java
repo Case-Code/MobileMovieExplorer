@@ -1,12 +1,16 @@
 package com.casecode.mobilemovieexplorer.presentation;
 
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.ActivityMainBinding;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding mBinding;
     private MovieViewModel movieViewModel;
 
+    private AppBarConfiguration mAppBarConfiguration;
+    private NavController mNavController;
+
     /**
      * Called when the activity is first created. Initializes UI components, sets up ViewModel,
      * and fetches movie-related data.
@@ -49,42 +56,40 @@ public class MainActivity extends AppCompatActivity {
         mBinding.setLifecycleOwner(this);
         // Create an instance of MoviesDetailsFragment
         setContentView(mBinding.getRoot());
-        setupNavigation();
+        initToolbar();
         setupViewModel();
         fetchViewModel();
         observeViewModel();
-
     }
 
-    private void setupNavigation() {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment);
+    private void initToolbar() {
+        // Find the NavHostFragment
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+
+        // Get the NavController from the NavHostFragment
         assert navHostFragment != null;
-        NavController navController = navHostFragment.getNavController();
+        mNavController = navHostFragment.getNavController();
 
-        navController.addOnDestinationChangedListener((nav, navDestination, bundle) -> {
-            mBinding.tvMainToolbar.setText(navDestination.getLabel());
+        // Create an AppBarConfiguration with the top-level destinations
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_movies,
+                R.id.nav_favorite_fragment,
+                R.id.nav_details_fragment
+        ).build();
 
-            mBinding.imvMainToolbarLike.setVisibility(navDestination.getId() == R.id.nav_favorite_fragment ? View.INVISIBLE : View.VISIBLE);
-            if (navDestination.getId() == R.id.nav_movies) {
-                mBinding.imvMainIcon.setImageResource(R.drawable.ic_baseline_movie_filter_24);
-            } else {
-                mBinding.imvMainIcon.setImageResource(R.drawable.ic_back);
-                mBinding.imvMainIcon.setOnClickListener(v -> {
-                    navController.navigateUp();
-                });
-            }
-        });
+        setSupportActionBar(mBinding.toolbar);
 
-        setupClickedLiked(navController);
+        // Associate the Toolbar with NavController using NavigationUI
+        NavigationUI.setupWithNavController(mBinding.toolbar, mNavController, mAppBarConfiguration);
+
+        // Listen for destination changes to update the icon
+        mNavController.addOnDestinationChangedListener((controller, destination, arguments) ->
+                updateToolbarIcon(destination.getId()));
     }
 
-    private void setupClickedLiked(NavController navController) {
-        mBinding.imvMainToolbarLike.setOnClickListener(v -> {
-
-            navController
-                    .navigate(R.id.nav_favorite_fragment);
-        });
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(mNavController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
     /**
@@ -130,5 +135,54 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mBinding = null;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.item_favorite_movies) {
+            // Handle the favorite movies item click
+            // Example: show a Toast
+            mNavController.navigate(R.id.nav_favorite_fragment);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Hide item_favorite_movies when in nav_favorite_fragment
+        MenuItem favoriteMenuItem = menu.findItem(R.id.item_favorite_movies);
+        favoriteMenuItem.setVisible(isFavoriteFragmentVisible());
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private boolean isFavoriteFragmentVisible() {
+        return mNavController.getCurrentDestination() != null &&
+                mNavController.getCurrentDestination().getId() != R.id.nav_favorite_fragment;
+    }
+
+    private void updateToolbarIcon(int destinationId) {
+        // Set the common icon by default
+        int iconResId = R.drawable.movie_white_24;
+
+        // Customize the icon for specific fragments
+        if (destinationId == R.id.nav_favorite_fragment) {
+            iconResId = R.drawable.favorite_white_24;
+        } else if (destinationId == R.id.nav_details_fragment) {
+            iconResId = R.drawable.subtitles_white_24;
+        }
+
+        // Set the icon in the Toolbar
+        mBinding.toolbar.setNavigationIcon(iconResId);
     }
 }

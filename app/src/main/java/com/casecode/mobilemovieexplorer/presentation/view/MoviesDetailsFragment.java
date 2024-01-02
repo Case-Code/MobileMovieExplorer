@@ -50,6 +50,10 @@ public class MoviesDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false);
+
+        // Enable the options menu in the fragment
+        setHasOptionsMenu(true);
+
         return binding.getRoot();
     }
 
@@ -59,18 +63,18 @@ public class MoviesDetailsFragment extends Fragment {
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
         setupUi();
-
     }
 
     private void setupUi() {
         setupViewModel();
         setupAdapter();
-
         observerMovieIdSelected();
         observerViewModel();
-
         setupClickedListener();
+        // Call the method to update the options menu
+        updateOptionsMenu();
     }
+
     private void setupViewModel() {
         movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory)
                 .get(MovieViewModel.class);
@@ -196,4 +200,8 @@ public class MoviesDetailsFragment extends Fragment {
 //        movieViewModel.getMovieDetailsLiveData().removeObservers(this);
     }
 
+    private void updateOptionsMenu() {
+        // Invalidate the options menu to trigger onPrepareOptionsMenu
+        getActivity().invalidateOptionsMenu();
+    }
 }

@@ -49,8 +49,11 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentMoviesBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
 
+        // Enable the options menu in the fragment
+        setHasOptionsMenu(true);
+
+        return mBinding.getRoot();
     }
 
     @Override
@@ -66,7 +69,8 @@ public class MoviesFragment extends Fragment {
         initializeAdapters();
         setupObserver();
         setupRefreshView();
-
+        // Call the method to update the options menu
+        updateOptionsMenu();
     }
 
     private void setupShimmerAnimation() {
@@ -251,5 +255,10 @@ public class MoviesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         mBinding = null;
+    }
+
+    private void updateOptionsMenu() {
+        // Invalidate the options menu to trigger onPrepareOptionsMenu
+        getActivity().invalidateOptionsMenu();
     }
 }

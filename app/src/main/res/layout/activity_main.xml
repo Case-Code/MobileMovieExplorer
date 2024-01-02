@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="isAvailable"
             type="Boolean" />
+
+        <variable
+            name="mainActivity"
+            type="com.casecode.mobilemovieexplorer.presentation.MainActivity" />
 
     </data>
 
@@ -15,65 +20,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.MainActivity">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_main"
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/color_steel_gray"
+                app:popupTheme="?attr/colorPrimaryDark" />
 
-                <ImageView
-                    android:id="@+id/imv_main_icon"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="0.03"
+        </com.google.android.material.appbar.AppBarLayout>
 
-                    android:src="@drawable/ic_baseline_movie_filter_24" />
-
-                <TextView
-                    android:id="@+id/tv_main_toolbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/small_spacing"
-                    android:layout_weight="0.87"
-                    android:text="@string/movies_app"
-                    android:textAppearance="@style/TextAppearance.app.TitleMedium"
-                    android:textColor="@color/md_theme_onPrimary" />
-
-                <ImageButton
-                    android:id="@+id/imv_main_toolbar_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/background_with_selectable_item"
-                    android:importantForAccessibility="no"
-                    android:padding="8dp"
-                    android:src="@drawable/favorite_white_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             app:navGraph="@navigation/nav_graph" />
+
         <TextView
             android:id="@+id/tv_main_network"
             android:layout_width="match_parent"
@@ -83,8 +59,6 @@
             android:text="@string/all_network_error"
             android:textAppearance="@style/TextAppearance.app.LabelSmall"
             android:textColor="@color/md_theme_surface"
-            app:isAvailable="@{isAvailable}"
-
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

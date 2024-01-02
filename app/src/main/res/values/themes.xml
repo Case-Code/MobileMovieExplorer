@@ -48,7 +48,23 @@
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
         <item name="android:windowBackground">@color/color_steel_gray</item>
+        <item name="toolbarStyle">@style/CustomToolbar</item>
     </style>
 
     <style name="Theme.MobileMovieExplorer" parent="Base.Theme.MobileMovieExplorer" />
+
+    <!-- Theme without ActionBar for MainActivity -->
+    <style name="Theme.MobileMovieExplorer.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomToolbar" parent="Widget.AppCompat.Toolbar">
+        <!-- Set the background color -->
+        <item name="android:background">@color/color_steel_gray</item>
+
+        <!-- Customize the title text color -->
+        <item name="titleTextColor">@android:color/white</item>
+    </style>
+
 </resources>

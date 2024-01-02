@@ -42,6 +42,10 @@ public class FavoriteMoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentFavoriteMoviesBinding.inflate(inflater, container, false);
+
+        // Enable the options menu in the fragment
+        setHasOptionsMenu(true);
+
         return mBinding.getRoot();
     }
 
@@ -56,6 +60,8 @@ public class FavoriteMoviesFragment extends Fragment {
         setupViewModel();
         observerViewModel();
         setupAdapter();
+        // Call the method to update the options menu
+        updateOptionsMenu();
     }
 
 
@@ -102,6 +108,10 @@ public class FavoriteMoviesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         mBinding = null;
+    }
 
+    private void updateOptionsMenu() {
+        // Invalidate the options menu to trigger onPrepareOptionsMenu
+        getActivity().invalidateOptionsMenu();
     }
 }
