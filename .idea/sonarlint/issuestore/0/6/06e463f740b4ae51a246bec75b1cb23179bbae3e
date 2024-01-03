@@ -1,7 +1,7 @@
 
 d
 java:S6813%"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8Ë²ÀØÌ1
-e
-java:S1126"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8‡³ÀØÌ1
+d
+java:S1126z"BReplace this if-then-else statement by a single method invocation.(éÿ–àúÿÿÿÿ8‡³ÀØÌ1
 k
-java:S1871¸"MThis branch's code block is the same as the block for the branch on line 182.(Ûº÷ú8—³ÀØÌ1
+java:S1871±"MThis branch's code block is the same as the block for the branch on line 175.(Ûº÷ú8—³ÀØÌ1

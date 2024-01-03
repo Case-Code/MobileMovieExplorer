@@ -23,14 +23,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
-import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
 import com.casecode.mobilemovieexplorer.paging.LoaderAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.FavoriteAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter;
+import com.casecode.mobilemovieexplorer.presentation.adapter.SliderDemoAdapter;
 import com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerDrawable;
+import com.smarteist.autoimageslider.SliderView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,20 +45,20 @@ import timber.log.Timber;
 public class MoviesBindingUtils {
     private static final String BASE_URL_IMAGE = "https://image.tmdb.org/t/p/original/";
 
-    @BindingAdapter("adapterFlipper")
-    public static void setAdapterFlipper(CustomAdapterViewFlipper adapterFlipper, DemoMoviesAdapter adapter) {
-        adapterFlipper.setAdapter(adapter);
-        adapterFlipper.setFlipInterval(3000);
-        adapterFlipper.setBackgroundResource(R.color.md_theme_inversePrimary);
-        adapterFlipper.startFlipping();
+    @BindingAdapter("adapterSlideView")
+    public static void setAdapterFlipper(SliderView sliderView, SliderDemoAdapter adapter) {
+        sliderView.setSliderAnimationDuration(600);
+        sliderView.setAutoCycle(true);
+        sliderView.setScrollTimeInSec(3);
+        sliderView.setSliderAdapter(adapter);
 
     }
 
-    @BindingAdapter("dataFlipper")
-    public static void setDataFlipper(CustomAdapterViewFlipper adapterViewFlipper, @Nullable List<DemoMovie> demoList) {
-        var adapter = (DemoMoviesAdapter) adapterViewFlipper.getAdapter();
+    @BindingAdapter("bindSliderDemo")
+    public static void bindSliderDemo(SliderView sliderView, @Nullable List<DemoMovie> demoList) {
+        var adapter = (SliderDemoAdapter) sliderView.getSliderAdapter();
         adapter.setDemoMovies(demoList);
-        adapterViewFlipper.setAdapter(adapter);
+        sliderView.setSliderAdapter(adapter);
     }
 
     @BindingAdapter("setMoviesAdapter")
@@ -79,7 +80,6 @@ public class MoviesBindingUtils {
             adapter.submitData(recyclerView.getLifecycle(),pagingData);
         }
     }*/
-
 
 
     @BindingAdapter("setFavoriteMoviesAdapter")
@@ -126,7 +126,7 @@ public class MoviesBindingUtils {
 
                         .placeholder(getShimmerDrawables(imageView.getContext()))
                         .error(baseImage)
-                        .fallback(getShimmerDrawables(imageView.getContext()))
+                       // .fallback(getShimmerDrawables(imageView.getContext()))
                         .into(imageView);
             } catch (Exception e) {
                 Timber.e(e);

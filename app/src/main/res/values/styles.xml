@@ -83,10 +83,9 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:checkable">false</item>
-<!--
-        <item name="cardBackgroundColor">@color/card_status</item>
--->
-        <item name="cardCornerRadius">@dimen/small_spacing</item>
+
+        <item name="cardBackgroundColor">@color/color_steel_gray</item>
+        <item name="cardCornerRadius">@dimen/smaller_spacing</item>
         <item name="cardElevation">0dp</item>
         <item name="strokeWidth">0dp</item>
     </style>

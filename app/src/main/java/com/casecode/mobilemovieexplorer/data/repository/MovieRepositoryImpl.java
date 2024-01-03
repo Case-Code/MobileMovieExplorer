@@ -66,7 +66,7 @@ public class MovieRepositoryImpl implements MovieRepository {
     public Flowable<PagingData<Movie>> getMoviesPaging() {
 
         Pager<Integer, Movie> pager =
-                new Pager<>(new PagingConfig(20)
+                new Pager<>(new PagingConfig(40)
                 ,() -> new  MoviePagingSource(remoteDataSource));
 
 

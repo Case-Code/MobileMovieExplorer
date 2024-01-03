@@ -14,7 +14,9 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/smaller_spacing"
+    >
 
     <com.google.android.material.card.MaterialCardView
 
@@ -23,7 +25,6 @@
 
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/md_theme_primary"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintDimensionRatio="H,2:1"
@@ -36,10 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/small_spacing"
+            android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="H,2:1"
-            app:baseImage="@{@drawable/panorama_24}"
+            app:baseImage="@{@drawable/intro_pic}"
             app:loadImage="@{demoMovie.backdropPath()}"
-            tools:srcCompat="@tools:sample/avatars"
+            tools:srcCompat="@drawable/intro_pic"
 
             />
     </com.google.android.material.card.MaterialCardView>

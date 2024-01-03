@@ -1,7 +1,5 @@
 package com.casecode.mobilemovieexplorer.presentation.view;
 
-import static autodispose2.AutoDispose.autoDisposable;
-
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,8 +19,8 @@ import com.casecode.mobilemovieexplorer.R;
 import com.casecode.mobilemovieexplorer.databinding.FragmentMoviesBinding;
 import com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie;
 import com.casecode.mobilemovieexplorer.domain.model.movies.Movie;
-import com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter;
 import com.casecode.mobilemovieexplorer.presentation.adapter.MoviesAdapter;
+import com.casecode.mobilemovieexplorer.presentation.adapter.SliderDemoAdapter;
 import com.casecode.mobilemovieexplorer.presentation.utils.ViewExtensions;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
@@ -31,7 +29,6 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 
 import javax.inject.Inject;
 
-import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 import dagger.hilt.android.AndroidEntryPoint;
 import lombok.experimental.ExtensionMethod;
 import timber.log.Timber;
@@ -44,6 +41,7 @@ public class MoviesFragment extends Fragment {
     MovieViewModelFactory movieViewModelFactory;
     private FragmentMoviesBinding mBinding;
     private MovieViewModel movieViewModel;
+    private MoviesAdapter moviesAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -101,9 +99,9 @@ public class MoviesFragment extends Fragment {
 
     private void stopAnimation() {
         mBinding.shMovies.stopShimmer();
+        mBinding.shMovies.setVisibility(View.GONE);
         mBinding.groupMoviesData.setVisibility(View.VISIBLE);
         mBinding.groupMoviesError.setVisibility(View.GONE);
-        mBinding.shMovies.setVisibility(View.GONE);
     }
 
     private void setupViewModel() {
@@ -117,9 +115,10 @@ public class MoviesFragment extends Fragment {
     }
 
     private void initDemoAdapter() {
-        var demoAdapter = new DemoMoviesAdapter(this.getContext());
-        demoAdapter.setItemClickListener(this::onItemDemoMovieClick);
-        mBinding.setDemoAdapter(demoAdapter);
+        var slideDemoAdapter = new SliderDemoAdapter();
+        slideDemoAdapter.setItemClickListener(this::onItemDemoMovieClick);
+        mBinding.setDemoAdapter(slideDemoAdapter);
+
     }
 
     private void onItemDemoMovieClick(View view, DemoMovie demoMovie) {
@@ -130,21 +129,21 @@ public class MoviesFragment extends Fragment {
     }
 
     private void initMoviesAdapter() {
-        MoviesAdapter adapter = new MoviesAdapter(this::onItemMovieClick);
+        moviesAdapter = new MoviesAdapter(this::onItemMovieClick);
 
-        initializeLoadStateListenerMoviesAdapter(adapter);
-        mBinding.setMoviesAdapter(adapter);
-        observerMoviesPaging(adapter);
+        initializeLoadStateListenerMoviesAdapter();
+        mBinding.setMoviesAdapter(moviesAdapter);
+        observerMoviesPaging();
     }
 
-    private void initializeLoadStateListenerMoviesAdapter(MoviesAdapter adapter) {
-        adapter.addLoadStateListener(loadState -> {
+    private void initializeLoadStateListenerMoviesAdapter() {
+        moviesAdapter.addLoadStateListener(loadState -> {
             if (loadState.getSource().getRefresh() instanceof LoadState.NotLoading notLoading) {
-                if (notLoading.getEndOfPaginationReached() && adapter.getItemCount() < 1) {
-                    Timber.tag(TAG).i("initializeAdapter: empty list");
+                if (notLoading.getEndOfPaginationReached() && moviesAdapter.getItemCount() < 1) {
+                    Timber.tag(TAG).i("addLoadStateListener: empty list");
                     stopAnimationAndShowImageError();
                 } else {
-                    Timber.tag(TAG).i("initializeAdapter: list present");
+                    Timber.tag(TAG).i("addLoadStateListener: list present");
 
                     new Handler(Looper.getMainLooper())
                             .postDelayed(this::stopAnimation, 800L);
@@ -152,29 +151,25 @@ public class MoviesFragment extends Fragment {
                 }
             } else if (loadState.getSource().getRefresh() instanceof LoadState.Loading) {
                 startAnimation();
-                Timber.tag(TAG).d("Movies  LOADING");
+                Timber.tag(TAG).d("addLoadStateListener  LOADING");
 
-            } else if (loadState.getSource().getRefresh() instanceof LoadState.Error) {
+            } else if (loadState.getSource().getRefresh() instanceof LoadState.Error error) {
                 stopAnimationAndShowImageError();
+                Timber.tag(TAG).d("addLoadStateListener  Error" + error);
+
                 mBinding.getRoot().showSnackbar(getString(R.string.movies_loading_error), BaseTransientBottomBar.LENGTH_SHORT);
             }
             return null;
         });
     }
 
-    private void observerMoviesPaging(MoviesAdapter adapter) {
-        movieViewModel.getMoviesPagingFlowable()
-                .to(autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-                .subscribe(pagingData -> {
+    private void observerMoviesPaging() {
 
-                    Timber.e("pagingData = %s", pagingData);
-                    adapter.submitData(getLifecycle(), pagingData);
-                });
+        movieViewModel.getMoviesPaging().observe(getViewLifecycleOwner(), pagingData -> {
+            Timber.e("observerMoviesPaging, pagingData = %s", pagingData);
+            moviesAdapter.submitData(getViewLifecycleOwner().getLifecycle(), pagingData);
+        });
 
-      /*  movieViewModel.getMoviesPaging().observe(getViewLifecycleOwner(), pagingData -> {
-            Timber.e("pagingData = %s", pagingData);
-            adapter.submitData(getLifecycle(), pagingData);
-        });*/
 
     }
 
@@ -192,8 +187,7 @@ public class MoviesFragment extends Fragment {
     private void setupNetworkMonitor() {
         movieViewModel.getIsOnline().observe(getViewLifecycleOwner(), isOnline -> {
             if (Boolean.TRUE.equals(isOnline)) {
-                Timber.e("isOnline = %s", true);
-                movieViewModel.fetchMoviesPaging();
+                movieViewModel.fetchMoviesPaging(getViewLifecycleOwner());
                 movieViewModel.fetchDemoMovies();
 
             } else {
@@ -237,7 +231,7 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        startAnimation();
+        //  startAnimation();
     }
 
     @Override

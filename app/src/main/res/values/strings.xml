@@ -9,7 +9,7 @@
 
     <string name="all_network_back">back online</string>
     <string name="all_network_error">Check your internet connection, Please</string>
-    <string name="movies_loading_error">Error loading data movies.</string>
+    <string name="movies_loading_error">Failed to load data movies.</string>
 
     <string name="summary">Summary</string>
     <string name="actors">Actors</string>

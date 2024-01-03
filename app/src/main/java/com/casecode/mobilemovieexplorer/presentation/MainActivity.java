@@ -42,14 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private NavController mNavController;
 
-    /**
-     * Called when the activity is first created. Initializes UI components, sets up ViewModel,
-     * and fetches movie-related data.
-     *
-     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
-     *                           this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
-     *                           Note: Otherwise, it is null.
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

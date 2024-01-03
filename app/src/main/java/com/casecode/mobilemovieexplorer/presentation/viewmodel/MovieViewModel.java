@@ -1,5 +1,8 @@
 package com.casecode.mobilemovieexplorer.presentation.viewmodel;
 
+import static autodispose2.AutoDispose.autoDisposable;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelKt;
@@ -19,6 +22,7 @@ import com.casecode.mobilemovieexplorer.presentation.utils.Resource;
 
 import javax.inject.Inject;
 
+import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Flowable;
@@ -46,9 +50,6 @@ public class MovieViewModel extends ViewModel {
     @Getter
     private final MutableLiveData<Integer> userMessage = new MutableLiveData<>();
     @Getter
-    private final MutableLiveData<PagingData<Movie>> moviesPaging = new MutableLiveData<>();
-
-    @Getter
     private final MutableLiveData<Resource<MoviesResponse>> moviesLiveData =
             new MutableLiveData<>();
     @Getter
@@ -60,9 +61,9 @@ public class MovieViewModel extends ViewModel {
     @Getter
     private final MutableLiveData<Resource<DemoDetailsResponse>> demoDetailsLiveData =
             new MutableLiveData<>();
-
-
     private final NetworkMonitor networkMonitor;
+    @Getter
+    private MutableLiveData<PagingData<Movie>> moviesPaging = new MutableLiveData<>();
     @Getter
     private MutableLiveData<Event<Integer>> demoMovieIdSelected = new MutableLiveData<>();
     @Getter
@@ -120,30 +121,49 @@ public class MovieViewModel extends ViewModel {
         isOnline.postValue(isConnected);
     }
 
-    public  void fetchMoviesPaging(){
-        mCompositeDisposable.add(getMoviesPagingFlowable().subscribeWith(new DisposableSubscriber<>() {
-            @Override
-            public void onNext(PagingData<Movie> moviePagingData) {
-                Timber.e("Success in moviePagingData ");
-            moviesPaging.setValue(moviePagingData);
-            }
+    public void fetchMoviesPaging(LifecycleOwner lifecycleOwner) {
+        mCompositeDisposable.add(getMoviesPagingFlowable()
+                .to(autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner))).subscribeWith(new DisposableSubscriber<PagingData<Movie>>() {
+                    @Override
+                    public void onNext(PagingData<Movie> pagingData) {
+                    moviesPaging.setValue(pagingData);
+                    }
 
-            @Override
-            public void onError(Throwable throwable) {
-                Timber.e("Error in moviePagingData " + throwable);
+                    @Override
+                    public void onError(Throwable throwable) {
+                        showSnackbarMessage(R.string.movies_loading_error);
+                    Timber.e("Error: " + throwable);
+                    }
 
-            }
+                    @Override
+                    public void onComplete() {
+                        Timber.e(" paging data ,onComplete: " );
 
-            @Override
-            public void onComplete() {
-                Timber.e("onComplete in moviePagingData " );
+                    }
+                }));
 
-            }
-        }));
     }
-    public Flowable<PagingData<Movie>> getMoviesPagingFlowable() {
-        CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
 
+    @NonNull
+    private Flowable<PagingData<Movie>> getMoviesPagingFlowable() {
+        CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
+        /*mCompositeDisposable.add(PagingRx.cachedIn(movieUseCase.getMoviesPaging(), viewModelScope)
+                .subscribeWith(new DisposableSubscriber<>() {
+                    @Override
+                    public void onNext(PagingData<Movie> moviePagingData) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));*/
         return PagingRx.cachedIn(movieUseCase.getMoviesPaging(), viewModelScope);
 
 

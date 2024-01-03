@@ -13,7 +13,7 @@
 
         <variable
             name="demoAdapter"
-            type="com.casecode.mobilemovieexplorer.presentation.adapter.DemoMoviesAdapter" />
+            type="com.casecode.mobilemovieexplorer.presentation.adapter.SliderDemoAdapter" />
 
         <variable
             name="demoList"
@@ -49,29 +49,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingStart="@dimen/normal_spacing"
-                    android:paddingEnd="@dimen/normal_spacing"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
-                <com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper
-                    android:id="@+id/avf_movies_demo"
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/slider_movies_demo"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:adapterFlipper="@{demoAdapter}"
-                    app:dataFlipper="@{demoList}"
+                    app:sliderIndicatorMargin="@dimen/smaller_spacing"
+                    app:adapterSlideView="@{demoAdapter}"
+                    app:bindSliderDemo="@{demoList}"
+                    app:sliderIndicatorSelectedColor="@color/md_theme_inversePrimary"
+                    app:sliderIndicatorUnselectedColor="@color/md_theme_primary"
                     app:layout_constraintDimensionRatio="H,2:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorOrientation="horizontal"
                     tools:listitem="@layout/item_demo_movie"
-                  >
 
-                </com.casecode.mobilemovieexplorer.presentation.base.CustomAdapterViewFlipper>
+                    />
 
                 <TextView
                     android:id="@+id/tv_movies_title"
@@ -82,8 +77,7 @@
                     android:textAppearance="@style/TextAppearance.app.BodyMedium"
                     android:textColor="@color/color_amber"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/avf_movies_demo"
-                     />
+                    app:layout_constraintTop_toBottomOf="@id/slider_movies_demo" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_movies"
@@ -101,16 +95,15 @@
 
                     app:setMoviesAdapter="@{moviesAdapter}"
                     app:spanCount="3"
-                    tools:listitem="@layout/item_movie"
-                    />
+                    tools:listitem="@layout/item_movie" />
 
 
                 <ImageView
                     android:id="@+id/imv_movies_empty"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
-                    android:padding="@dimen/small_spacing"
                     android:contentDescription="@null"
+                    android:padding="@dimen/small_spacing"
                     android:src="@drawable/ic_error"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -124,9 +117,10 @@
                     android:text="@string/movies_loading_error"
                     android:textAppearance="@style/TextAppearance.app.BodyLarge"
                     android:textColor="@color/md_theme_onPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imv_movies_empty" />
+
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/sh_movies"
                     android:layout_width="0dp"
@@ -163,16 +157,17 @@
                     android:layout_height="wrap_content"
                     android:visibility="visible"
 
-                    app:constraint_referenced_ids="rv_movies, avf_movies_demo, tv_movies_title"
-                    tools:visibility="gone" />
+                    app:constraint_referenced_ids="rv_movies, slider_movies_demo, tv_movies_title"
+                    tools:visibility="visible" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/group_movies_error"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:constraint_referenced_ids="imv_movies_empty, tv_movies_empty"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
+
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gdl_movies_top"
                     android:layout_width="wrap_content"
