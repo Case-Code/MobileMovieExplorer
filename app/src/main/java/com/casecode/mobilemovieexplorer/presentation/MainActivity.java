@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateToolbarIcon(int destinationId) {
         // Set the common icon by default
-        int iconResId = R.drawable.movie_white_24;
+        int iconResId = R.drawable.movie_24;
 
         // Customize the icon for specific fragments
         if (destinationId == R.id.nav_favorite_fragment) {

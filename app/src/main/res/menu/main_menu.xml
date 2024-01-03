@@ -5,7 +5,7 @@
         android:id="@+id/item_favorite_movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/favorite_white_24"
+        android:icon="@drawable/favorite_black_24"
         android:title="@string/favorite_movies"
         app:showAsAction="always" />
 </menu>

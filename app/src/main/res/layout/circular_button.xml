@@ -3,5 +3,6 @@
     android:id="@+id/imageButton"
     android:layout_width="56dp"
     android:layout_height="56dp"
-    android:background="@drawable/circle_background"
+    android:background="@drawable/genre_background"
+    android:importantForAccessibility="no"
     android:src="@drawable/ic_back" />

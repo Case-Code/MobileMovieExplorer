@@ -21,5 +21,10 @@
     <string name="movies_app">Movies App</string>
     <string name="movie_details">Movie details</string>
     <string name="favorite_empty">Favorite movies are Empty, please add select favorite movie.</string>
+    <string name="discover_your">Discover Your</string>
+    <string name="favorite_show">Favorite Show</string>
+    <string name="watch_now_or_watch_later">Watch Now or Watch Later</string>
+    <string name="you_can_browse_movies_and_shows_by_ngenre_search_for_specific_title_or_ncheck_out_our_recommendation_for_you">you can browse movies and shows by \ngenre, search for specific title, or \ncheck out our recommendation for you</string>
+    <string name="error_loading_data">Error Loading Data</string>
 
 </resources>

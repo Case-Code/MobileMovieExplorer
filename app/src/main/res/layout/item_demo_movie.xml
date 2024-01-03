@@ -4,47 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="clickListener"
             type="com.casecode.mobilemovieexplorer.presentation.base.ItemClickListener" />
+
         <variable
             name="demoMovie"
             type="com.casecode.mobilemovieexplorer.domain.model.demo.DemoMovie" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="@dimen/smaller_spacing"
-    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
-
-        style="@style/Widget.app.CardView"
-        android:onClick="@{(view) -> clickListener.onItemClick(view,demoMovie)}"
-
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintDimensionRatio="H,2:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imv_item_movie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/small_spacing"
-            android:scaleType="centerCrop"
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.app.CardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{(view) -> clickListener.onItemClick(view,demoMovie)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,2:1"
-            app:baseImage="@{@drawable/intro_pic}"
-            app:loadImage="@{demoMovie.backdropPath()}"
-            tools:srcCompat="@drawable/intro_pic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            />
-    </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imv_item_movie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/small_spacing"
+                android:scaleType="centerCrop"
+                app:baseImage="@{@drawable/intro_pic}"
+                app:layout_constraintDimensionRatio="H,2:1"
+                app:loadImage="@{demoMovie.backdropPath()}"
+                tools:srcCompat="@drawable/panorama_24" />
+        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

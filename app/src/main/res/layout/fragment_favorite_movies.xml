@@ -55,7 +55,7 @@
             android:id="@+id/imv_favorite_empty"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_item_movie"
-            android:backgroundTint="@color/md_theme_inversePrimary"
+            android:backgroundTint="@color/color_mischka"
             android:backgroundTintMode="screen"
             android:contentDescription="@null"
             android:visibility="gone"
@@ -63,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/gdl_favorite_top"
             app:srcCompat="@drawable/favorite_24"
-            app:tint="@color/md_theme_inversePrimary"
+            app:tint="@color/gray_color"
             tools:visibility="visible" />
 
         <TextView
@@ -73,7 +73,6 @@
             android:padding="@dimen/normal_spacing"
             android:text="@string/favorite_empty"
             android:textAppearance="@style/TextAppearance.app.BodyLarge"
-            android:textColor="@color/md_theme_inversePrimary"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

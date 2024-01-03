@@ -33,8 +33,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/color_steel_gray"
-                app:popupTheme="?attr/colorPrimaryDark" />
+                android:background="@color/md_theme_background"
+                app:popupTheme="@color/color_steel_gray" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -54,18 +54,14 @@
             android:id="@+id/tv_main_network"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_theme_onSurface"
             android:gravity="center"
-            app:isAvailable="@{isAvailable}"
-
             android:text="@string/all_network_error"
             android:textAppearance="@style/TextAppearance.app.LabelSmall"
-            android:textColor="@color/md_theme_surface"
             android:visibility="gone"
+            app:isAvailable="@{isAvailable}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

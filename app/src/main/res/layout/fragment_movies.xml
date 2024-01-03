@@ -53,20 +53,18 @@
                     android:id="@+id/slider_movies_demo"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:sliderIndicatorMargin="@dimen/smaller_spacing"
                     app:adapterSlideView="@{demoAdapter}"
                     app:bindSliderDemo="@{demoList}"
-                    app:sliderIndicatorSelectedColor="@color/md_theme_inversePrimary"
-                    app:sliderIndicatorUnselectedColor="@color/md_theme_primary"
                     app:layout_constraintDimensionRatio="H,2:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="@dimen/smaller_spacing"
                     app:sliderIndicatorOrientation="horizontal"
-                    tools:listitem="@layout/item_demo_movie"
-
-                    />
+                    app:sliderIndicatorSelectedColor="@color/color_steel_gray"
+                    app:sliderIndicatorUnselectedColor="@color/md_theme_background"
+                    tools:listitem="@layout/item_demo_movie" />
 
                 <TextView
                     android:id="@+id/tv_movies_title"
@@ -75,7 +73,7 @@
                     android:layout_margin="@dimen/small_spacing"
                     android:text="@string/best_movies_title"
                     android:textAppearance="@style/TextAppearance.app.BodyMedium"
-                    android:textColor="@color/color_amber"
+                    android:textColor="@color/color_california"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/slider_movies_demo" />
 
@@ -92,11 +90,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_movies_title"
-
                     app:setMoviesAdapter="@{moviesAdapter}"
                     app:spanCount="3"
                     tools:listitem="@layout/item_movie" />
-
 
                 <ImageView
                     android:id="@+id/imv_movies_empty"
@@ -129,7 +125,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-
                     app:layout_constraintTop_toTopOf="@+id/avf_movies_demo"
                     tools:visibility="gone">
 
@@ -178,6 +173,4 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 </layout>
