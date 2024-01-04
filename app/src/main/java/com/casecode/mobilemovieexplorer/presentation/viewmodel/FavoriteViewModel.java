@@ -12,11 +12,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableCompletableObserver;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import lombok.Getter;
 
 @HiltViewModel
@@ -29,6 +30,8 @@ public class FavoriteViewModel extends ViewModel {
     private MutableLiveData<Boolean> isAddingFavoriteMovie = new MutableLiveData<>();
     @Getter
     private MutableLiveData<Boolean> isDeletingFavoriteMovie = new MutableLiveData<>();
+    @Getter
+    private MutableLiveData<Boolean> isFavoriteMovie = new MutableLiveData<>();
 
     @Inject
     public FavoriteViewModel(FavoriteMoviesRepository favoriteMoviesRepository) {
@@ -47,6 +50,23 @@ public class FavoriteViewModel extends ViewModel {
                 isAddingFavoriteMovie.setValue(false);
             }
         }));
+    }
+
+    public void isFavoriteMovies(int idMovies) {
+       compositeDisposable.add( favoriteMoviesRepository.getListFavorite()
+
+               .subscribeWith(new DisposableSingleObserver<List<FavoriteMovie>>() {
+                    @Override
+                    public void onSuccess(@NonNull List<FavoriteMovie> favoriteMovies) {
+                        boolean isFavorite = favoriteMovies.stream().anyMatch(item -> item.idMovie == idMovies);
+                        isFavoriteMovie.setValue(isFavorite);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        isFavoriteMovie.setValue(false);
+                    }
+                }));
     }
 
     public void getListFavorite() {
@@ -95,20 +115,19 @@ public class FavoriteViewModel extends ViewModel {
 
     public void deleteFavoriteMovie(FavoriteMovie moviesDetailsMovie) {
 
-         compositeDisposable.add(favoriteMoviesRepository.deleteFavoriteMovie(moviesDetailsMovie).subscribeWith(new DisposableCompletableObserver() {
-             @Override
-             public void onComplete() {
-                 isDeletingFavoriteMovie.setValue(true);
+        compositeDisposable.add(favoriteMoviesRepository.deleteFavoriteMovie(moviesDetailsMovie).subscribeWith(new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+                isDeletingFavoriteMovie.setValue(true);
 
-             }
+            }
 
-             @Override
-             public void onError(@NonNull Throwable e) {
-                 isDeletingFavoriteMovie.setValue(false);
+            @Override
+            public void onError(@NonNull Throwable e) {
+                isDeletingFavoriteMovie.setValue(false);
 
-             }
-         }));
-
+            }
+        }));
 
 
     }

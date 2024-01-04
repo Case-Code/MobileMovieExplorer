@@ -30,7 +30,7 @@
             app:shapeAppearanceOverlay="@style/circularImageView" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/pgr_details"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"

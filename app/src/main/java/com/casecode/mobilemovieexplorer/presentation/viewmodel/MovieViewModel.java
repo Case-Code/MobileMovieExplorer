@@ -41,7 +41,6 @@ import timber.log.Timber;
 @HiltViewModel
 public class MovieViewModel extends ViewModel {
 
-    private static final String TAG = "MovieViewModel";
     private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     private final MovieUseCase movieUseCase;
@@ -68,8 +67,7 @@ public class MovieViewModel extends ViewModel {
     private MutableLiveData<Event<Integer>> demoMovieIdSelected = new MutableLiveData<>();
     @Getter
     private MutableLiveData<Event<Integer>> movieIdSelected = new MutableLiveData<>();
-    @Getter
-    private MutableLiveData<Event<Integer>> favoriteMovieIdSelected = new MutableLiveData<>();
+
 
     /**
      * Constructs a MovieViewModel with the specified dependencies.
@@ -132,7 +130,7 @@ public class MovieViewModel extends ViewModel {
                     @Override
                     public void onError(Throwable throwable) {
                         showSnackbarMessage(R.string.movies_loading_error);
-                    Timber.e("Error: " + throwable);
+                    Timber.e("Error: %s", throwable);
                     }
 
                     @Override
@@ -147,23 +145,7 @@ public class MovieViewModel extends ViewModel {
     @NonNull
     private Flowable<PagingData<Movie>> getMoviesPagingFlowable() {
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);
-        /*mCompositeDisposable.add(PagingRx.cachedIn(movieUseCase.getMoviesPaging(), viewModelScope)
-                .subscribeWith(new DisposableSubscriber<>() {
-                    @Override
-                    public void onNext(PagingData<Movie> moviePagingData) {
 
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                }));*/
         return PagingRx.cachedIn(movieUseCase.getMoviesPaging(), viewModelScope);
 
 
@@ -223,9 +205,7 @@ public class MovieViewModel extends ViewModel {
         demoMovieIdSelected.setValue(new Event<>(id));
     }
 
-    public void setFavoriteMovieIdSelected(int id) {
-        favoriteMovieIdSelected.setValue(new Event<>(id));
-    }
+
 
     private void restMovieIdSelected() {
         if (movieIdSelected.getValue() != null)
@@ -238,11 +218,7 @@ public class MovieViewModel extends ViewModel {
             demoMovieIdSelected.setValue(null);
     }
 
-    private void restFavoriteMovieIdSelected() {
-        if (favoriteMovieIdSelected.getValue() != null)
 
-            favoriteMovieIdSelected.setValue(null);
-    }
 
 
     /**
@@ -261,7 +237,6 @@ public class MovieViewModel extends ViewModel {
                         Timber.d("MoviesDetailsResponse = %s",
                                 moviesDetailsResponse.toString());
                         restMovieIdSelected();
-                        restFavoriteMovieIdSelected();
                     }
 
                     @Override

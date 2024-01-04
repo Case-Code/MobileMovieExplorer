@@ -38,7 +38,7 @@
 
             <!-- ImageView for the poster -->
             <ImageView
-                android:id="@+id/image_backdrop_path"
+                android:id="@+id/imv_details_backdrop_path"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:importantForAccessibility="no"
@@ -51,18 +51,18 @@
 
             <!-- Scrim overlay View -->
             <View
-                android:id="@+id/scrimView"
+                android:id="@+id/scrimView_details"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/scrim"
                 app:layout_constraintDimensionRatio="16:9"
-                app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
-                app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
-                app:layout_constraintTop_toTopOf="@+id/image_backdrop_path" />
+                app:layout_constraintEnd_toEndOf="@+id/imv_details_backdrop_path"
+                app:layout_constraintStart_toStartOf="@+id/imv_details_backdrop_path"
+                app:layout_constraintTop_toTopOf="@+id/imv_details_backdrop_path" />
 
             <!-- TextView for displaying the original title of the movie -->
             <TextView
-                android:id="@+id/text_original_title"
+                android:id="@+id/tv_details_original_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -71,15 +71,15 @@
                 android:text="@{favoriteMovie.originalTitle}"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/image_backdrop_path"
-                app:layout_constraintEnd_toEndOf="@+id/image_backdrop_path"
+                app:layout_constraintBottom_toBottomOf="@+id/imv_details_backdrop_path"
+                app:layout_constraintEnd_toEndOf="@+id/imv_details_backdrop_path"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/image_backdrop_path"
+                app:layout_constraintStart_toStartOf="@+id/imv_details_backdrop_path"
                 tools:text="Ant-Man and the Wasp: Quantumania" />
 
             <!-- TextView for displaying the vote average of the movie -->
             <TextView
-                android:id="@+id/text_vote_average"
+                android:id="@+id/tv_details_vote_average"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
@@ -89,13 +89,13 @@
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/kid_star_24"
-                app:layout_constraintBottom_toTopOf="@+id/text_original_title"
-                app:layout_constraintStart_toStartOf="@+id/text_original_title"
+                app:layout_constraintBottom_toTopOf="@+id/tv_details_original_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_details_original_title"
                 tools:text="9.3" />
 
             <!-- TextView for displaying the runtime of the movie -->
             <TextView
-                android:id="@+id/text_runtime"
+                android:id="@+id/tv_details_runtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -104,9 +104,9 @@
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/schedule_24"
-                app:layout_constraintBottom_toBottomOf="@+id/text_vote_average"
-                app:layout_constraintStart_toEndOf="@+id/text_vote_average"
-                app:layout_constraintTop_toTopOf="@+id/text_vote_average"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_details_vote_average"
+                app:layout_constraintStart_toEndOf="@+id/tv_details_vote_average"
+                app:layout_constraintTop_toTopOf="@+id/tv_details_vote_average"
                 tools:text="178 min" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

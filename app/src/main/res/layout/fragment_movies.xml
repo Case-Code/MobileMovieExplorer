@@ -130,8 +130,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
 
-                    app:layout_constraintTop_toTopOf="@+id/avf_movies_demo"
-                    tools:visibility="gone">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -155,7 +155,7 @@
                     android:id="@+id/group_movies_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="invisible"
 
                     app:constraint_referenced_ids="rv_movies, slider_movies_demo, tv_movies_title"
                     tools:visibility="visible" />

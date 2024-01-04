@@ -39,3 +39,17 @@ Zapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/MoviesA
 Zapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/GenresAdapter.java,a\d\ad831d9ff2512e1e6a5ba2d3bf51706884aaf8d0
 à
 Xapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/CastAdapter.java,8\4\849634d79b42bb1eb1f33e6e52a2579d0c2b33a1
+î
+dapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/demodetails/DemoDetailsResponse.java,4\9\49f8a1e9e15000e846a8b9c655a92955a0981d58
+è
+_app/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesDetailsFragment.java,b\d\bdbb38755c81d066f4927d23f140b9073a3492f0
+å
+\app/src/main/java/com/casecode/mobilemovieexplorer/presentation/adapter/FavoriteAdapter.java,6\5\659d886ad6e4012c5bf055c1386d6c01b9bfe734
+Å
+Qapp/src/main/java/com/casecode/mobilemovieexplorer/data/database/AppDatabase.java,d\5\d5caba76b6955474237afa727e6483bb1b6d9ec8
+Ö
+Uapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/db/FavoriteMovie.java,1\4\142b4ec93e67684d9a4b35789fcf492a3a2fd291
+ê
+`app/src/main/java/com/casecode/mobilemovieexplorer/presentation/viewmodel/FavoriteViewModel.java,b\f\bf4088435092c9fa71c4975d36ff162db1f597b8
+Ç
+Rapp/src/main/java/com/casecode/mobilemovieexplorer/data/mapper/FavoriteMovies.java,e\8\e81adb1fe9bca916807cca26d7bf9c1ce60c893e

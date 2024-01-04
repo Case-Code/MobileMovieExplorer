@@ -43,6 +43,8 @@ public class MoviesFragment extends Fragment {
     private MovieViewModel movieViewModel;
     private MoviesAdapter moviesAdapter;
 
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -248,6 +250,6 @@ public class MoviesFragment extends Fragment {
 
     private void updateOptionsMenu() {
         // Invalidate the options menu to trigger onPrepareOptionsMenu
-        getActivity().invalidateOptionsMenu();
+        requireActivity().invalidateOptionsMenu();
     }
 }

@@ -20,6 +20,8 @@ import com.casecode.mobilemovieexplorer.presentation.viewmodel.FavoriteViewModel
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -41,10 +43,6 @@ public class FavoriteMoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentFavoriteMoviesBinding.inflate(inflater, container, false);
-
-        // Enable the options menu in the fragment
-        setHasOptionsMenu(true);
-
         return mBinding.getRoot();
     }
 
@@ -70,7 +68,11 @@ public class FavoriteMoviesFragment extends Fragment {
     }
 
     private void onItemClick(View view, FavoriteMovie favoriteMovie) {
-        movieViewModel.setFavoriteMovieIdSelected(favoriteMovie.idMovie);
+        if (favoriteMovie.isDemo) {
+            movieViewModel.setDemoMovieIdSelected(favoriteMovie.idMovie);
+        } else {
+            movieViewModel.setMovieIdSelected(favoriteMovie.idMovie);
+        }
         Navigation.findNavController(view)
                 .navigate(R.id.action_nav_favoirte_fragment_to_nav_details_fragment);
     }
@@ -91,13 +93,7 @@ public class FavoriteMoviesFragment extends Fragment {
                 case SUCCESS -> {
                     Timber.tag(TAG).i("favoirteMoviesResource Success: %s", favoirteMoviesResource);
                     var favoriteItems = favoirteMoviesResource.getData();
-                    if (favoriteItems.size() == 0) {
-                        mBinding.groupFavoriteEmpty.setVisibility(View.VISIBLE);
-                    } else {
-                        mBinding.groupFavoriteEmpty.setVisibility(View.GONE);
-                        mBinding.setFavoriteMovies(favoirteMoviesResource.getData());
-
-                    }
+                    showUiEmptyOrList(favoriteItems);
                 }
                 case ERROR -> {
                     Timber.tag(TAG).e("favoirteMoviesResource  ERROR: %s", favoirteMoviesResource.message);
@@ -109,6 +105,16 @@ public class FavoriteMoviesFragment extends Fragment {
         });
     }
 
+    private void showUiEmptyOrList(List<FavoriteMovie> favoriteItems) {
+        if (favoriteItems.isEmpty()) {
+            mBinding.groupFavoriteEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.groupFavoriteEmpty.setVisibility(View.GONE);
+            mBinding.setFavoriteMovies(favoriteItems);
+
+        }
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -117,6 +123,6 @@ public class FavoriteMoviesFragment extends Fragment {
 
     private void updateOptionsMenu() {
         // Invalidate the options menu to trigger onPrepareOptionsMenu
-        getActivity().invalidateOptionsMenu();
+        requireActivity().invalidateOptionsMenu();
     }
 }

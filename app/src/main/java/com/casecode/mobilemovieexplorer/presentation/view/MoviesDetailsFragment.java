@@ -50,7 +50,6 @@ public class MoviesDetailsFragment extends Fragment {
         binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false);
 
         // Enable the options menu in the fragment
-        setHasOptionsMenu(true);
 
         return binding.getRoot();
     }
@@ -66,12 +65,22 @@ public class MoviesDetailsFragment extends Fragment {
     private void setupUi() {
         setupViewModel();
         setupAdapter();
-        observerMovieIdSelected();
+        movieViewModel.getIsOnline().observe(getViewLifecycleOwner(), isOnline -> {
+            if (Boolean.TRUE.equals(isOnline)) {
+                observerMovieIdSelected();
+
+            } else {
+                Timber.e("isOnline = %s", false);
+                showUiError();
+                binding.getRoot().showSnackbar(getString(R.string.all_network_error), BaseTransientBottomBar.LENGTH_SHORT);
+            }
+        });
         observerViewModel();
         setupClickedListener();
         // Call the method to update the options menu
         updateOptionsMenu();
     }
+
 
     private void setupViewModel() {
         movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory)
@@ -105,16 +114,31 @@ public class MoviesDetailsFragment extends Fragment {
     }
 
     private void updateButtonDrawable(View likeButton) {
-        //TODO: handle logic for add and remove movie favorite in db.
         int drawableResId;
-        var moviesDetails = movieViewModel.getMovieDetailsLiveData().getValue().getData();
         if (likeButton.isSelected()) {
+            if (Boolean.TRUE.equals(binding.getIsDemo())) {
+                var movieDemo = movieViewModel.getDemoDetailsLiveData().getValue().getData();
+                favoriteViewModel.addFavoriteMovie(FavoriteMovies.asDomainDemoDetails(movieDemo));
+
+            } else {
+
+                var moviesDetails = movieViewModel.getMovieDetailsLiveData().getValue().getData();
+                favoriteViewModel.addFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
+            }
             drawableResId = R.drawable.favorite_crusta_24;
-            favoriteViewModel.addFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
 
         } else {
+            if (Boolean.TRUE.equals(binding.getIsDemo())) {
+                var movieDemo = movieViewModel.getDemoDetailsLiveData().getValue().getData();
+
+                favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asDomainDemoDetails(movieDemo));
+            } else {
+                var moviesDetails = movieViewModel.getMovieDetailsLiveData().getValue().getData();
+
+                favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
+
+            }
             drawableResId = R.drawable.favorite_white_24;
-            favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
 
         }
         binding.imvMoviesDetailsLike.setImageResource(drawableResId);
@@ -132,13 +156,19 @@ public class MoviesDetailsFragment extends Fragment {
         movieViewModel.getDemoDetailsLiveData().observe(getViewLifecycleOwner(), deomResource -> {
             switch (deomResource.getStatus()) {
                 case LOADING -> {
+                    showUiLoading();
                 }
                 case SUCCESS -> {
                     binding.setIsDemo(true);
+                    favoriteViewModel.isFavoriteMovies(deomResource.getData().id());
                     binding.setDemoMovie(deomResource.getData());
+
+                    showUiData();
                     binding.executePendingBindings();
                 }
                 case ERROR -> {
+                    showUiError();
+
                 }
             }
         });
@@ -146,41 +176,60 @@ public class MoviesDetailsFragment extends Fragment {
         movieViewModel.getMovieDetailsLiveData().observe(getViewLifecycleOwner(), resource -> {
             switch (resource.getStatus()) {
                 case LOADING -> {
+                    showUiLoading();
+
                 }
                 case SUCCESS -> {
+                    showUiData();
                     binding.setIsDemo(false);
-                    // Handle success state, and access movie details from resource.getData()
+
+                    favoriteViewModel.isFavoriteMovies(resource.getData().id());
                     binding.setMovie(resource.getData());
                     // Do something with movieDetails
                     binding.executePendingBindings();
 
-                    favoriteViewModel.getListFavorite(resource.getData().id());
                 }
-                case ERROR -> {
+                default -> {
                     // Handle error state
+                    showUiError();
                 }
             }
         });
 
-        favoriteViewModel.getFavoriteMoviesResource().observe(getViewLifecycleOwner(), favoirteMoviesResource -> {
-            switch (favoirteMoviesResource.status) {
-                case LOADING -> {
-                }
-                case SUCCESS -> {
-                    int drawableResId;
-                    if (favoirteMoviesResource.getData().size()>0) {
-                        drawableResId = R.drawable.favorite_crusta_24;
-                    } else {
-                        drawableResId = R.drawable.favorite_white_24;
-                    }
-                    binding.imvMoviesDetailsLike.setImageResource(drawableResId);
-                }
-                case ERROR -> {
-                }
-                case NULL -> {
-                }
+        favoriteViewModel.getIsFavoriteMovie().observe(getViewLifecycleOwner(), isFavorite ->{
+        int drawableResId;
+            if(Boolean.TRUE.equals(isFavorite)){
+                drawableResId = R.drawable.favorite_crusta_24;
+                binding.imvMoviesDetailsLike.setSelected(true);
+
+            }else{
+                drawableResId = R.drawable.favorite_white_24;
+
             }
+            binding.imvMoviesDetailsLike.setImageResource(drawableResId);
+
         });
+
+
+    }
+
+    private void showUiError() {
+        binding.pgrDetails.setVisibility(View.GONE);
+        binding.groupDetailsData.setVisibility(View.INVISIBLE);
+
+        binding.groupDetailsError.setVisibility(View.VISIBLE);
+    }
+
+    private void showUiData() {
+        binding.groupDetailsError.setVisibility(View.GONE);
+        binding.pgrDetails.setVisibility(View.GONE);
+        binding.groupDetailsData.setVisibility(View.VISIBLE);
+    }
+
+    private void showUiLoading() {
+        binding.pgrDetails.setVisibility(View.VISIBLE);
+        binding.groupDetailsData.setVisibility(View.INVISIBLE);
+        binding.groupDetailsError.setVisibility(View.INVISIBLE);
     }
 
 
@@ -189,9 +238,6 @@ public class MoviesDetailsFragment extends Fragment {
             if (idMessage == null) {
 
                 movieViewModel.getMovieIdSelected().observe(getViewLifecycleOwner(),
-                        new EventObserver<>(id -> movieViewModel.fetchMovieDetails(id)));
-
-                movieViewModel.getFavoriteMovieIdSelected().observe(getViewLifecycleOwner(),
                         new EventObserver<>(id -> movieViewModel.fetchMovieDetails(id)));
 
                 movieViewModel.getDemoMovieIdSelected().observe(getViewLifecycleOwner(),
@@ -203,6 +249,9 @@ public class MoviesDetailsFragment extends Fragment {
         });
     }
 
+    private void updateOptionsMenu() {
+        requireActivity().invalidateOptionsMenu();
+    }
 
     @Override
     public void onDestroyView() {
@@ -210,8 +259,4 @@ public class MoviesDetailsFragment extends Fragment {
         binding = null;
     }
 
-    private void updateOptionsMenu() {
-        // Invalidate the options menu to trigger onPrepareOptionsMenu
-        getActivity().invalidateOptionsMenu();
-    }
 }

@@ -28,4 +28,7 @@ public class FavoriteMovie {
     @ColumnInfo(name = "runtime")
     public int runtime;
 
+    @ColumnInfo(name = "is_demo")
+    public boolean isDemo;
+
 }

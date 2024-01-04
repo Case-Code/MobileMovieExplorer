@@ -1,15 +1,11 @@
 
 d
-java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ŸØ¬ØÌ1
+java:S6813!"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8³Ì«­Í1
 d
-java:S6813!"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ŸØ¬ØÌ1
-[
-java:S1874."9Remove this use of "setHasOptionsMenu"; it is deprecated.(Ï™ñşÿÿÿÿ8İØ¬ØÌ1
+java:S6813#"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8µÌ«­Í1
 >
-java:S6205X"Remove this redundant block.(Ö…‚Ğûÿÿÿÿ8öØ¬ØÌ1
-`
-java:S1155^">Use isEmpty() to check whether the collection is empty or not.(Ò†ƒüşÿÿÿÿ8øØ¬ØÌ1
+java:S6205Z"Remove this redundant block.(Ö…‚Ğûÿÿÿÿ8éŸ¬­Í1
 >
-java:S6205f"Remove this redundant block.(ß×ùÙıÿÿÿÿ8ûØ¬ØÌ1
+java:S6205b"Remove this redundant block.(ß×ùÙıÿÿÿÿ8ëŸ¬­Í1
 >
-java:S6205i"Remove this redundant block.(¯ä¤Ãşÿÿÿÿ8ıØ¬ØÌ1
+java:S6205e"Remove this redundant block.(¯ä¤Ãşÿÿÿÿ8íŸ¬­Í1

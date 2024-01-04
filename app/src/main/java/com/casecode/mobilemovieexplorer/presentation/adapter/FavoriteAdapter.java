@@ -72,42 +72,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             binding.setClickListener(itemClickListener);
             binding.setFavoriteMovie(favoriteItem);
 
-            // Use ViewBinding to access views
-            // Assuming 'binding' is the ViewBinding instance for your layout
-            // Example of setting an image using Glide with a ProgressBar
-          //  bindImage(favoriteItem);
-            // Set data to other views
-         //   binding.textOriginalTitle.setText(favoriteItem.getOriginalTitle());
-           // binding.textVoteAverage.setText(String.valueOf(favoriteItem.getVoteAverage()));
-            // Example of setting text to a TextView with formatted string using View Binding
-            //String runtimeFormat = binding.textRuntime.getContext().getString(R.string.runtime_format);
-            //String runtime = String.valueOf(favoriteItem.getRuntime());
-            //binding.textRuntime.setText(String.format(runtimeFormat, runtime));
-
-            // Set onClickListener for likeButton if needed
-            // binding.imageButtonLike.setOnClickListener(v -> handleLikeButtonClick(favoriteItem));
         }
 
-        private void bindImage(FavoriteMovie favoriteItem) {
-            Glide.with(binding.imageBackdropPath.getContext())
-                    .load(favoriteItem.getBackdropPath())
-                    .placeholder(R.drawable.panorama_24) // Placeholder image while loading
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            // Hide progress bar on failure
-                          //  binding.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            // Hide progress bar on success
-                           // binding.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(binding.imageBackdropPath);
-        }
     }
 }
