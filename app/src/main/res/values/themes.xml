@@ -1,5 +1,5 @@
 <resources>
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.MobileMovieExplorer" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
@@ -47,24 +47,17 @@
         <item name="colorSurfaceContainer">@color/md_theme_surfaceContainer</item>
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
-        <item name="android:windowBackground">@color/color_steel_gray</item>
-        <item name="toolbarStyle">@style/CustomToolbar</item>
+        <item name="colorCalifornia">@color/colorCalifornia</item>
+        <item name="colorOnCalifornia">@color/colorOnCalifornia</item>
+        <item name="colorCaliforniaContainer">@color/colorCaliforniaContainer</item>
+        <item name="colorOnCaliforniaContainer">@color/colorOnCaliforniaContainer</item>
+        <item name="colorFlamingo">@color/colorFlamingo</item>
+        <item name="colorOnFlamingo">@color/colorOnFlamingo</item>
+        <item name="colorFlamingoContainer">@color/colorFlamingoContainer</item>
+        <item name="colorOnFlamingoContainer">@color/colorOnFlamingoContainer</item>
+        <!--        <item name="android:windowBackground">@color/color_steel_gray</item>-->
     </style>
 
     <style name="Theme.MobileMovieExplorer" parent="Base.Theme.MobileMovieExplorer" />
-
-    <!-- Theme without ActionBar for MainActivity -->
-    <style name="Theme.MobileMovieExplorer.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="CustomToolbar" parent="Widget.AppCompat.Toolbar">
-        <!-- Set the background color -->
-        <item name="android:background">@color/color_steel_gray</item>
-
-        <!-- Customize the title text color -->
-        <item name="titleTextColor">@android:color/white</item>
-    </style>
 
 </resources>

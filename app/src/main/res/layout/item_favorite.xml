@@ -15,12 +15,6 @@
         <variable
             name="favoriteMovie"
             type="com.casecode.mobilemovieexplorer.domain.model.db.FavoriteMovie" />
-
-        <!-- Define the variable for the binding -->
-        <!--        <variable-->
-        <!--            name="binding"-->
-        <!--            type="com.casecode.mobilemovieexplorer.databinding." />-->
-
     </data>
 
 

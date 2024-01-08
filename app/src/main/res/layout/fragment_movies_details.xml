@@ -42,6 +42,7 @@
             android:id="@+id/imv_details_backdrop_path"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:importantForAccessibility="no"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,10 +69,9 @@
             android:background="@drawable/background_with_selectable_item"
             android:importantForAccessibility="no"
             android:padding="8dp"
-            android:src="@drawable/favorite_white_24"
+            android:src="@drawable/favorite_24"
             app:layout_constraintEnd_toStartOf="@+id/btn_details_share"
             app:layout_constraintTop_toTopOf="@+id/btn_details_share" />
-
 
         <TextView
             android:id="@+id/tv_details_original_title"
@@ -95,8 +95,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{isDemo == true ? String.valueOf(demoMovie.voteAverage()): String.valueOf(movie.voteAverage)}"
-
-            android:textColor="@android:color/white"
+            android:textColor="@color/firstTextColor"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/kid_star_24"
             app:layout_constraintBottom_toBottomOf="@+id/tv_details_runtime"
@@ -110,9 +109,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center"
-
             android:text="@{isDemo == true ? String.format(@string/runtime_format,demoMovie.runtime()): String.format(@string/runtime_format,movie.runtime)}"
-            android:textColor="@android:color/white"
+            android:textColor="@color/firstTextColor"
             android:textSize="14sp"
             app:drawableStartCompat="@drawable/schedule_24"
             app:layout_constraintBottom_toBottomOf="@+id/btn_details_share"
@@ -159,7 +157,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/summary"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/color_amber"
+            android:textColor="@color/colorCaliforniaContainer"
             app:layout_constraintStart_toStartOf="@+id/tv_details_vote_average"
             app:layout_constraintTop_toBottomOf="@+id/rv_details_genres" />
 
@@ -170,7 +168,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/actors"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/color_amber"
+            android:textColor="@color/colorCaliforniaContainer"
             android:visibility="@{isDemo == true ? View.GONE : View.VISIBLE  }"
             app:layout_constraintStart_toStartOf="@+id/tv_details_overview"
             app:layout_constraintTop_toBottomOf="@+id/tv_details_overview" />
@@ -182,7 +180,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="@{isDemo == true ? demoMovie.overview(): movie.overview}"
-            android:textColor="@android:color/white"
+            android:textColor="@color/secondTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/tv_details_summary"

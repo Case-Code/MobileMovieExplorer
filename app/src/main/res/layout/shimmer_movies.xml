@@ -8,17 +8,14 @@
     android:layout_marginStart="@dimen/normal_spacing"
     android:layout_marginTop="@dimen/normal_spacing"
     android:layout_marginEnd="@dimen/normal_spacing"
-    android:orientation="horizontal"
-
-    >
+    android:orientation="horizontal">
 
     <View
 
         android:layout_width="@dimen/width_item_movie_card"
         android:layout_height="@dimen/height_item_movie"
         android:layout_marginTop="@dimen/smallest_spacing"
-        android:background="@color/md_theme_inversePrimary"
-        />
+        android:background="@color/md_theme_inversePrimary" />
 
 
     <LinearLayout

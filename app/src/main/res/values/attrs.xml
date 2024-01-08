@@ -1,0 +1,10 @@
+<resources>
+    <attr name="colorCalifornia" format="color" />
+    <attr name="colorOnCalifornia" format="color" />
+    <attr name="colorCaliforniaContainer" format="color" />
+    <attr name="colorOnCaliforniaContainer" format="color" />
+    <attr name="colorFlamingo" format="color" />
+    <attr name="colorOnFlamingo" format="color" />
+    <attr name="colorFlamingoContainer" format="color" />
+    <attr name="colorOnFlamingoContainer" format="color" />
+</resources>

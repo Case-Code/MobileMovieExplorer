@@ -22,14 +22,11 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:onClick="@{(view) -> clickListener.onItemClick(view,movie)}"
-
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/md_theme_primary">
-
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_movie_poster"
@@ -65,7 +62,7 @@
             android:padding="@dimen/smaller_spacing"
             android:text="@{movie.title()}"
             android:textAppearance="@style/TextAppearance.app.TitleSmall"
-            android:textColor="@color/md_theme_onPrimary"
+            android:textColor="@color/firstTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cv_movie_poster"
             app:layout_constraintTop_toTopOf="@+id/cv_movie_poster"
@@ -75,13 +72,12 @@
             android:id="@+id/tv_item_movie_overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="@dimen/smaller_spacing"
             android:layout_marginTop="@dimen/smaller_spacing"
             android:padding="@dimen/smaller_spacing"
             android:text="@{movie.overview()}"
             android:textAppearance="@style/TextAppearance.app.LabelSmall"
-            android:textColor="@color/md_theme_onPrimary"
+            android:textColor="@color/secondTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cv_movie_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_movie_title"

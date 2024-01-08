@@ -138,7 +138,7 @@ public class MoviesDetailsFragment extends Fragment {
                 favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
 
             }
-            drawableResId = R.drawable.favorite_white_24;
+            drawableResId = R.drawable.favorite_24;
 
         }
         binding.imvMoviesDetailsLike.setImageResource(drawableResId);
@@ -203,7 +203,7 @@ public class MoviesDetailsFragment extends Fragment {
                 binding.imvMoviesDetailsLike.setSelected(true);
 
             }else{
-                drawableResId = R.drawable.favorite_white_24;
+                drawableResId = R.drawable.favorite_24;
 
             }
             binding.imvMoviesDetailsLike.setImageResource(drawableResId);

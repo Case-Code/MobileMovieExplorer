@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="cast"
-    type="com.casecode.mobilemovieexplorer.domain.model.moviesdetails.Cast" />
+
+        <variable
+            name="cast"
+            type="com.casecode.mobilemovieexplorer.domain.model.moviesdetails.Cast" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,15 +19,14 @@
             android:id="@+id/imageViewProfile"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            app:baseImage="@{@drawable/account_circle_24}"
-            app:loadImage="@{cast.profilePath}"
-
             android:contentDescription="@string/profile_image_description"
             android:scaleType="centerCrop"
             android:src="@drawable/account_circle_24"
+            app:baseImage="@{@drawable/account_circle_24}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{cast.profilePath}"
             app:shapeAppearanceOverlay="@style/circularImageView" />
 
         <ProgressBar
@@ -46,9 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-
             android:text="@{cast.name}"
-            android:textColor="@android:color/white"
+            android:textColor="@color/secondTextColor"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

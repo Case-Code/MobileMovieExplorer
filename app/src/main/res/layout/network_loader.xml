@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             style="@style/TextAppearance.app.BodyMedium"
-            android:text="Error Loading Data"
+            android:text="@string/error_loading_data"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
