@@ -164,10 +164,13 @@
     <color name="colorOnFlamingo_highContrast">#000000</color>
     <color name="colorFlamingoContainer_highContrast">#FFBBA5</color>
     <color name="colorOnFlamingoContainer_highContrast">#000000</color>
+    <color name="colorBackground">#1F1D2B</color>
+    <color name="colorSurface">#1F1D2B</color>
+    <color name="colorPrimary">#1F1D2B</color>
 
-    <color name="color_steel_gray">#E6E0E9</color>
+    <color name="color_steel_gray">#1F1D2B</color>
     <color name="color_flamingo">#F25D27</color>
-    <color name="color_jumbo">#E6E0E9</color>
+    <color name="color_jumbo">#87878C</color>
     <color name="color_california">#F2A007</color>
 
     <color name="firstTextColor">#E6E0E9</color>
