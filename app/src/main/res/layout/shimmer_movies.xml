@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cl_price_list_root"
     android:layout_width="match_parent"
@@ -10,36 +8,16 @@
     android:layout_marginEnd="@dimen/normal_spacing"
     android:orientation="horizontal">
 
-    <View
-
-        android:layout_width="@dimen/width_item_movie_card"
-        android:layout_height="@dimen/height_item_movie"
-        android:layout_marginTop="@dimen/smallest_spacing"
-        android:background="@color/md_theme_inversePrimary" />
-
+    <View style="@style/shimmer_image_view" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/smaller_spacing"
-            android:layout_marginTop="@dimen/smaller_spacing"
-            android:layout_weight="1"
-            android:background="@color/md_theme_inversePrimary" />
+        <View style="@style/shimmer_view" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/smaller_spacing"
-            android:layout_marginTop="@dimen/smaller_spacing"
-            android:layout_weight="1"
-            android:background="@color/md_theme_inversePrimary"
-
-            />
+        <View style="@style/shimmer_view" />
     </LinearLayout>
 
 </LinearLayout>

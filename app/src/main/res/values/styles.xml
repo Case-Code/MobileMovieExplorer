@@ -154,4 +154,35 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
+    <style name="shimmer_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/smaller_spacing</item>
+        <item name="android:layout_marginTop">@dimen/smaller_spacing</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/md_theme_inversePrimary</item>
+    </style>
+
+    <style name="shimmer_image_view">
+        <item name="android:layout_width">@dimen/width_item_movie_card</item>
+        <item name="android:layout_height">@dimen/height_item_movie</item>
+        <item name="android:layout_marginTop">@dimen/smallest_spacing</item>
+        <item name="android:background">@color/md_theme_inversePrimary</item>
+    </style>
+
+    <style name="circular_button">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/circle_background</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+
+    <style name="text_subject">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">@color/colorCaliforniaContainer</item>
+    </style>
+
 </resources>

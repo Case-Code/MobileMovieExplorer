@@ -152,23 +152,19 @@
 
         <TextView
             android:id="@+id/tv_details_summary"
+            style="@style/text_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/summary"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/colorCaliforniaContainer"
             app:layout_constraintStart_toStartOf="@+id/tv_details_vote_average"
             app:layout_constraintTop_toBottomOf="@+id/rv_details_genres" />
 
         <TextView
             android:id="@+id/tv_details_actors"
+            style="@style/text_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/actors"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/colorCaliforniaContainer"
             android:visibility="@{isDemo == true ? View.GONE : View.VISIBLE  }"
             app:layout_constraintStart_toStartOf="@+id/tv_details_overview"
             app:layout_constraintTop_toBottomOf="@+id/tv_details_overview" />

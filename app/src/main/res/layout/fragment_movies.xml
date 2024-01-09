@@ -68,13 +68,9 @@
 
                 <TextView
                     android:id="@+id/tv_movies_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/text_subject"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:text="@string/best_movies_title"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/colorCaliforniaContainer"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/slider_movies_demo" />
 
@@ -173,8 +169,5 @@
                     app:layout_constraintGuide_percent="0.3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 </layout>
