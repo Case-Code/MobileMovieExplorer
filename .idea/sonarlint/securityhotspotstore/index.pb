@@ -53,3 +53,15 @@ Uapp/src/main/java/com/casecode/mobilemovieexplorer/domain/model/db/FavoriteMovi
 `app/src/main/java/com/casecode/mobilemovieexplorer/presentation/viewmodel/FavoriteViewModel.java,b\f\bf4088435092c9fa71c4975d36ff162db1f597b8
 ‚
 Rapp/src/main/java/com/casecode/mobilemovieexplorer/data/mapper/FavoriteMovies.java,e\8\e81adb1fe9bca916807cca26d7bf9c1ce60c893e
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+I
+gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+€
+Papp/src/main/java/com/casecode/mobilemovieexplorer/data/api/MovieApiService.java,4\0\40339c8047732d43259989bda3ea5e8cb5b184b4
+T
+$gradle/projectDependencyGraph.gradle,c\3\c37cc481265d9f8c51716d0ffc34985a6dc52456
+J
+.github/workflows/main.yml,c\7\c778226b6c4c0fb51cf7942c8ee1f3d9fc1249d0
