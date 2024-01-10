@@ -36,21 +36,15 @@ import timber.log.Timber;
 @ExtensionMethod(ViewExtensions.class)
 @AndroidEntryPoint
 public class MoviesDetailsFragment extends Fragment {
-
+    @Inject
     FavoriteViewModelFactory favoriteViewModelFactory;
+    @Inject
     MovieViewModelFactory movieViewModelFactory;
     private FragmentMoviesDetailsBinding binding;
     private FavoriteViewModel favoriteViewModel;
     private MovieViewModel movieViewModel;
 
 
-
-    @Inject
-    public MoviesDetailsFragment(MovieViewModelFactory movieViewModelFactory, FavoriteViewModelFactory favoriteViewModelFactory)
-    {
-        this.movieViewModelFactory = movieViewModelFactory;
-        this.favoriteViewModelFactory = favoriteViewModelFactory;
-    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -168,8 +162,7 @@ public class MoviesDetailsFragment extends Fragment {
                     showUiData();
                     binding.executePendingBindings();
                 }
-                case ERROR -> showUiError();
-                case NULL -> showUiError();
+                case ERROR, NULL -> showUiError();
             }
         });
 

@@ -9,6 +9,8 @@ import com.casecode.mobilemovieexplorer.domain.usecase.MovieUseCase;
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.scopes.ViewModelScoped;
+
 /**
  * Factory class for creating instances of the MovieViewModel.
  * Implements the ViewModelProvider.Factory interface to enable dependency injection

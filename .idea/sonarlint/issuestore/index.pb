@@ -69,3 +69,11 @@ J
 dapp/src/main/java/com/casecode/mobilemovieexplorer/data/utils/ConnectivityManagerNetworkMonitor.java,c\8\c8d3dacca928a84c1a35da652efabb573d7b4102
 ì
 capp/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesDetailsBindingUtils.java,f\d\fdc6a057e3fd2fa3acb86e3b7a718acd838c46a4
+ó
+gapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/viewmodel/FavoriteViewModelFactory.java,0\0\00d6ed8224b532f9210bc528f697de8852cd6f76
+î
+dapp/src/main/java/com/casecode/mobilemovieexplorer/presentation/viewmodel/MovieViewModelFactory.java,c\9\c902f97bd732ad36c80014f70f906493e3886088
+|
+Lapp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/AppModule.java,2\1\2164016d961b9cf007f79e885dbf41a3dcb649e7
+Å
+Qapp/src/main/java/com/casecode/mobilemovieexplorer/data/utils/NetworkMonitor.java,4\f\4f35928ee24d7ef44d14fe593a1aa9673800e953

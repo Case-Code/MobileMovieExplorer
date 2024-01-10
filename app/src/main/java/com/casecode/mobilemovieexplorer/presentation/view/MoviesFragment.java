@@ -37,20 +37,15 @@ import timber.log.Timber;
 @AndroidEntryPoint
 public class MoviesFragment extends Fragment {
     private static final String TAG = "MoviesFragment";
+    @Inject
     MovieViewModelFactory movieViewModelFactory;
     private FragmentMoviesBinding mBinding;
     private MovieViewModel movieViewModel;
     private MoviesAdapter moviesAdapter;
 
-    @Inject
-    public MoviesFragment(MovieViewModelFactory movieViewModelFactory) {
-        this.movieViewModelFactory = movieViewModelFactory;
-    }
-
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = FragmentMoviesBinding.inflate(inflater, container, false);
         return mBinding.getRoot();
     }
@@ -73,11 +68,8 @@ public class MoviesFragment extends Fragment {
     }
 
     private void setupShimmerAnimation() {
-        var shimmer = new Shimmer.AlphaHighlightBuilder().setDuration(
-                        2000L) // how long the shimmering animation takes to do one full sweep
-                .setRepeatMode(ValueAnimator.REVERSE)
-                .setAutoStart(true)
-                .build();
+        var shimmer = new Shimmer.AlphaHighlightBuilder().setDuration(2000L) // how long the shimmering animation takes to do one full sweep
+                .setRepeatMode(ValueAnimator.REVERSE).setAutoStart(true).build();
 
         mBinding.shMovies.setShimmer(shimmer);
 
@@ -106,8 +98,7 @@ public class MoviesFragment extends Fragment {
     }
 
     private void setupViewModel() {
-        movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory)
-                .get(MovieViewModel.class);
+        movieViewModel = new ViewModelProvider(requireActivity(), movieViewModelFactory).get(MovieViewModel.class);
     }
 
     private void initializeAdapters() {
@@ -125,8 +116,7 @@ public class MoviesFragment extends Fragment {
     private void onItemDemoMovieClick(View view, DemoMovie demoMovie) {
         movieViewModel.setDemoMovieIdSelected(demoMovie.id());
 
-        Navigation.findNavController(view)
-                .navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
+        Navigation.findNavController(view).navigate(R.id.action_nav_movies_fragment_to_nav_details_fragment);
     }
 
     private void initMoviesAdapter() {
@@ -146,8 +136,7 @@ public class MoviesFragment extends Fragment {
                 } else {
                     Timber.tag(TAG).i("addLoadStateListener: list present");
 
-                    new Handler(Looper.getMainLooper())
-                            .postDelayed(this::stopAnimation, 800L);
+                    new Handler(Looper.getMainLooper()).postDelayed(this::stopAnimation, 800L);
 
                 }
             } else if (loadState.getSource().getRefresh() instanceof LoadState.Loading) {

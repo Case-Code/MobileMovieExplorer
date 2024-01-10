@@ -8,6 +8,8 @@ import com.casecode.mobilemovieexplorer.data.repository.FavoriteMoviesRepository
 
 import javax.inject.Inject;
 
+import dagger.hilt.android.scopes.ViewModelScoped;
+
 /**
  * Created by Mahmoud Abdalhafeez on 12/27/2023
  *
