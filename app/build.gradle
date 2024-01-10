@@ -37,6 +37,9 @@ android {
             languageVersion = JavaLanguageVersion.of(17)
         }
     }
+    lintOptions {
+        baseline file("lint-baseline.xml")
+    }
 }
 
 dependencies {

@@ -6,6 +6,7 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.casecode.mobilemovieexplorer.di.utils.AppScheduler;
@@ -17,12 +18,9 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import dagger.hilt.android.qualifiers.ApplicationContext;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Implementation of the {@link NetworkMonitor} interface that monitors the device's network
@@ -30,10 +28,6 @@ import timber.log.Timber;
  */
 public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
 
-    /**
-     * The tag used for logging.
-     */
-    private static final String TAG = "ConnectivityManagerNetworkMonitor";
 
     /**
      * The application context.
@@ -77,26 +71,17 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
                 private final Set<Network> networks = new HashSet<>();
 
                 @Override
-                public void onAvailable(Network network) {
+                public void onAvailable(@NonNull Network network) {
                     networks.add(network);
                     emitter.onNext(true);
                 }
 
                 @Override
-                public void onLost(Network network) {
+                public void onLost(@NonNull Network network) {
                     networks.remove(network);
                     emitter.onNext(!networks.isEmpty());
                 }
 
-                @Override
-                public void onCapabilitiesChanged(
-                        Network network,
-                        NetworkCapabilities networkCapabilities) {
-                    super.onCapabilitiesChanged(network, networkCapabilities);
-                    boolean unmetered = networkCapabilities.hasCapability(
-                            NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
-                    Timber.tag(TAG).d("onCapabilitiesChanged = %s", unmetered);
-                }
             };
 
             NetworkRequest request = new NetworkRequest.Builder()
@@ -108,10 +93,7 @@ public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
 
             emitter.onNext(isCurrentlyConnected(connectivityManager));
 
-            emitter.setCancellable(() -> {
-                connectivityManager.unregisterNetworkCallback(callback);
-                Timber.d("close connectivity manager");
-            });
+            emitter.setCancellable(() -> connectivityManager.unregisterNetworkCallback(callback));
         }, BackpressureStrategy.LATEST).subscribeOn(ioScheduler).observeOn(mainScheduler);
     }
 

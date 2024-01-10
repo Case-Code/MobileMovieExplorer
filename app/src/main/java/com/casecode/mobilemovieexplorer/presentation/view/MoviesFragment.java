@@ -37,22 +37,21 @@ import timber.log.Timber;
 @AndroidEntryPoint
 public class MoviesFragment extends Fragment {
     private static final String TAG = "MoviesFragment";
-    @Inject
     MovieViewModelFactory movieViewModelFactory;
     private FragmentMoviesBinding mBinding;
     private MovieViewModel movieViewModel;
     private MoviesAdapter moviesAdapter;
 
+    @Inject
+    public MoviesFragment(MovieViewModelFactory movieViewModelFactory) {
+        this.movieViewModelFactory = movieViewModelFactory;
+    }
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentMoviesBinding.inflate(inflater, container, false);
-
-        // Enable the options menu in the fragment
-        setHasOptionsMenu(true);
-
         return mBinding.getRoot();
     }
 
@@ -157,7 +156,7 @@ public class MoviesFragment extends Fragment {
 
             } else if (loadState.getSource().getRefresh() instanceof LoadState.Error error) {
                 stopAnimationAndShowImageError();
-                Timber.tag(TAG).d("addLoadStateListener  Error" + error);
+                Timber.tag(TAG).d("addLoadStateListener  Error%s", error);
 
                 mBinding.getRoot().showSnackbar(getString(R.string.movies_loading_error), BaseTransientBottomBar.LENGTH_SHORT);
             }
@@ -203,18 +202,14 @@ public class MoviesFragment extends Fragment {
     private void setupObserverDemoMovies() {
         movieViewModel.getDemoMoviesLiveData().observe(getViewLifecycleOwner(), demoResponse -> {
             switch (demoResponse.status) {
-                case LOADING -> {
-                    Timber.tag(TAG).d("Demo movies LOADING");
-                }
+                case LOADING -> Timber.tag(TAG).d("Demo movies LOADING");
 
                 case SUCCESS -> {
                     Timber.tag(TAG).d("Demo movies : %s", demoResponse);
                     mBinding.setDemoList(demoResponse.getData().results());
 
                 }
-                case ERROR -> {
-                    Timber.tag(TAG).e("Demo movies ERROR: %s", demoResponse.message);
-                }
+                case ERROR -> Timber.tag(TAG).e("Demo movies ERROR: %s", demoResponse.message);
                 case NULL -> {
                     Timber.tag(TAG).e("Demo movies NULL");
                     stopAnimation();
@@ -228,12 +223,6 @@ public class MoviesFragment extends Fragment {
             setupNetworkMonitor();
             mBinding.swipeMovies.setRefreshing(false);
         });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //  startAnimation();
     }
 
     @Override

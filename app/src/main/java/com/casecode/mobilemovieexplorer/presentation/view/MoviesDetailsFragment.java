@@ -24,6 +24,8 @@ import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModel;
 import com.casecode.mobilemovieexplorer.presentation.viewmodel.MovieViewModelFactory;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -35,22 +37,24 @@ import timber.log.Timber;
 @AndroidEntryPoint
 public class MoviesDetailsFragment extends Fragment {
 
-    @Inject
     FavoriteViewModelFactory favoriteViewModelFactory;
-    @Inject
     MovieViewModelFactory movieViewModelFactory;
     private FragmentMoviesDetailsBinding binding;
     private FavoriteViewModel favoriteViewModel;
     private MovieViewModel movieViewModel;
 
 
+
+    @Inject
+    public MoviesDetailsFragment(MovieViewModelFactory movieViewModelFactory, FavoriteViewModelFactory favoriteViewModelFactory)
+    {
+        this.movieViewModelFactory = movieViewModelFactory;
+        this.favoriteViewModelFactory = favoriteViewModelFactory;
+    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false);
-
-        // Enable the options menu in the fragment
-
         return binding.getRoot();
     }
 
@@ -117,23 +121,23 @@ public class MoviesDetailsFragment extends Fragment {
         int drawableResId;
         if (likeButton.isSelected()) {
             if (Boolean.TRUE.equals(binding.getIsDemo())) {
-                var movieDemo = movieViewModel.getDemoDetailsLiveData().getValue().getData();
+                var movieDemo = Objects.requireNonNull(movieViewModel.getDemoDetailsLiveData().getValue()).getData();
                 favoriteViewModel.addFavoriteMovie(FavoriteMovies.asDomainDemoDetails(movieDemo));
 
             } else {
 
-                var moviesDetails = movieViewModel.getMovieDetailsLiveData().getValue().getData();
+                var moviesDetails = Objects.requireNonNull(movieViewModel.getMovieDetailsLiveData().getValue()).getData();
                 favoriteViewModel.addFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
             }
             drawableResId = R.drawable.favorite_crusta_24;
 
         } else {
             if (Boolean.TRUE.equals(binding.getIsDemo())) {
-                var movieDemo = movieViewModel.getDemoDetailsLiveData().getValue().getData();
+                var movieDemo = Objects.requireNonNull(movieViewModel.getDemoDetailsLiveData().getValue()).getData();
 
                 favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asDomainDemoDetails(movieDemo));
             } else {
-                var moviesDetails = movieViewModel.getMovieDetailsLiveData().getValue().getData();
+                var moviesDetails = Objects.requireNonNull(movieViewModel.getMovieDetailsLiveData().getValue()).getData();
 
                 favoriteViewModel.deleteFavoriteMovie(FavoriteMovies.asMoviesDetailsMovie(moviesDetails));
 
@@ -155,9 +159,7 @@ public class MoviesDetailsFragment extends Fragment {
     private void observerViewModel() {
         movieViewModel.getDemoDetailsLiveData().observe(getViewLifecycleOwner(), deomResource -> {
             switch (deomResource.getStatus()) {
-                case LOADING -> {
-                    showUiLoading();
-                }
+                case LOADING -> showUiLoading();
                 case SUCCESS -> {
                     binding.setIsDemo(true);
                     favoriteViewModel.isFavoriteMovies(deomResource.getData().id());
@@ -166,19 +168,14 @@ public class MoviesDetailsFragment extends Fragment {
                     showUiData();
                     binding.executePendingBindings();
                 }
-                case ERROR -> {
-                    showUiError();
-
-                }
+                case ERROR -> showUiError();
+                case NULL -> showUiError();
             }
         });
 
         movieViewModel.getMovieDetailsLiveData().observe(getViewLifecycleOwner(), resource -> {
             switch (resource.getStatus()) {
-                case LOADING -> {
-                    showUiLoading();
-
-                }
+                case LOADING -> showUiLoading();
                 case SUCCESS -> {
                     showUiData();
                     binding.setIsDemo(false);
@@ -189,20 +186,18 @@ public class MoviesDetailsFragment extends Fragment {
                     binding.executePendingBindings();
 
                 }
-                default -> {
-                    // Handle error state
-                    showUiError();
-                }
+                default -> // Handle error state
+                        showUiError();
             }
         });
 
-        favoriteViewModel.getIsFavoriteMovie().observe(getViewLifecycleOwner(), isFavorite ->{
-        int drawableResId;
-            if(Boolean.TRUE.equals(isFavorite)){
+        favoriteViewModel.getIsFavoriteMovie().observe(getViewLifecycleOwner(), isFavorite -> {
+            int drawableResId;
+            if (Boolean.TRUE.equals(isFavorite)) {
                 drawableResId = R.drawable.favorite_crusta_24;
                 binding.imvMoviesDetailsLike.setSelected(true);
 
-            }else{
+            } else {
                 drawableResId = R.drawable.favorite_24;
 
             }

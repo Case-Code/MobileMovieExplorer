@@ -30,6 +30,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.subscribers.DisposableSubscriber;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.ExperimentalCoroutinesApi;
 import lombok.Getter;
 import timber.log.Timber;
 
@@ -103,8 +104,8 @@ public class MovieViewModel extends ViewModel {
      * Sets up a subscription to observe network connectivity changes.
      */
     public void setNetworkMonitor() {
-        mCompositeDisposable.add(networkMonitor.isOnline().subscribe(isOnline -> {
-                    setConnected(isOnline);
+        mCompositeDisposable.add(networkMonitor.isOnline().subscribe(isConnected -> {
+                    setConnected(isConnected);
                     showSnackbarMessage(R.string.all_network_error);
                 }, Timber::e
         ));
@@ -141,7 +142,7 @@ public class MovieViewModel extends ViewModel {
                 }));
 
     }
-
+    @ExperimentalCoroutinesApi
     @NonNull
     private Flowable<PagingData<Movie>> getMoviesPagingFlowable() {
         CoroutineScope viewModelScope = ViewModelKt.getViewModelScope(this);

@@ -65,3 +65,7 @@ T
 $gradle/projectDependencyGraph.gradle,c\3\c37cc481265d9f8c51716d0ffc34985a6dc52456
 J
 .github/workflows/main.yml,c\7\c778226b6c4c0fb51cf7942c8ee1f3d9fc1249d0
+”
+dapp/src/main/java/com/casecode/mobilemovieexplorer/data/utils/ConnectivityManagerNetworkMonitor.java,c\8\c8d3dacca928a84c1a35da652efabb573d7b4102
+“
+capp/src/main/java/com/casecode/mobilemovieexplorer/presentation/view/MoviesDetailsBindingUtils.java,f\d\fdc6a057e3fd2fa3acb86e3b7a718acd838c46a4
