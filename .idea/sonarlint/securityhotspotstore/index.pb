@@ -6673,7 +6673,7 @@ w
 G.idea/sonarlint/issuestore/a/f/af89bdbe085e1a68315e0915282782e4885f26c4,b\c\bcff1925c343fe687050b4f873ea42fe2178fceb
 Å
 Q.idea/sonarlint/securityhotspotstore/b/2/b2f56390fdda32d424704b0c064a16c9bf211e44,e\5\e591a4ff7da91341d7a41cc75561c99bb90b8dd7
-Y
-).github/workflows/generateDependencyGraph,5\6\568b4f9ccae847d8c682dadd3d31f491b00f8006
 ]
 -.github/workflows/generateDependencyGraph.yml,8\3\832eb07f17aa8ca76a3cfdef08b4a54abeb7b0f1
+S
+#gradle/dependency-graph/project.dot,7\f\7fbbd6e90302fc4618f20b1999c3f396f8dc0d94

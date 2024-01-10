@@ -18,12 +18,14 @@ jobs:
 
         - name: Copy CI gradle.properties
           run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+        - name: Install Graphviz
+          uses: tlylt/install-graphviz@v1.0.0
 
         - name: Setup Graphviz
           uses: ts-graphviz/setup-graphviz@v1
 
         - name: Generate Dependency Graph
-          run: ./gradlew projectDependencyGraph
+          run: ./gradlew projectDependencyGraph--stacktrace
 
         - name: Commmit
           run: |

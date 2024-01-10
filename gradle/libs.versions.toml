@@ -109,4 +109,5 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-hilt = { id = 'com.google.dagger.hilt.android', version.ref = "hiltAndroid" }
 graphuntangler = { id = 'net.siggijons.gradle.graphuntangler', version = "0.0.4" }
+dependency-graph = { id = 'org.gradle.github-dependency-graph-gradle-plugin', version = "1.0.0" }
 
