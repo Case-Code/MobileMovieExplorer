@@ -1,14 +1,10 @@
 package com.casecode.mobilemovieexplorer.data.utils;
 
-import javax.inject.Singleton;
-
-import dagger.hilt.android.scopes.ActivityScoped;
 import io.reactivex.rxjava3.core.Flowable;
 
 /**
  * Interface defining methods for monitoring network connectivity.
  */
-@ActivityScoped
 public interface NetworkMonitor {
 
     /**

@@ -29,7 +29,7 @@ import io.reactivex.rxjava3.core.Scheduler;
  * Dagger Hilt module that provides application-wide dependencies.
  */
 @Module
-@InstallIn(ActivityComponent.class)
+@InstallIn(SingletonComponent.class)
 public class AppModule {
 
     /**
@@ -39,7 +39,7 @@ public class AppModule {
      * @return A {@link NetworkMonitor} instance.
      */
     @Provides
-    @ActivityScoped
+    @Singleton
     public NetworkMonitor provideConnectivityManagerNetworkMonitor(@ApplicationContext Context context, @AppScheduler(appSchedulers = AppSchedulers.IO) Scheduler ioScheduler,
                                                                    @AppScheduler(appSchedulers = AppSchedulers.MAIN) Scheduler mainScheduler) {
         return new ConnectivityManagerNetworkMonitor(context, ioScheduler, mainScheduler);
