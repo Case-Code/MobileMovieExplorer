@@ -40,8 +40,8 @@ Model-View-ViewModel (MVVM)
 ### Light and dark mode
 
 <p align = "left" >
-  <img width="250" height="500" src="github_images/light_mode.jpg">
-  <img width="250" height="500"  src="github_images/dark_mode.jpg">
+  <img width="500" height="500" src="github_images/light_mode.jpg">
+  <img width="500" height="500"  src="github_images/dark_mode.jpg">
 </p>
 
 ### Home | Favorite | Animation | Details | Error

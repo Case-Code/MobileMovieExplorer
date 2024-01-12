@@ -6681,3 +6681,5 @@ S
 	README.me,f\a\fa75912a6344b0c0c44641def268d8a677d64275
 €
 Papp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/NetworkModule.java,c\e\ce01c3e371baee1b54ef8cfe8b7e79a17b683e5d
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
