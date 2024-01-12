@@ -41,7 +41,23 @@ android {
     lint{
         abortOnError = false
     }
+    applicationVariants.all { variant ->
+        task("printAllClasses${variant.name.capitalize()}") {
+            doLast {
+                // Get the output directory for the current variant
+                def classesDir = variant.outputs.get(0).outputFile
+
+                // Iterate through the classes directory and print class names
+                project.fileTree(classesDir).visit { FileVisitDetails details ->
+                    if (details.file.isFile() && details.file.name.endsWith('.class')) {
+                        println(details.relativePath)
+                    }
+                }
+            }
+        }
+    }
 }
+
 
 dependencies {
     // AndroidX
@@ -106,3 +122,8 @@ dependencies {
     annotationProcessor libs.androidx.room.compiler
     implementation(libs.timber)
 }
+
+
+
+
+

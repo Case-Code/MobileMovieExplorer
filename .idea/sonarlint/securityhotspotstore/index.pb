@@ -6677,3 +6677,7 @@ Q.idea/sonarlint/securityhotspotstore/b/2/b2f56390fdda32d424704b0c064a16c9bf211e
 -.github/workflows/generateDependencyGraph.yml,8\3\832eb07f17aa8ca76a3cfdef08b4a54abeb7b0f1
 S
 #gradle/dependency-graph/project.dot,7\f\7fbbd6e90302fc4618f20b1999c3f396f8dc0d94
+9
+	README.me,f\a\fa75912a6344b0c0c44641def268d8a677d64275
+€
+Papp/src/main/java/com/casecode/mobilemovieexplorer/di/modules/NetworkModule.java,c\e\ce01c3e371baee1b54ef8cfe8b7e79a17b683e5d

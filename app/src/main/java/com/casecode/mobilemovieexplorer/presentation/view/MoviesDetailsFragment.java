@@ -189,16 +189,11 @@ public class MoviesDetailsFragment extends Fragment {
             if (Boolean.TRUE.equals(isFavorite)) {
                 drawableResId = R.drawable.favorite_crusta_24;
                 binding.imvMoviesDetailsLike.setSelected(true);
-
             } else {
                 drawableResId = R.drawable.favorite_24;
-
             }
             binding.imvMoviesDetailsLike.setImageResource(drawableResId);
-
         });
-
-
     }
 
     private void showUiError() {

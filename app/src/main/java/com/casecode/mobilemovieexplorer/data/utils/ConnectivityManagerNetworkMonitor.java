@@ -28,20 +28,12 @@ import io.reactivex.rxjava3.core.Scheduler;
  */
 public class ConnectivityManagerNetworkMonitor implements NetworkMonitor {
 
-
-    /**
-     * The application context.
-     */
     private final Context context;
 
     private final Scheduler ioScheduler;
     private final Scheduler mainScheduler;
 
-    /**
-     * Constructs a {@code ConnectivityManagerNetworkMonitor} instance.
-     *
-     * @param context The application context.
-     */
+
     @Inject
     public ConnectivityManagerNetworkMonitor(@ApplicationContext Context context,
                                              @AppScheduler(appSchedulers = AppSchedulers.IO) Scheduler ioScheduler,

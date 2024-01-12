@@ -119,3 +119,4 @@ tasks.register('projectDependencyGraph') {
         println("Project module dependency graph created at ${dot.absolutePath}.png")
     }
 }
+
